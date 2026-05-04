@@ -4,7 +4,6 @@ using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerInputActions inputActions;
     [SerializeField] private float walkSpeed, runSpeed, rotationSpeed;
     private Rigidbody rb;
 
@@ -20,15 +19,14 @@ public class PlayerMovement : MonoBehaviour
         //Commented 2 lines below this because the input creation was moved to a singleton in InputManager script
         //inputActions = new PlayerInputActions();
         //inputActions.Player.Enable();
-        inputActions = InputManager.singleton.inputActions;
-        inputActions.Player.Run.performed += OnRunInput;
-        inputActions.Player.Run.canceled += OnRunInput;
+        InputManager.singleton.inputActions.Player.Run.performed += OnRunInput;
+        InputManager.singleton.inputActions.Player.Run.canceled += OnRunInput;
     }
 
     private void OnDisable()
     {
-        inputActions.Player.Run.performed -= OnRunInput;
-        inputActions.Player.Run.canceled -= OnRunInput;
+        InputManager.singleton.inputActions.Player.Run.performed -= OnRunInput;
+        InputManager.singleton.inputActions.Player.Run.canceled -= OnRunInput;
     }
 
     private void Start()
