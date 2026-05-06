@@ -5,6 +5,7 @@ public class MapGridManager : MonoBehaviour
 {
     public static MapGridManager singleton;
     public MapGridData gridData;
+    public Grid mapGrid;
 
     private void Awake()
     {

@@ -5,28 +5,14 @@ using UnityEngine.Windows;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float walkSpeed, runSpeed, rotationSpeed;
-    private Rigidbody rb;
 
+    private Rigidbody rb;
+    private Vector2 moveInput;
     private float speed;
 
     private void Awake()
     {
         TryGetComponent(out rb);
-    }
-
-    private void OnEnable()
-    {
-        //Commented 2 lines below this because the input creation was moved to a singleton in InputManager script
-        //inputActions = new PlayerInputActions();
-        //inputActions.Player.Enable();
-        InputManager.singleton.inputActions.Player.Run.performed += OnRunInput;
-        InputManager.singleton.inputActions.Player.Run.canceled += OnRunInput;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.singleton.inputActions.Player.Run.performed -= OnRunInput;
-        InputManager.singleton.inputActions.Player.Run.canceled -= OnRunInput;
     }
 
     private void Start()
@@ -46,14 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector2 moveInput = InputManager.singleton.inputActions.Player.Move.ReadValue<Vector2>();
-        Vector3 movementVector = new Vector3(moveInput.x, 0, moveInput.y);
-
-        rb.AddForce(movementVector * speed, ForceMode.Force);
-
-        //Rotates the player towards movement direction
-        if (movementVector != Vector3.zero) 
+        if (moveInput != Vector2.zero)
         {
+            Vector3 movementVector = new Vector3(moveInput.x, 0, moveInput.y);
+            rb.AddForce(movementVector * speed, ForceMode.Force);
+
+            //Rotates the player towards movement direction
             Quaternion toRotation = Quaternion.LookRotation(movementVector);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.fixedDeltaTime);
             //Below are alternatives to rotation that also worked, just in case
@@ -62,7 +46,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnRunInput(InputAction.CallbackContext context)
+    public void OnMoveInput(InputAction.CallbackContext context)
+    {
+        moveInput = context.action.ReadValue<Vector2>();
+    }
+
+    public void OnRunInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
             speed = runSpeed;
