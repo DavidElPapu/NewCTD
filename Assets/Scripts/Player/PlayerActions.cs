@@ -25,7 +25,7 @@ public class PlayerActions : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
         {
-            GameObject station = MapGridManager.singleton.gridData.GetGameObjectAt(MapGridManager.singleton.mapGrid.WorldToCell(selectionPoint.position));
+            GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
             if (station == null || !station.TryGetComponent(out IInteractable stationInteraction)) return;
             if (inventory[selectedItem] == null)
             {
@@ -51,7 +51,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            GameObject station = MapGridManager.singleton.gridData.GetGameObjectAt(MapGridManager.singleton.mapGrid.WorldToCell(selectionPoint.position));
+            GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
             if (station == null || !station.TryGetComponent(out IInteractable stationInteraction) || inventory[selectedItem] != null) return;
             stationInteraction.OnUse();
         }
