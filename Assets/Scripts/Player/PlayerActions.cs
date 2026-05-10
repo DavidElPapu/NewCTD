@@ -26,7 +26,7 @@ public class PlayerActions : MonoBehaviour
         if(context.phase == InputActionPhase.Performed)
         {
             GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
-            if (station == null || !station.TryGetComponent(out IInteractable stationInteraction)) return;
+            if (station == null || !station.TryGetComponent(out IPlaceable stationInteraction)) return;
             if (inventory[selectedItem] == null)
             {
                 if (stationInteraction.OnPickEmpty() != null)

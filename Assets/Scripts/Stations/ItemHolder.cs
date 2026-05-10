@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-public class ItemHolder : MonoBehaviour, IInteractable
+public class ItemHolder : MonoBehaviour, IPlaceable
 {
     [SerializeField] private Transform itemLocation;
-    public GameObject itemHolded;
+    [SerializeField] private List<ContainerName> validContainers;
+    private GameObject itemHolded;
 
     private void Awake()
     {
@@ -12,25 +14,59 @@ public class ItemHolder : MonoBehaviour, IInteractable
 
     public bool CanPlaceItem(GameObject item)
     {
-        if (itemHolded != null)
+        if(item.TryGetComponent(out ICookingObject cookingObject))
         {
-            //Here should check the item inside
-        }
-        else
-        {
-            //For now, only checks it has no item, but later will check item
-            return true;
+            if (itemHolded != null)
+            {
+                if (itemHolded.TryGetComponent(out ICookingObject myCookingObject) && myCookingObject.GetCookingObjectType() == CookingObjectType.Container)
+                {
+                    if (itemHolded.TryGetComponent(out ContainerScript myContainer))
+                    {
+                        if (cookingObject.GetCookingObjectType() == CookingObjectType.Container && item.TryGetComponent(out ContainerScript container))
+                        {
+                            //Falta checar si el container puede dropear, si si, entonces recibir su lista de ingredientes y ver si pueden entrar en mi contenedor
+                        }
+                        else if (cookingObject.GetCookingObjectType() == CookingObjectType.Ingredient && item.TryGetComponent(out IngredientScript aloneIngredient))
+                        {
+                            if (myContainer.CanPlaceIngredient(aloneIngredient))
+                            {
+                                //Falta que ponga el ingrediente en el container.
+                                return true;
+                            }
+                        }
+                    }
+                }
+                //For now, you can't mix ingredients outside a container
+            }
+            else
+            {
+                if (cookingObject.GetCookingObjectType() == CookingObjectType.Container && item.TryGetComponent(out ContainerScript container))
+                    if (!IsContainerValid(container.cName)) return false;
+                item.transform.parent = null;
+                item.transform.position = itemLocation.position;
+                item.transform.rotation = itemLocation.rotation;
+                itemHolded = item;
+                return true;
+            }
         }
         return false;
     }
 
     public GameObject OnPickEmpty()
     {
-        throw new System.NotImplementedException();
+        if (itemHolded == null) return null;
+        GameObject tempHold = itemHolded;
+        itemHolded = null;
+        return tempHold;
     }
 
-    public void OnUse()
+    private bool IsContainerValid(ContainerName container)
     {
-        //Nothing
+        if (validContainers.Count == 0) return true;
+        foreach (ContainerName validContainer in validContainers)
+        {
+            if (container == validContainer) return true;
+        }
+        return false;
     }
 }
