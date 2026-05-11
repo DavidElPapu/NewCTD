@@ -20,7 +20,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     {
         if (containedIngredients.Count >= maxContainedIngredients) return false;
         //For now, it just need to be either type or state, that might change later for an exeptions list (like water, ice , etc)
-        if (IsIngredientTypeValid(ingredient.type) || IsIngredientStateValid(ingredient.state)) return true;
+        if (IsIngredientTypeValid(ingredient.data.type) || IsIngredientStateValid(ingredient.data.state)) return true;
         return false;
     }
 

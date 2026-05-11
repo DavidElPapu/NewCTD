@@ -9,45 +9,42 @@ public class ItemHolder : MonoBehaviour, IPlaceable
     [SerializeField] private Transform itemLocation;
     //For now stations can only hold specific containers, not specific ingredients or specific something else
     [SerializeField] private List<ContainerName> validContainers;
-    private GameObject itemHolded;
+    private GameObject itemHeld;
 
     private void Awake()
     {
-        itemHolded = null;
+        itemHeld = null;
     }
 
     public bool CanPlaceItem(GameObject item)
     {
         if(item.TryGetComponent(out ICookingObject cookingObject))
         {
-            if (itemHolded != null)
+            if (itemHeld != null)
             {
-                if (itemHolded.TryGetComponent(out ICookingObject myCookingObject) && myCookingObject.GetCookingObjectType() == CookingObjectType.Container)
+                if (itemHeld.TryGetComponent(out ContainerScript myContainer))
                 {
-                    if (itemHolded.TryGetComponent(out ContainerScript myContainer))
+                    if (item.TryGetComponent(out ContainerScript container))
                     {
-                        if (cookingObject.GetCookingObjectType() == CookingObjectType.Container && item.TryGetComponent(out ContainerScript container))
+                        if (container.CanEmptyContainer() && container.GetContainedIngredients() != null)
                         {
-                            if (container.CanEmptyContainer() && container.GetContainedIngredients() != null)
+                            List<IngredientScript> transferIngredients = container.GetContainedIngredients();
+                            if (myContainer.CanPlaceIngredientList(transferIngredients))
                             {
-                                List<IngredientScript> transferIngredients = container.GetContainedIngredients();
-                                if (myContainer.CanPlaceIngredientList(transferIngredients))
-                                {
-                                    container.EmptyContainer();
-                                    myContainer.PlaceIngredientList(transferIngredients);
-                                    OnItemHold?.Invoke(itemHolded);
-                                    //There is no need for return true since the player will keep the container
-                                }
+                                container.EmptyContainer();
+                                myContainer.PlaceIngredientList(transferIngredients);
+                                OnItemHold?.Invoke(itemHeld);
+                                //There is no need for return true since the player will keep the container
                             }
                         }
-                        else if (cookingObject.GetCookingObjectType() == CookingObjectType.Ingredient && item.TryGetComponent(out IngredientScript aloneIngredient))
+                    }
+                    else if (item.TryGetComponent(out IngredientScript aloneIngredient))
+                    {
+                        if (myContainer.CanPlaceIngredient(aloneIngredient))
                         {
-                            if (myContainer.CanPlaceIngredient(aloneIngredient))
-                            {
-                                myContainer.PlaceIngredient(aloneIngredient);
-                                OnItemHold?.Invoke(itemHolded);
-                                return true;
-                            }
+                            myContainer.PlaceIngredient(aloneIngredient);
+                            OnItemHold?.Invoke(itemHeld);
+                            return true;
                         }
                     }
                 }
@@ -60,8 +57,8 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                 item.transform.parent = null;
                 item.transform.position = itemLocation.position;
                 item.transform.rotation = itemLocation.rotation;
-                itemHolded = item;
-                OnItemHold?.Invoke(itemHolded);
+                itemHeld = item;
+                OnItemHold?.Invoke(itemHeld);
                 return true;
             }
         }
@@ -70,9 +67,9 @@ public class ItemHolder : MonoBehaviour, IPlaceable
 
     public GameObject OnPickEmpty()
     {
-        if (itemHolded == null) return null;
-        GameObject tempHold = itemHolded;
-        itemHolded = null;
+        if (itemHeld == null) return null;
+        GameObject tempHold = itemHeld;
+        itemHeld = null;
         OnItemLeave?.Invoke(tempHold);
         return tempHold;
     }

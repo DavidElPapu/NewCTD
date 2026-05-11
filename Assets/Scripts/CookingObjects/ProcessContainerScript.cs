@@ -56,7 +56,7 @@ public class ProcessContainerScript : ContainerScript
     {
         foreach (IngredientScript ingredient in containedIngredients)
         {
-            ingredient.state = stateChange;
+            ingredient.data.state = stateChange;
         }
     }
 
