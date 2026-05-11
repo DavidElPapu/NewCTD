@@ -36,7 +36,10 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void PlaceIngredient(IngredientScript ingredient)
     {
         containedIngredients.Add(ingredient);
-        //Missing to place ingredients, or destroy them, or hide them
+        //For now it just deactivates the gameObject
+        ingredient.transform.parent = transform;
+        ingredient.transform.position = transform.position;
+        ingredient.gameObject.SetActive(false);
     }
 
     public void PlaceIngredientList(List<IngredientScript> ingredientList)
@@ -58,8 +61,12 @@ public class ContainerScript : MonoBehaviour, ICookingObject
 
     public virtual void EmptyContainer()
     {
+        foreach (IngredientScript ingredient in containedIngredients)
+        {
+            ingredient.transform.parent = null;
+            ingredient.gameObject.SetActive(true);
+        }
         containedIngredients.Clear();
-        //Missing to unparent the ingredients if needed
     }
 
     public List<IngredientScript> GetContainedIngredients()

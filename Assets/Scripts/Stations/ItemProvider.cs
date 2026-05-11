@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemProvider : IPlaceable
+public class ItemProvider : MonoBehaviour, IPlaceable
 {
     [SerializeField] private GameObject ingredientPrefab;
     [SerializeField] private IngredientSO ingredientSO;

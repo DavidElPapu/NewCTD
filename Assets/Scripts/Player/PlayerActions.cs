@@ -32,15 +32,17 @@ public class PlayerActions : MonoBehaviour
                 if (stationInteraction.OnPickEmpty() != null)
                 {
                     inventory[selectedItem] = stationInteraction.OnPickEmpty();
-                    //Missing placing item on players hand
+                    inventory[selectedItem].transform.parent = selectionPoint;
+                    inventory[selectedItem].transform.position = selectionPoint.position;
+                    inventory[selectedItem].transform.rotation = selectionPoint.rotation;
                 }
             }
             else
             {
                 if (stationInteraction.CanPlaceItem(inventory[selectedItem]) == true)
                 {
+                    inventory[selectedItem].transform.parent = null;
                     inventory[selectedItem] = null;
-                    //Missing removing item from players hand
 
                 }
             }

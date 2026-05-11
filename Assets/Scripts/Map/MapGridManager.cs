@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class MapGridManager : MonoBehaviour
 {
     public static MapGridManager singleton;
-    private Grid mapGrid;
+    [SerializeField] private Grid mapGrid;
     private Dictionary<Vector3Int, GameObject> objectsOnMap;
 
     private void Awake()
@@ -26,7 +26,10 @@ public class MapGridManager : MonoBehaviour
     {
         Vector3Int gridPosition = GetGridPosition(position);
         if (!objectsOnMap.ContainsKey(gridPosition))
+        {
             objectsOnMap[gridPosition] = gameObject;
+            gameObject.transform.position = mapGrid.CellToWorld(gridPosition);
+        }
     }
 
     public void RemoveObjectAt(Vector3 position)
