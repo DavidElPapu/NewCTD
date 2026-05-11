@@ -7,19 +7,68 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientType> validIngredientStates;
     [SerializeField] private int maxContainedIngredients;
-    private List<IngredientScript> containedIngredients;
+    protected List<IngredientScript> containedIngredients;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         containedIngredients = new List<IngredientScript>();
     }
 
+    #region PlaceOnContainer
+
     public bool CanPlaceIngredient(IngredientScript ingredient)
     {
-        //Aqui hay que checar que no tenga un proceso activo (falta agregar eso tanto aqui como en cada ingrediente) y ademas otra funcion igual a esta, pero para
-        //varios ingredientes, ademas que esta solo checa, no hace, entonces falta tambien la funcion de poner el ingrediente como tal
+        if (containedIngredients.Count >= maxContainedIngredients) return false;
+        //For now, it just need to be either type or state, that might change later for an exeptions list (like water, ice , etc)
+        if (IsIngredientTypeValid(ingredient.type) || IsIngredientStateValid(ingredient.state)) return true;
         return false;
     }
+
+    public bool CanPlaceIngredientList(List<IngredientScript> ingredientList)
+    {
+        foreach (IngredientScript ingredient in ingredientList)
+        {
+            if (!CanPlaceIngredient(ingredient)) return false;
+        }
+        return true;
+    }
+
+    public virtual void PlaceIngredient(IngredientScript ingredient)
+    {
+        containedIngredients.Add(ingredient);
+        //Missing to place ingredients, or destroy them, or hide them
+    }
+
+    public void PlaceIngredientList(List<IngredientScript> ingredientList)
+    {
+        foreach (IngredientScript ingredient in ingredientList)
+        {
+            PlaceIngredient(ingredient);
+        }
+    }
+
+    #endregion
+
+    #region EmptyContainer
+
+    public virtual bool CanEmptyContainer()
+    {
+        return true;
+    }
+
+    public virtual void EmptyContainer()
+    {
+        containedIngredients.Clear();
+        //Missing to unparent the ingredients if needed
+    }
+
+    public List<IngredientScript> GetContainedIngredients()
+    {
+        if (containedIngredients.Count == 0) return null;
+        return containedIngredients;
+    }
+
+    #endregion
 
     public CookingObjectType GetCookingObjectType()
     {

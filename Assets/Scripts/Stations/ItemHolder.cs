@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class ItemHolder : MonoBehaviour, IPlaceable
 {
+    public event Action<GameObject> OnItemHold;
+    public event Action<GameObject> OnItemLeave;
     [SerializeField] private Transform itemLocation;
+    //For now stations can only hold specific containers, not specific ingredients or specific something else
     [SerializeField] private List<ContainerName> validContainers;
     private GameObject itemHolded;
 
@@ -24,13 +28,24 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                     {
                         if (cookingObject.GetCookingObjectType() == CookingObjectType.Container && item.TryGetComponent(out ContainerScript container))
                         {
-                            //Falta checar si el container puede dropear, si si, entonces recibir su lista de ingredientes y ver si pueden entrar en mi contenedor
+                            if (container.CanEmptyContainer() && container.GetContainedIngredients() != null)
+                            {
+                                List<IngredientScript> transferIngredients = container.GetContainedIngredients();
+                                if (myContainer.CanPlaceIngredientList(transferIngredients))
+                                {
+                                    container.EmptyContainer();
+                                    myContainer.PlaceIngredientList(transferIngredients);
+                                    OnItemHold?.Invoke(itemHolded);
+                                    //There is no need for return true since the player will keep the container
+                                }
+                            }
                         }
                         else if (cookingObject.GetCookingObjectType() == CookingObjectType.Ingredient && item.TryGetComponent(out IngredientScript aloneIngredient))
                         {
                             if (myContainer.CanPlaceIngredient(aloneIngredient))
                             {
-                                //Falta que ponga el ingrediente en el container.
+                                myContainer.PlaceIngredient(aloneIngredient);
+                                OnItemHold?.Invoke(itemHolded);
                                 return true;
                             }
                         }
@@ -46,6 +61,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                 item.transform.position = itemLocation.position;
                 item.transform.rotation = itemLocation.rotation;
                 itemHolded = item;
+                OnItemHold?.Invoke(itemHolded);
                 return true;
             }
         }
@@ -57,6 +73,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         if (itemHolded == null) return null;
         GameObject tempHold = itemHolded;
         itemHolded = null;
+        OnItemLeave?.Invoke(tempHold);
         return tempHold;
     }
 
