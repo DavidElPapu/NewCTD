@@ -1,14 +1,16 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ItemHolder : MonoBehaviour, IPlaceable
 {
     public event Action<GameObject> OnItemHold;
     public event Action<GameObject> OnItemLeave;
+    [SerializeField] private List<CookingObjectName> validItems;
+    [SerializeField] private List<IngredientType> validIngredientTypes;
+    [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] private Transform itemLocation;
-    //For now stations can only hold specific containers, not specific ingredients or specific something else
-    [SerializeField] private List<ContainerName> validContainers;
     private GameObject itemHeld;
 
     private void Awake()
@@ -52,8 +54,8 @@ public class ItemHolder : MonoBehaviour, IPlaceable
             }
             else
             {
-                if (cookingObject.GetCookingObjectType() == CookingObjectType.Container && item.TryGetComponent(out ContainerScript container))
-                    if (!IsContainerValid(container.cName)) return false;
+                if (!IsCookingObjectValid(cookingObject.GetCookingObjectName()))
+                    if (!IsIngredientValid(item)) return false;
                 item.transform.parent = null;
                 item.transform.position = itemLocation.position;
                 item.transform.rotation = itemLocation.rotation;
@@ -74,12 +76,29 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         return tempHold;
     }
 
-    private bool IsContainerValid(ContainerName container)
+    private bool IsCookingObjectValid(CookingObjectName item)
     {
-        if (validContainers.Count == 0) return true;
-        foreach (ContainerName validContainer in validContainers)
+        if (validItems.Count != 0)
         {
-            if (container == validContainer) return true;
+            foreach (CookingObjectName validItem in validItems)
+            {
+                if (item == validItem) return true;
+            }
+        }
+        return false;
+    }
+
+    private bool IsIngredientValid(GameObject possibleIngredient)
+    {
+        //For now, if there is a valid type, there needs to be valid state and viceversa
+        if (validIngredientTypes.Count == 0 || validIngredientStates.Count == 0) return true;
+
+        if (possibleIngredient.TryGetComponent(out IngredientScript ingredient))
+        {
+            foreach (IngredientType validType in validIngredientTypes)
+            {
+                if (ingredient.data.type == validType) return true;
+            }
         }
         return false;
     }

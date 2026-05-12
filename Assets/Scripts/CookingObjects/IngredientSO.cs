@@ -3,18 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ingredient", menuName = "Create Ingredient SO")]
 public class IngredientSO : ScriptableObject
 {
-    public IngredientName iName;
+    public CookingObjectName iName;
     public IngredientType type;
     public IngredientState state;
     public Mesh mesh;
     public Material material;
     public Vector3 customSize;
-}
-
-public enum IngredientName
-{
-    Coconut,
-    Pinapple
 }
 
 public enum IngredientType

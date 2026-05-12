@@ -6,6 +6,11 @@ public class IngredientScript : MonoBehaviour, ICookingObject
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshRenderer meshRenderer;
 
+    public CookingObjectName GetCookingObjectName()
+    {
+        return data.iName;
+    }
+
     public CookingObjectType GetCookingObjectType()
     {
         return CookingObjectType.Ingredient;

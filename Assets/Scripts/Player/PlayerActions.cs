@@ -54,8 +54,8 @@ public class PlayerActions : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
-            if (station == null || !station.TryGetComponent(out IInteractable stationInteraction) || inventory[selectedItem] != null) return;
-            stationInteraction.OnUse();
+            if (station == null || !station.TryGetComponent(out IInteractable stationInteraction)) return;
+            stationInteraction.OnUse(inventory[selectedItem]);
         }
     }
 

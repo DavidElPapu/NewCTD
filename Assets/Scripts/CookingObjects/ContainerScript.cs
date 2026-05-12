@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class ContainerScript : MonoBehaviour, ICookingObject
 {
-    public ContainerName cName;
+    public CookingObjectName cName;
     [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientType> validIngredientStates;
     [SerializeField] private int maxContainedIngredients;
@@ -77,6 +77,11 @@ public class ContainerScript : MonoBehaviour, ICookingObject
 
     #endregion
 
+    public CookingObjectName GetCookingObjectName()
+    {
+        return cName;
+    }
+
     public CookingObjectType GetCookingObjectType()
     {
         return CookingObjectType.Container;
@@ -101,10 +106,4 @@ public class ContainerScript : MonoBehaviour, ICookingObject
         }
         return false;
     }
-}
-
-public enum ContainerName
-{
-    Glass,
-    Pot
 }

@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void OnUse();
+    void OnUse(GameObject item);
 }
