@@ -29,9 +29,9 @@ public class PlayerActions : MonoBehaviour
             if (station == null || !station.TryGetComponent(out IPlaceable stationInteraction)) return;
             if (inventory[selectedItem] == null)
             {
-                if (stationInteraction.OnPickEmpty() != null)
+                inventory[selectedItem] = stationInteraction.OnPickEmpty();
+                if (inventory[selectedItem] != null)
                 {
-                    inventory[selectedItem] = stationInteraction.OnPickEmpty();
                     inventory[selectedItem].transform.parent = selectionPoint;
                     inventory[selectedItem].transform.position = selectionPoint.position;
                     inventory[selectedItem].transform.rotation = selectionPoint.rotation;

@@ -17,10 +17,13 @@ public class ItemProvider : MonoBehaviour, IPlaceable
 
     public GameObject OnPickEmpty()
     {
-        GameObject newIngredient = Object.Instantiate(ingredientPrefab);
+        GameObject newIngredient = Instantiate(ingredientPrefab);
         if (newIngredient.TryGetComponent(out IngredientScript ingredientScript))
         {
             ingredientScript.data = ingredientSO;
+            ingredientScript.ChangeMesh(ingredientSO.mesh);
+            ingredientScript.ChangeMaterial(ingredientSO.material);
+            ingredientScript.ChangeSize(ingredientSO.customSize);
         }
         else
             return null;

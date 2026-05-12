@@ -6,6 +6,9 @@ public class IngredientSO : ScriptableObject
     public IngredientName iName;
     public IngredientType type;
     public IngredientState state;
+    public Mesh mesh;
+    public Material material;
+    public Vector3 customSize;
 }
 
 public enum IngredientName

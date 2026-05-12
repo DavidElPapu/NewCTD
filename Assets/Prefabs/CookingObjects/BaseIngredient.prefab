@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientScript
   data: {fileID: 0}
+  meshFilter: {fileID: 274219915104796611}
+  meshRenderer: {fileID: 7035930472070648783}
 --- !u!1 &8260305112721728912
 GameObject:
   m_ObjectHideFlags: 0

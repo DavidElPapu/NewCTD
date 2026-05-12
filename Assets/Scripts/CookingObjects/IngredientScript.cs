@@ -3,10 +3,26 @@ using UnityEngine;
 public class IngredientScript : MonoBehaviour, ICookingObject
 {
     public IngredientSO data;
-    //For now thats all, hence the no MonoBehaviour use, but it might come later when adding the GUI for the ingredient icon
+    [SerializeField] private MeshFilter meshFilter;
+    [SerializeField] private MeshRenderer meshRenderer;
 
     public CookingObjectType GetCookingObjectType()
     {
         return CookingObjectType.Ingredient;
+    }
+
+    public void ChangeMesh(Mesh newMesh)
+    {
+        meshFilter.mesh = newMesh;
+    }
+
+    public void ChangeMaterial(Material newMaterial)
+    {
+        meshRenderer.material = newMaterial;
+    }
+
+    public void ChangeSize(Vector3 newSize)
+    {
+        transform.localScale = newSize;
     }
 }
