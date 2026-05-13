@@ -41,9 +41,7 @@ public class PlayerActions : MonoBehaviour
             {
                 if (stationInteraction.CanPlaceItem(inventory[selectedItem]) == true)
                 {
-                    inventory[selectedItem].transform.parent = null;
                     inventory[selectedItem] = null;
-
                 }
             }
         }

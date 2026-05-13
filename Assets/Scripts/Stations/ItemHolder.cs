@@ -24,23 +24,48 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         {
             if (itemHeld != null)
             {
-                if (itemHeld.TryGetComponent(out ContainerScript myContainer))
+                if (item.TryGetComponent(out ContainerScript container))
                 {
-                    if (item.TryGetComponent(out ContainerScript container))
+                    if (itemHeld.TryGetComponent(out ContainerScript myContainer))
                     {
-                        if (container.CanEmptyContainer() && container.GetContainedIngredients() != null)
+                        if (container.GetContainedIngredients() == null && myContainer.GetContainedIngredients() != null && myContainer.CanEmptyContainer())
                         {
-                            List<IngredientScript> transferIngredients = container.GetContainedIngredients();
+                            List<IngredientScript> transferIngredients = new List<IngredientScript>(myContainer.GetContainedIngredients());
+                            if (container.CanPlaceIngredientList(transferIngredients))
+                            {
+                                myContainer.EmptyContainer();
+                                container.PlaceIngredientList(transferIngredients);
+                                OnItemLeave?.Invoke(itemHeld);
+                            }
+                        }
+                        else if(container.GetContainedIngredients() != null && container.CanEmptyContainer())
+                        {
+                            List<IngredientScript> transferIngredients = new List<IngredientScript>(container.GetContainedIngredients());
                             if (myContainer.CanPlaceIngredientList(transferIngredients))
                             {
                                 container.EmptyContainer();
                                 myContainer.PlaceIngredientList(transferIngredients);
                                 OnItemHold?.Invoke(itemHeld);
-                                //There is no need for return true since the player will keep the container
                             }
+                            //This code below could be a more efficient way of switching List, but container.Empty container might need tweaks to not show objects
+                            //if (myContainer.CanPlaceIngredientList(container.GetContainedIngredients()))
+                            //{
+                            //    myContainer.PlaceIngredientList(container.GetContainedIngredients());
+                            //    container.EmptyContainer();
+                            //    OnItemHold?.Invoke(itemHeld);
+                            //}
                         }
                     }
-                    else if (item.TryGetComponent(out IngredientScript aloneIngredient))
+                    else if (itemHeld.TryGetComponent(out IngredientScript myAloneIngredient) && container.CanPlaceIngredient(myAloneIngredient))
+                    {
+                        container.PlaceIngredient(myAloneIngredient);
+                        OnItemLeave?.Invoke(itemHeld);
+                        itemHeld = null;
+                    }
+                }
+                else
+                {
+                    if (itemHeld.TryGetComponent(out ContainerScript myContainer) && item.TryGetComponent(out IngredientScript aloneIngredient))
                     {
                         if (myContainer.CanPlaceIngredient(aloneIngredient))
                         {

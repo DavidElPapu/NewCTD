@@ -26,6 +26,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
 
     public bool CanPlaceIngredientList(List<IngredientScript> ingredientList)
     {
+        if (containedIngredients.Count + ingredientList.Count > maxContainedIngredients) return false;
         foreach (IngredientScript ingredient in ingredientList)
         {
             if (!CanPlaceIngredient(ingredient)) return false;
@@ -61,11 +62,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
 
     public virtual void EmptyContainer()
     {
-        foreach (IngredientScript ingredient in containedIngredients)
-        {
-            ingredient.transform.parent = null;
-            ingredient.gameObject.SetActive(true);
-        }
         containedIngredients.Clear();
     }
 
