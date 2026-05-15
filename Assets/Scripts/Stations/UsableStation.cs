@@ -1,15 +1,47 @@
-using UnityEngine;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-[RequireComponent(typeof(ItemHolder))]
 public class UsableStation : MonoBehaviour, IInteractable
 {
+    public event Action<GameObject> OnStationUse;
     [SerializeField] private List<CookingObjectName> validTools;
     [SerializeField] private float useCooldown;
-    [SerializeField] private int processMeterValue;
+    private bool canBeUsed;
+
+    private void Awake()
+    {
+        canBeUsed = true;
+    }
 
     public void OnUse(GameObject item)
     {
-        throw new System.NotImplementedException();
+        if(IsItemValid(item) && canBeUsed)
+        {
+            OnStationUse?.Invoke(item);
+            canBeUsed = false;
+            StartCoroutine(Cooldown());
+        }
+    }
+
+    private bool IsItemValid(GameObject item)
+    {
+        if (validTools.Count == 0) return true;
+        if (item.TryGetComponent(out ICookingObject cookingObject))
+        {
+            foreach (CookingObjectName tool in validTools)
+            {
+                if (cookingObject.GetCookingObjectName() == tool) return true;
+            }
+        }
+        return false;
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(useCooldown);
+        canBeUsed = true;
+        yield break;
     }
 }
