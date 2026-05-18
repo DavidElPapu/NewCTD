@@ -3,17 +3,13 @@ using UnityEngine;
 public class IngredientScript : MonoBehaviour, ICookingObject
 {
     public IngredientSO data;
+    public IngredientState state;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshRenderer meshRenderer;
 
     public CookingObjectName GetCookingObjectName()
     {
         return data.iName;
-    }
-
-    public CookingObjectType GetCookingObjectType()
-    {
-        return CookingObjectType.Ingredient;
     }
 
     public void ChangeMesh(Mesh newMesh)
@@ -26,8 +22,9 @@ public class IngredientScript : MonoBehaviour, ICookingObject
         meshRenderer.material = newMaterial;
     }
 
-    public void ChangeSize(Vector3 newSize)
+    public void ChangeSizeAndOffset(Vector3 newSize, Vector3 newOffset)
     {
-        transform.localScale = newSize;
+        meshRenderer.transform.localScale = newSize;
+        meshRenderer.transform.localPosition = newOffset;
     }
 }

@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  validItems: 
+  validIngredientTypes: 
+  validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
-  validContainers: 
 --- !u!1 &5150963647566158330
 GameObject:
   m_ObjectHideFlags: 0

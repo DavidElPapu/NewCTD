@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
   iName: 0
   type: 0
-  state: 0
   mesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}
   material: {fileID: 2100000, guid: 5f70900c90cf474468e9db306afc6a52, type: 2}
-  customSize: {x: 0.6, y: 0.6, z: 0.6}
+  customSize: {x: 0.7, y: 0.7, z: 0.7}
+  customOffset: {x: 0, y: 0.35, z: 0}
+  baseColor: {r: 0.9528302, g: 0.9428539, b: 0.93934673, a: 0}

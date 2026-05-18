@@ -28,7 +28,7 @@ public class UsableStation : MonoBehaviour, IInteractable
     private bool IsItemValid(GameObject item)
     {
         if (validTools.Count == 0) return true;
-        if (item.TryGetComponent(out ICookingObject cookingObject))
+        if (item != null && item.TryGetComponent(out ICookingObject cookingObject))
         {
             foreach (CookingObjectName tool in validTools)
             {

@@ -79,8 +79,29 @@ public class ItemHolder : MonoBehaviour, IPlaceable
             }
             else
             {
-                if (!IsCookingObjectValid(cookingObject.GetCookingObjectName()))
-                    if (!IsIngredientValid(item)) return false;
+                if (!IsCookingObjectValid(cookingObject.GetCookingObjectName()) || !IsIngredientTypeValid(item) || !IsIngredientStateValid(item))
+                {
+                    //I dont like how this look, but this is to place an ingredient inside the container into the station
+                    if (item.TryGetComponent(out ContainerScript container2) && container2.GetContainedIngredients() != null && container2.CanEmptyContainer())
+                    {
+                        IngredientScript newHeldIngredient = container2.GetContainedIngredients()[0];
+                        if (container2.GetContainedIngredients().Count == 1 && IsCookingObjectValid(newHeldIngredient.GetCookingObjectName()))
+                        {
+                            if(IsIngredientTypeValid(newHeldIngredient.gameObject) && IsIngredientStateValid(newHeldIngredient.gameObject))
+                            {
+                                container2.EmptyContainer();
+                                newHeldIngredient.gameObject.transform.parent = null;
+                                newHeldIngredient.gameObject.transform.position = itemLocation.position;
+                                newHeldIngredient.gameObject.transform.rotation = itemLocation.rotation;
+                                if (!newHeldIngredient.gameObject.activeSelf)
+                                    newHeldIngredient.gameObject.SetActive(true);
+                                itemHeld = newHeldIngredient.gameObject;
+                                OnItemHold?.Invoke(itemHeld);
+                            }
+                        }
+                    }
+                    return false;
+                }
                 item.transform.parent = null;
                 item.transform.position = itemLocation.position;
                 item.transform.rotation = itemLocation.rotation;
@@ -103,26 +124,37 @@ public class ItemHolder : MonoBehaviour, IPlaceable
 
     private bool IsCookingObjectValid(CookingObjectName item)
     {
-        if (validItems.Count != 0)
+        if (validItems.Count == 0) return true;
+        foreach (CookingObjectName validItem in validItems)
         {
-            foreach (CookingObjectName validItem in validItems)
-            {
-                if (item == validItem) return true;
-            }
+            if (item == validItem) return true;
         }
         return false;
     }
 
-    private bool IsIngredientValid(GameObject possibleIngredient)
+    private bool IsIngredientTypeValid(GameObject possibleIngredient)
     {
-        //For now, if there is a valid type, there needs to be valid state and viceversa
-        if (validIngredientTypes.Count == 0 || validIngredientStates.Count == 0) return true;
+        if (validIngredientTypes.Count == 0) return true;
 
         if (possibleIngredient.TryGetComponent(out IngredientScript ingredient))
         {
             foreach (IngredientType validType in validIngredientTypes)
             {
                 if (ingredient.data.type == validType) return true;
+            }
+        }
+        return false;
+    }
+
+    private bool IsIngredientStateValid(GameObject possibleIngredient)
+    {
+        if (validIngredientStates.Count == 0) return true;
+
+        if (possibleIngredient.TryGetComponent(out IngredientScript ingredient))
+        {
+            foreach (IngredientState validState in validIngredientStates)
+            {
+                if (ingredient.state == validState) return true;
             }
         }
         return false;

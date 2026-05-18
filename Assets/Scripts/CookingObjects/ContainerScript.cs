@@ -5,7 +5,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
 {
     public CookingObjectName cName;
     [SerializeField] private List<IngredientType> validIngredientTypes;
-    [SerializeField] private List<IngredientType> validIngredientStates;
+    [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] private int maxContainedIngredients;
     protected List<IngredientScript> containedIngredients;
 
@@ -19,8 +19,8 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public bool CanPlaceIngredient(IngredientScript ingredient)
     {
         if (containedIngredients.Count >= maxContainedIngredients) return false;
-        //For now, it just need to be either type or state, that might change later for an exeptions list (like water, ice , etc)
-        if (IsIngredientTypeValid(ingredient.data.type) || IsIngredientStateValid(ingredient.data.state)) return true;
+        //For now, it needs to be a valid type and state, that might change later for an exeptions list (like water, ice , etc)
+        if (IsIngredientTypeValid(ingredient.data.type) && IsIngredientStateValid(ingredient.state)) return true;
         return false;
     }
 
@@ -76,11 +76,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public CookingObjectName GetCookingObjectName()
     {
         return cName;
-    }
-
-    public CookingObjectType GetCookingObjectType()
-    {
-        return CookingObjectType.Container;
     }
 
     private bool IsIngredientTypeValid(IngredientType iType)

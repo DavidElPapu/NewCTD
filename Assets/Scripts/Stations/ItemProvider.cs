@@ -4,6 +4,7 @@ public class ItemProvider : MonoBehaviour, IPlaceable
 {
     [SerializeField] private GameObject ingredientPrefab;
     [SerializeField] private IngredientSO ingredientSO;
+    [SerializeField] private IngredientState initialState;
 
     public void SetIngredient(IngredientSO ingredient)
     {
@@ -21,9 +22,10 @@ public class ItemProvider : MonoBehaviour, IPlaceable
         if (newIngredient.TryGetComponent(out IngredientScript ingredientScript))
         {
             ingredientScript.data = ingredientSO;
+            ingredientScript.state = initialState;
             ingredientScript.ChangeMesh(ingredientSO.mesh);
             ingredientScript.ChangeMaterial(ingredientSO.material);
-            ingredientScript.ChangeSize(ingredientSO.customSize);
+            ingredientScript.ChangeSizeAndOffset(ingredientSO.customSize, ingredientSO.customOffset);
         }
         else
             return null;

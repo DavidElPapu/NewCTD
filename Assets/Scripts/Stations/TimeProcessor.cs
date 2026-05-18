@@ -4,8 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(ItemHolder))]
 public class TimeProcessor : MonoBehaviour
 {
+    [Header("For Ingredient Processing")]
+    [SerializeField] private Mesh processedMesh;
+    [SerializeField] private Vector3 customSize, customOffset;
+    [SerializeField] private int maxProcessMeter;
+    private int currentProcessMeter;
+    [Header("For Ingredient or Container Processing")]
     [SerializeField] private IngredientState processedState;
-    [SerializeField] private float processTimeFrequency;
+    [SerializeField] private float processMeterValueTimeFrequency;
     [SerializeField] private int processMeterValue;
     private ItemHolder itemHolder;
     private Coroutine timerProcess;
@@ -14,6 +20,7 @@ public class TimeProcessor : MonoBehaviour
     {
         TryGetComponent(out itemHolder);
         timerProcess = null;
+        currentProcessMeter = 0;
     }
 
     private void OnEnable()
@@ -30,37 +37,44 @@ public class TimeProcessor : MonoBehaviour
 
     private void StartProcessing(GameObject item)
     {
-        //For now it can only process ingredients through containers not directly
-        if (item.TryGetComponent(out ICookingObject cookingObject) && cookingObject.GetCookingObjectType() == CookingObjectType.Container)
+        if (timerProcess == null)
         {
-            if (timerProcess == null && item.TryGetComponent(out ProcessContainerScript processContainer))
-            {
-                timerProcess = StartCoroutine(Timer(processContainer));
-            }
+            timerProcess = StartCoroutine(Timer(item));
         }
     }
 
     private void StopProcessing(GameObject item)
     {
-        //Checking if its a container may be redundant so this line might be deleted
-        if (item.TryGetComponent(out ICookingObject cookingObject) && cookingObject.GetCookingObjectType() == CookingObjectType.Container)
+        if (timerProcess != null)
         {
-            if (timerProcess != null)
-            {
-                StopCoroutine(timerProcess);
-                timerProcess = null;
-            }
+            StopCoroutine(timerProcess);
+            timerProcess = null;
         }
     }
 
-    private IEnumerator Timer(ProcessContainerScript container)
+    private IEnumerator Timer(GameObject item)
     {
-        while (!container.IsProcessDone())
+        if (item.TryGetComponent(out ProcessContainerScript processContainer))
         {
-            container.AddProcessMeter(processMeterValue);
-            yield return new WaitForSeconds(processTimeFrequency);
+            while (!processContainer.IsProcessDone())
+            {
+                processContainer.AddProcessMeter(processMeterValue);
+                yield return new WaitForSeconds(processMeterValueTimeFrequency);
+            }
+            processContainer.OnProcessDone(processedState);
         }
-        container.OnProcessDone(processedState);
+        else if (item.TryGetComponent(out IngredientScript ingredient))
+        {
+            currentProcessMeter = 0;
+            while (currentProcessMeter < maxProcessMeter)
+            {
+                currentProcessMeter += processMeterValue;
+                yield return new WaitForSeconds(processMeterValueTimeFrequency);
+            }
+            ingredient.state = processedState;
+            ingredient.ChangeMesh(processedMesh);
+            ingredient.ChangeSizeAndOffset(customSize, customOffset);
+        }
         timerProcess = null;
         yield break;
     }

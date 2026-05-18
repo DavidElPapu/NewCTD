@@ -5,10 +5,11 @@ public class IngredientSO : ScriptableObject
 {
     public CookingObjectName iName;
     public IngredientType type;
-    public IngredientState state;
     public Mesh mesh;
     public Material material;
     public Vector3 customSize;
+    public Vector3 customOffset;
+    public Color baseColor;
 }
 
 public enum IngredientType
@@ -20,5 +21,8 @@ public enum IngredientState
 {
     Intact,
     Cut,
-    Blended
+    Blended,
+    Cooked,
+    Brewed,
+    Squashed
 }

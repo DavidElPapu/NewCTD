@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150508091882527491}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0.5, y: 0.55, z: 0.5}
-  m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.521, z: 0.5}
+  m_LocalScale: {x: 0.9, y: 0.05, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5871187926449424828}
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2325024931655181331
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 1737231796263190949}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 0.55, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 9159407259945270527}
   - component: {fileID: 5006073485279066628}
   m_Layer: 0
-  m_Name: CuttingTable
+  m_Name: BrewingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
-  validItems: 
-  validIngredientTypes: 00000000
-  validIngredientStates: 0000000001000000
+  validItems: 05000000
+  validIngredientTypes: 
+  validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
 --- !u!114 &9159407259945270527
 MonoBehaviour:
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e371e17c1a58b46439dd3b291871f8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UsableStation
-  validTools: 
-  useCooldown: 0.2
+  validTools: 00000000
+  useCooldown: 0.8
 --- !u!114 &5006073485279066628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,12 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6de9217e07a3443869b1a1ac98ce4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StepProcessor
-  processedMesh: {fileID: 2381890483179193753, guid: 830d62a62cc90fe46bb6c997091476c8, type: 3}
-  customSize: {x: 3, y: 3, z: 3}
+  processedMesh: {fileID: 0}
+  customSize: {x: 0, y: 0, z: 0}
   customOffset: {x: 0, y: 0, z: 0}
-  maxProcessMeter: 6
-  processedState: 1
-  processMeterValue: 1
+  maxProcessMeter: 0
+  processedState: 4
+  processMeterValue: 25
 --- !u!1 &5150963647566158330
 GameObject:
   m_ObjectHideFlags: 0
