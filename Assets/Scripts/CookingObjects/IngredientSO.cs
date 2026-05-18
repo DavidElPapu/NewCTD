@@ -24,5 +24,6 @@ public enum IngredientState
     Blended,
     Cooked,
     Brewed,
-    Squashed
+    Squashed,
+    Null
 }

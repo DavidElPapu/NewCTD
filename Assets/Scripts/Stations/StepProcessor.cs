@@ -9,12 +9,14 @@ public class StepProcessor : MonoBehaviour
     [SerializeField] private int maxProcessMeter;
     private int currentProcessMeter;
     [Header("For Ingredient or Container Processing")]
-    [SerializeField] private IngredientState processedState;
     //stepMeterValue is relative to requiredSteps for ingredients and relative to a 100 for containers, this might change for consistency
     [SerializeField] private int processMeterValue;
+    [Header("For processing without tool")]
+    [SerializeField] private IngredientState processedState;
     private UsableStation usableStation;
     private ItemHolder itemHolder;
     private GameObject currentItem;
+    private IngredientState currentProcessedState;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class StepProcessor : MonoBehaviour
         TryGetComponent(out itemHolder);
         currentItem = null;
         currentProcessMeter = 0;
+        currentProcessedState = IngredientState.Null;
     }
 
     private void OnEnable()
@@ -42,22 +45,32 @@ public class StepProcessor : MonoBehaviour
     {
         currentItem = item;
         currentProcessMeter = 0;
+        if (processedState != IngredientState.Null)
+            currentProcessedState = processedState;
     }
 
     private void OnItemLeave(GameObject item)
     {
         currentItem = null;
+        currentProcessedState = IngredientState.Null;
     }
 
     private void OnUse(GameObject usedItem)
     {
         if (currentItem == null) return;
+        if (usedItem != null && usedItem.TryGetComponent(out ToolScript tool))
+        {
+            if (currentProcessedState == IngredientState.Null)
+                currentProcessedState = tool.processedState;
+            else if (tool.processedState != currentProcessedState)
+                return;
+        }
         if (currentItem.TryGetComponent(out IngredientScript ingredient) && currentProcessMeter < maxProcessMeter)
         {
             currentProcessMeter += processMeterValue;
             if (currentProcessMeter >= maxProcessMeter)
             {
-                ingredient.state = processedState;
+                ingredient.state = currentProcessedState;
                 ingredient.ChangeMesh(processedMesh);
                 ingredient.ChangeSizeAndOffset(customSize, customOffset);
             }
@@ -66,7 +79,7 @@ public class StepProcessor : MonoBehaviour
         {
             container.AddProcessMeter(processMeterValue);
             if (container.IsProcessDone())
-                container.OnProcessDone(processedState);
+                container.OnProcessDone(currentProcessedState);
         }
     }
 }

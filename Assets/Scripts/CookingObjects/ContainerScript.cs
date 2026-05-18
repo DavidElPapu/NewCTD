@@ -6,12 +6,18 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public CookingObjectName cName;
     [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientState> validIngredientStates;
+    [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
     protected List<IngredientScript> containedIngredients;
+    private MeshRenderer contentMeshRenderer;
+    private Color contentColor;
 
     protected virtual void Awake()
     {
         containedIngredients = new List<IngredientScript>();
+        contentModel.SetActive(false);
+        contentModel.TryGetComponent(out contentMeshRenderer);
+        contentColor = Color.black;
     }
 
     #region PlaceOnContainer
@@ -41,6 +47,13 @@ public class ContainerScript : MonoBehaviour, ICookingObject
         ingredient.transform.parent = transform;
         ingredient.transform.position = transform.position;
         ingredient.gameObject.SetActive(false);
+        if (!contentModel.activeSelf)
+            contentModel.SetActive(true);
+        if (contentColor == Color.black)
+            contentColor = ingredient.data.baseColor;
+        else
+            contentColor = Color.Lerp(contentColor, ingredient.data.baseColor, 0.5f);
+        contentMeshRenderer.material.color = contentColor;
     }
 
     public void PlaceIngredientList(List<IngredientScript> ingredientList)
@@ -63,6 +76,8 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void EmptyContainer()
     {
         containedIngredients.Clear();
+        contentModel.SetActive(false);
+        contentColor = Color.black;
     }
 
     public List<IngredientScript> GetContainedIngredients()
