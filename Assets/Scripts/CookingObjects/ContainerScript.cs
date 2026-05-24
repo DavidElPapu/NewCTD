@@ -1,8 +1,11 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ContainerScript : MonoBehaviour, ICookingObject
 {
+    public event Action<IngredientScript> OnIngredientPlaced;
+    public event Action OnIngredientReset;
     public CookingObjectName cName;
     [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientState> validIngredientStates;
@@ -43,6 +46,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void PlaceIngredient(IngredientScript ingredient)
     {
         containedIngredients.Add(ingredient);
+        OnIngredientPlaced?.Invoke(ingredient);
         //For now it just deactivates the gameObject
         ingredient.transform.parent = transform;
         ingredient.transform.position = transform.position;
@@ -76,6 +80,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void EmptyContainer()
     {
         containedIngredients.Clear();
+        OnIngredientReset?.Invoke();
         contentModel.SetActive(false);
         contentColor = Color.black;
     }
