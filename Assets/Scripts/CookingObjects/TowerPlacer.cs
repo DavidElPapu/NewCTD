@@ -5,7 +5,7 @@ public class TowerPlacer : MonoBehaviour
 {
     private ContainerScript containerScript;
     private HashSet<RecipeIngredient> containedRecipeIngredients;
-    private GameObject towerPrefab;
+    public GameObject towerPrefab;
 
     private void Awake()
     {

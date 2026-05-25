@@ -4,7 +4,7 @@ using UnityEngine;
 public class RecipesManager : MonoBehaviour
 {
     public static RecipesManager singleton;
-    [SerializeField] private List<RecipeSO> allRecipesSO;
+    [SerializeField] private List<RecipeSO> allRecipesSO = new List<RecipeSO>();
     private HashSet<RecipeScript> allRecipes, levelRecipes;
 
     private void Awake()

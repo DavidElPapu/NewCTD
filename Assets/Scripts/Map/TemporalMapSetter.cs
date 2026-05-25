@@ -19,7 +19,7 @@ public class TemporalMapSetter : MonoBehaviour
             {
                 if (stationInteraction.CanPlaceItem(container))
                 {
-                    stationInteraction.CanPlaceItem(container);
+                    //no if since we assume we placed containers where we know is valid
                 }
             }
         }
