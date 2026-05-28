@@ -1,0 +1,13 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Tower", menuName = "Create Tower SO")]
+public class BaseTowerSO : ScriptableObject
+{
+    public TowerName tName;
+}
+
+public enum TowerName
+{
+    Coconuturret,
+    Pinacolada
+}

@@ -1,38 +1,43 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class BaseTower : MonoBehaviour
+public class BaseTower : MonoBehaviour
 {
-    //Reference to the SO
     //DetectionRange
-    [SerializeField] private List<GameObject> levelModels;
+    [SerializeField] protected List<BaseTowerSO> levelsData;
+    [SerializeField] private List<GameObject> levelsModels;
     protected List<GameObject> enemiesInRange = new List<GameObject>();
     private int currentLevel = 0;
 
     protected virtual void Awake()
     {
-        for (int i = 0; i < levelModels.Count; i++)
+        for (int i = 0; i < levelsModels.Count; i++)
         {
             if (i != currentLevel)
-                levelModels[i].SetActive(false);
+                levelsModels[i].SetActive(false);
             else
-                levelModels[i].SetActive(true);
+                levelsModels[i].SetActive(true);
         }
     }
 
     public virtual bool CanUpgrade()
     {
-        if (currentLevel < levelModels.Count - 1) return true;
+        if (currentLevel < levelsModels.Count - 1) return true;
         return false;
     }
 
-    public virtual void OnUpgrade()
+    public virtual void Upgrade()
     {
-        levelModels[currentLevel].SetActive(false);
+        levelsModels[currentLevel].SetActive(false);
         currentLevel++;
-        levelModels[currentLevel].SetActive(true);
+        levelsModels[currentLevel].SetActive(true);
     }
 
-    protected abstract void OnMainAction();
+    public TowerName GetName()
+    {
+        return levelsData[currentLevel].tName;
+    }
+
+    //protected abstract void SetData(/*pasar SO*/);
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class TowerSpotStation : MonoBehaviour, IPlaceable
 {
     private UsableStation usableStation;
-    private GameObject currentTower;
+    private BaseTower currentTower;
 
     private void Awake()
     {
@@ -29,11 +29,16 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable
             if (currentTower == null)
             {
                 GameObject newTower = Instantiate(towerContainer.towerPrefab, transform.position, transform.rotation);
-                currentTower = newTower;
+                currentTower = newTower.GetComponent<BaseTower>();
                 if (item.TryGetComponent(out ContainerScript container))
                     container.EmptyContainer();
             }
-            //else if (checar que sean la misma torre para mejorar)
+            else if (towerContainer.towerPrefab.TryGetComponent(out BaseTower tower) && (tower.GetName() == currentTower.GetName()) && currentTower.CanUpgrade())
+            {
+                currentTower.Upgrade();
+                if (item.TryGetComponent(out ContainerScript container2))
+                    container2.EmptyContainer();
+            }
         }
         return false;
     }
