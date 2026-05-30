@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 public class BaseTower : MonoBehaviour
 {
-    //DetectionRange
     [SerializeField] protected List<BaseTowerSO> levelsData;
     [SerializeField] private List<GameObject> levelsModels;
-    protected List<GameObject> enemiesInRange = new List<GameObject>();
     private int currentLevel = 0;
 
     protected virtual void Awake()
@@ -37,7 +35,4 @@ public class BaseTower : MonoBehaviour
     {
         return levelsData[currentLevel].tName;
     }
-
-    //protected abstract void SetData(/*pasar SO*/);
-
 }
