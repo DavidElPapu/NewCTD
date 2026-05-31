@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class IngredientScript : MonoBehaviour, ICookingObject
 {
+    public static int ingredientProcessMeter = 100;
     public IngredientSO data;
     public IngredientState state;
     [SerializeField] private MeshFilter meshFilter;

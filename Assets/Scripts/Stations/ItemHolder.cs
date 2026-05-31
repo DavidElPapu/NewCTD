@@ -13,9 +13,13 @@ public class ItemHolder : MonoBehaviour, IPlaceable
     [SerializeField] private Transform itemLocation;
     private GameObject itemHeld;
 
+    private IHoldProcessor holdProcessor; 
+
     private void Awake()
     {
         itemHeld = null;
+
+        TryGetComponent(out holdProcessor);
     }
 
     public bool CanPlaceItem(GameObject item)
@@ -36,6 +40,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                                 myContainer.EmptyContainer();
                                 container.PlaceIngredientList(transferIngredients);
                                 OnItemLeave?.Invoke(itemHeld);
+                                ProcessorOnItemExit(itemHeld);
                             }
                         }
                         else if(container.GetContainedIngredients() != null && container.CanEmptyContainer())
@@ -46,6 +51,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                                 container.EmptyContainer();
                                 myContainer.PlaceIngredientList(transferIngredients);
                                 OnItemHold?.Invoke(itemHeld);
+                                ProcessorOnItemEnter(itemHeld);
                             }
                             //This code below could be a more efficient way of switching List, but container.Empty container might need tweaks to not show objects
                             //if (myContainer.CanPlaceIngredientList(container.GetContainedIngredients()))
@@ -60,6 +66,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                     {
                         container.PlaceIngredient(myAloneIngredient);
                         OnItemLeave?.Invoke(itemHeld);
+                        ProcessorOnItemExit(itemHeld);
                         itemHeld = null;
                     }
                 }
@@ -71,6 +78,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                         {
                             myContainer.PlaceIngredient(aloneIngredient);
                             OnItemHold?.Invoke(itemHeld);
+                            ProcessorOnItemEnter(itemHeld);
                             return true;
                         }
                     }
@@ -97,6 +105,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                                     newHeldIngredient.gameObject.SetActive(true);
                                 itemHeld = newHeldIngredient.gameObject;
                                 OnItemHold?.Invoke(itemHeld);
+                                ProcessorOnItemEnter(itemHeld);
                             }
                         }
                     }
@@ -107,6 +116,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                 item.transform.rotation = itemLocation.rotation;
                 itemHeld = item;
                 OnItemHold?.Invoke(itemHeld);
+                ProcessorOnItemEnter(itemHeld);
                 return true;
             }
         }
@@ -119,8 +129,12 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         GameObject tempHold = itemHeld;
         itemHeld = null;
         OnItemLeave?.Invoke(tempHold);
+        ProcessorOnItemExit(tempHold);
         return tempHold;
     }
+
+    private void ProcessorOnItemEnter(GameObject item) => holdProcessor?.OnItemEnter(item);
+    private void ProcessorOnItemExit(GameObject item) => holdProcessor?.OnItemExit(item);
 
     private bool IsCookingObjectValid(CookingObjectName item)
     {

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
   - component: {fileID: 4180390567052774535}
-  - component: {fileID: 7312914869955796639}
+  - component: {fileID: 2192597100819383689}
   m_Layer: 0
   m_Name: Oven
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   validIngredientTypes: 
   validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
---- !u!114 &7312914869955796639
+--- !u!114 &2192597100819383689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,13 +114,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58335973cc8da0240b87f064e3e68f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: f7f906c7d2ee27b4eafc8a0e5332b1d5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeProcessor
-  processedMesh: {fileID: 0}
-  customSize: {x: 0, y: 0, z: 0}
-  customOffset: {x: 0, y: 0, z: 0}
-  maxProcessMeter: 0
+  m_EditorClassIdentifier: Assembly-CSharp::TimeContainerProcessor
   processedState: 3
   processMeterValueTimeFrequency: 0.5
   processMeterValue: 10
