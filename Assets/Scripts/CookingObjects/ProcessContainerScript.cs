@@ -4,7 +4,7 @@ public class ProcessContainerScript : ContainerScript
 {
     [SerializeField] private Mesh defaultContentMesh, processedContentMesh;
     private MeshFilter contentMeshFilter;
-    private int currentProcessMeter, maxProcessMeter, ingredientProcessMeterValue;
+    private int currentProcessMeter, maxProcessMeter;
 
     protected override void Awake()
     {
@@ -12,13 +12,12 @@ public class ProcessContainerScript : ContainerScript
         contentModel.TryGetComponent(out contentMeshFilter);
         currentProcessMeter = 0;
         maxProcessMeter = 0;
-        ingredientProcessMeterValue = 100;
     }
 
     public override void PlaceIngredient(IngredientScript ingredient)
     {
         base.PlaceIngredient(ingredient);
-        maxProcessMeter += ingredientProcessMeterValue;
+        maxProcessMeter += IngredientScript.ingredientProcessMeter;
         if (contentMeshFilter.mesh != defaultContentMesh)
             contentMeshFilter.mesh = defaultContentMesh;
     }

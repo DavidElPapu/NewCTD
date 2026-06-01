@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class UsableStation : MonoBehaviour
 {
-    public event Action<GameObject> OnStationUse;
     [SerializeField] private List<CookingObjectName> validTools;
     [SerializeField] private float useCooldown;
+    private IUseProcessor useProcessor;
     private bool canBeUsed;
 
     private void Awake()
     {
+        TryGetComponent(out useProcessor);
         canBeUsed = true;
     }
 
@@ -19,7 +20,7 @@ public class UsableStation : MonoBehaviour
     {
         if(IsItemValid(item) && canBeUsed)
         {
-            OnStationUse?.Invoke(item);
+            useProcessor.OnProcessorUse(item);
             canBeUsed = false;
             StartCoroutine(Cooldown());
         }

@@ -5,20 +5,16 @@ using static UnityEditor.Progress;
 
 public class ItemHolder : MonoBehaviour, IPlaceable
 {
-    public event Action<GameObject> OnItemHold;
-    public event Action<GameObject> OnItemLeave;
     [SerializeField] private List<CookingObjectName> validItems;
     [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] private Transform itemLocation;
     private GameObject itemHeld;
-
-    private IHoldProcessor holdProcessor; 
+    private IHoldProcessor holdProcessor;
 
     private void Awake()
     {
         itemHeld = null;
-
         TryGetComponent(out holdProcessor);
     }
 
@@ -39,7 +35,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                             {
                                 myContainer.EmptyContainer();
                                 container.PlaceIngredientList(transferIngredients);
-                                OnItemLeave?.Invoke(itemHeld);
                                 ProcessorOnItemExit(itemHeld);
                             }
                         }
@@ -50,7 +45,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                             {
                                 container.EmptyContainer();
                                 myContainer.PlaceIngredientList(transferIngredients);
-                                OnItemHold?.Invoke(itemHeld);
                                 ProcessorOnItemEnter(itemHeld);
                             }
                             //This code below could be a more efficient way of switching List, but container.Empty container might need tweaks to not show objects
@@ -65,7 +59,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                     else if (itemHeld.TryGetComponent(out IngredientScript myAloneIngredient) && container.CanPlaceIngredient(myAloneIngredient))
                     {
                         container.PlaceIngredient(myAloneIngredient);
-                        OnItemLeave?.Invoke(itemHeld);
                         ProcessorOnItemExit(itemHeld);
                         itemHeld = null;
                     }
@@ -77,7 +70,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                         if (myContainer.CanPlaceIngredient(aloneIngredient))
                         {
                             myContainer.PlaceIngredient(aloneIngredient);
-                            OnItemHold?.Invoke(itemHeld);
                             ProcessorOnItemEnter(itemHeld);
                             return true;
                         }
@@ -104,7 +96,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                                 if (!newHeldIngredient.gameObject.activeSelf)
                                     newHeldIngredient.gameObject.SetActive(true);
                                 itemHeld = newHeldIngredient.gameObject;
-                                OnItemHold?.Invoke(itemHeld);
                                 ProcessorOnItemEnter(itemHeld);
                             }
                         }
@@ -115,7 +106,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                 item.transform.position = itemLocation.position;
                 item.transform.rotation = itemLocation.rotation;
                 itemHeld = item;
-                OnItemHold?.Invoke(itemHeld);
                 ProcessorOnItemEnter(itemHeld);
                 return true;
             }
@@ -128,7 +118,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         if (itemHeld == null) return null;
         GameObject tempHold = itemHeld;
         itemHeld = null;
-        OnItemLeave?.Invoke(tempHold);
         ProcessorOnItemExit(tempHold);
         return tempHold;
     }

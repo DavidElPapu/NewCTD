@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 5449347200747252298}
   - component: {fileID: 4180390567052774535}
   - component: {fileID: 9159407259945270527}
-  - component: {fileID: 5006073485279066628}
+  - component: {fileID: 3214967685204679517}
   m_Layer: 0
   m_Name: BrewingTable
   m_TagString: Untagged
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UsableStation
   validTools: 00000000
   useCooldown: 0.8
---- !u!114 &5006073485279066628
+--- !u!114 &3214967685204679517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,13 +219,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa6de9217e07a3443869b1a1ac98ce4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b63db0793c49bb47a60698e73dfaab5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StepProcessor
-  processedMesh: {fileID: 0}
-  customSize: {x: 0, y: 0, z: 0}
-  customOffset: {x: 0, y: 0, z: 0}
-  maxProcessMeter: 0
+  m_EditorClassIdentifier: Assembly-CSharp::StepContainerProcessor
   processMeterValue: 25
   processedState: 6
 --- !u!1 &5150963647566158330

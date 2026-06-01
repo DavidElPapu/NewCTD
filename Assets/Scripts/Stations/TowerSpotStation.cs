@@ -1,25 +1,13 @@
 using UnityEngine;
 
 [RequireComponent(typeof(UsableStation))]
-public class TowerSpotStation : MonoBehaviour, IPlaceable
+public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
 {
-    private UsableStation usableStation;
     private BaseTower currentTower;
 
     private void Awake()
     {
-        TryGetComponent(out usableStation);
         currentTower = null;
-    }
-
-    private void OnEnable()
-    {
-        usableStation.OnStationUse += OnUse;
-    }
-
-    private void OnDisable()
-    {
-        usableStation.OnStationUse -= OnUse;
     }
 
     public bool CanPlaceItem(GameObject item)
@@ -48,7 +36,7 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable
         return null;
     }
 
-    private void OnUse(GameObject usedItem)
+    public void OnProcessorUse(GameObject usedItem)
     {
         //For now, this is just used to delete the tower, maybe later could be more uses for diferent tools on towers
         //Before destroying could call a function of the tower for closure
