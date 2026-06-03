@@ -374,6 +374,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414beeb80244bf642a1406bbd9150753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseTower
+  abilities:
+  - ability: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    - {fileID: 0}
+  - ability: {fileID: 0}
+    conditions:
+    - {fileID: 0}
+    - {fileID: 0}
   levelsData:
   - {fileID: 11400000, guid: a313ddb84d251dc47bc015a49c47992c, type: 2}
   - {fileID: 11400000, guid: a34363b1646b0af4aa460a938eb7e77e, type: 2}
