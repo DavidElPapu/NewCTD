@@ -4,8 +4,7 @@ using System;
 
 public class TowerDetectionRange : MonoBehaviour
 {
-    public event Action OnEnemyInRange;
-    //Consider changing the hashset from gameobjects to IEnemyHealth, since it might decrease trygetcomponent calls
+    //Consider changing the hashset from gameobjects to enemy monobehavour script, since it might decrease trygetcomponent calls
     public HashSet<GameObject> enemiesInRange;
 
     private void Awake()
@@ -19,8 +18,6 @@ public class TowerDetectionRange : MonoBehaviour
         {
             enemiesInRange.Add(other.gameObject);
             health.OnDeath += EnemyRemove;
-            if (enemiesInRange.Count == 1)
-                OnEnemyInRange?.Invoke();
         }
     }
 
@@ -37,5 +34,20 @@ public class TowerDetectionRange : MonoBehaviour
             if (enemy.TryGetComponent(out IEnemyHealth health))
                 health.OnDeath -= EnemyRemove;
         }
+    }
+
+    private GameObject GetFirstEnemy()
+    {
+        //this whole thing might need to change to return enemy script instead and get first enemy
+        GameObject firstEnemy = null;
+        float closestDistance = 1000f;
+        foreach (GameObject enemy in enemiesInRange)
+        {
+            if(enemy.transform.position.y < closestDistance)
+            {
+                firstEnemy = enemy;
+            }
+        }
+        return firstEnemy;
     }
 }

@@ -2,5 +2,6 @@ using UnityEngine;
 
 public abstract class TowerAbilityConditionSO : ScriptableObject
 {
-    public abstract bool IsValid(GameObject tower);
+    public abstract void Setup(GameObject tower);
+    public abstract bool IsValid();
 }
