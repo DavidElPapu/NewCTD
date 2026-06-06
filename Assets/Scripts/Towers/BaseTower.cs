@@ -5,6 +5,7 @@ public class BaseTower : MonoBehaviour
 {
     [SerializeField] protected List<BaseTowerSO> levelsData;
     [SerializeField] private List<GameObject> levelsModels;
+    private TowerContext context;
     private int currentLevel = 0;
 
     protected virtual void Awake()
@@ -16,6 +17,12 @@ public class BaseTower : MonoBehaviour
             else
                 levelsModels[i].SetActive(true);
         }
+        context = new TowerContext
+        (
+            gameObject,
+            this,
+            GetComponent<TowerDetectionRange>()
+        );
     }
 
     public virtual bool CanUpgrade()
@@ -31,8 +38,22 @@ public class BaseTower : MonoBehaviour
         levelsModels[currentLevel].SetActive(true);
     }
 
-    public TowerName GetName()
+    public BaseTowerSO GetData()
     {
-        return levelsData[currentLevel].tName;
+        return levelsData[currentLevel];
+    }
+}
+
+public readonly struct TowerContext
+{
+    public readonly GameObject towerGO;
+    public readonly BaseTower towerScript;
+    public readonly TowerDetectionRange detectionRange;
+
+    public TowerContext(GameObject towerGO, BaseTower towerScript, TowerDetectionRange detectionRange)
+    {
+        this.towerGO = towerGO;
+        this.towerScript = towerScript;
+        this.detectionRange = detectionRange;
     }
 }

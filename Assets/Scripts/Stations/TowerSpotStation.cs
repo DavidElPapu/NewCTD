@@ -21,7 +21,7 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
                 if (item.TryGetComponent(out ContainerScript container))
                     container.EmptyContainer();
             }
-            else if (towerContainer.towerPrefab.TryGetComponent(out BaseTower tower) && (tower.GetName() == currentTower.GetName()) && currentTower.CanUpgrade())
+            else if (towerContainer.towerPrefab.TryGetComponent(out BaseTower tower) && (tower.GetData().tName == currentTower.GetData().tName) && currentTower.CanUpgrade())
             {
                 currentTower.Upgrade();
                 if (item.TryGetComponent(out ContainerScript container2))

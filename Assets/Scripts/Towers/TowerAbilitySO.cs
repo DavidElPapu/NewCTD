@@ -2,6 +2,5 @@ using UnityEngine;
 
 public abstract class TowerAbilitySO : ScriptableObject
 {
-    public abstract void Setup(GameObject tower);
-    public abstract void TriggerAbility();
+    public abstract void TriggerAbility(in TowerContext context);
 }
