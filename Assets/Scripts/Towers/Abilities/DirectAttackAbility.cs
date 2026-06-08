@@ -7,7 +7,6 @@ public class DirectAttackAbility : TowerAbilitySO
     {
         //I made this fast, this might need optimizing
         GameObject targetEnemy = context.detectionRange.GetFirstEnemy();
-        Debug.Log(targetEnemy);
         if (targetEnemy.TryGetComponent(out IEnemyHealth enemyHealth))
         {
             enemyHealth.DealDamage(context.towerScript.GetData().damage);

@@ -33,15 +33,22 @@ public class BaseTower : MonoBehaviour
     {
         foreach (TowerAbility towerAbility in GetData().abilities)
         {
+            bool canTriggerAbility = true;
             foreach (TowerAbilityConditionSO condition in towerAbility.conditions)
             {
                 if (!condition.IsValid(context))
+                {
+                    canTriggerAbility = false;
                     break;
+                }
             }
-            towerAbility.ability.TriggerAbility(context);
-            foreach (TowerAbilityCleanupSO cleanup in towerAbility.cleanups)
+            if (canTriggerAbility)
             {
-                cleanup.Cleanup(context);
+                towerAbility.ability.TriggerAbility(context);
+                foreach (TowerAbilityCleanupSO cleanup in towerAbility.cleanups)
+                {
+                    cleanup.Cleanup(context);
+                }
             }
         }
     }

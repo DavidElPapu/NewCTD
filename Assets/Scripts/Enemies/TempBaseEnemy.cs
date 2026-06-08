@@ -14,7 +14,7 @@ public class TempBaseEnemy : MonoBehaviour, IEnemyHealth
     public void DealDamage(int damage)
     {
         health -= damage;
-        if (health < 0)
+        if (health <= 0)
             OnDeath?.Invoke(gameObject);
     }
 
