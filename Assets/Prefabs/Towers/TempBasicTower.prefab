@@ -317,6 +317,9 @@ GameObject:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
   - component: {fileID: 1734138512789975069}
+  - component: {fileID: 2661017839633984087}
+  - component: {fileID: 7584752377110321376}
+  - component: {fileID: 2757476541820157894}
   m_Layer: 0
   m_Name: TempBasicTower
   m_TagString: Untagged
@@ -374,21 +377,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414beeb80244bf642a1406bbd9150753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseTower
-  abilities:
-  - ability: {fileID: 0}
-    conditions:
-    - {fileID: 0}
-    - {fileID: 0}
-  - ability: {fileID: 0}
-    conditions:
-    - {fileID: 0}
-    - {fileID: 0}
   levelsData:
   - {fileID: 11400000, guid: a313ddb84d251dc47bc015a49c47992c, type: 2}
   - {fileID: 11400000, guid: a34363b1646b0af4aa460a938eb7e77e, type: 2}
   levelsModels:
   - {fileID: 6326639438221102750}
   - {fileID: 1726795359310545554}
+--- !u!114 &2661017839633984087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405196700253947439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42bfa3bcf5a58534e820ba4625e18412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerDetectionRange
+  detectionArea: {fileID: 7584752377110321376}
+--- !u!135 &7584752377110321376
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405196700253947439}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!114 &2757476541820157894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405196700253947439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5724aaa039d2dd24f9322d25840f1ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerCooldownManager
 --- !u!1 &4629032179709045699
 GameObject:
   m_ObjectHideFlags: 0

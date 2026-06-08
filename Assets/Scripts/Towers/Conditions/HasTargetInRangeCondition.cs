@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "NewCondition", menuName = "Tower Ability Condition / HasTargetCondition")]
 public class HasTargetInRangeCondition : TowerAbilityConditionSO
 {
     public override bool IsValid(in TowerContext context)

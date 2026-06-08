@@ -2,15 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class TowerDetectionRange : MonoBehaviour
+public class TowerDetectionRange : MonoBehaviour, ITowerComponent
 {
     //Consider changing the hashset from gameobjects to enemy monobehavour script, since it might decrease trygetcomponent calls
-    public HashSet<GameObject> enemiesInRange;
-
-    private void Awake()
-    {
-        enemiesInRange = new HashSet<GameObject>();
-    }
+    public HashSet<GameObject> enemiesInRange = new HashSet<GameObject>();
+    [SerializeField] private SphereCollider detectionArea;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +32,7 @@ public class TowerDetectionRange : MonoBehaviour
         }
     }
 
-    private GameObject GetFirstEnemy()
+    public GameObject GetFirstEnemy()
     {
         //this whole thing might need to change to return enemy script instead and get first enemy
         GameObject firstEnemy = null;
@@ -49,5 +45,11 @@ public class TowerDetectionRange : MonoBehaviour
             }
         }
         return firstEnemy;
+    }
+
+    public void SetupData(BaseTowerSO newData)
+    {
+        //for now uses 1, maybe later will use a custom one
+        detectionArea.radius = newData.range1;
     }
 }

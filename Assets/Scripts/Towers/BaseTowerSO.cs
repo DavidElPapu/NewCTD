@@ -5,6 +5,11 @@ using UnityEngine;
 public class BaseTowerSO : ScriptableObject
 {
     public TowerName tName;
+    public int damage;
+    public float range1;
+    public float cooldown1;
+    public float cooldown2;
+    public float cooldown3;
     public List<TowerAbility> abilities;
 }
 
