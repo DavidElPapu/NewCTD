@@ -72,6 +72,11 @@ public class BaseTower : MonoBehaviour
         return levelsData[currentLevel];
     }
 
+    public GameObject GetModel()
+    {
+        return levelsModels[currentLevel];
+    }
+
     private void SetTowerComponentsData()
     {
         foreach (ITowerComponent towerComponent in towerComponents)

@@ -10,7 +10,7 @@ public class DirectAttackAbility : TowerAbilitySO
         if (targetEnemy.TryGetComponent(out IEnemyHealth enemyHealth))
         {
             enemyHealth.DealDamage(context.towerScript.GetData().damage);
-            context.towerGO.transform.LookAt(targetEnemy.transform.position);
+            context.towerScript.GetModel().transform.GetChild(0).LookAt(targetEnemy.transform.position);
         }
     }
 }

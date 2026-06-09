@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoconutWater2
   m_EditorClassIdentifier: Assembly-CSharp::BaseTowerSO
   tName: 0
-  damage: 30
+  damage: 2
   range1: 10
   cooldown1: 0.4
   cooldown2: 0
