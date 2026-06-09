@@ -12,5 +12,6 @@ public enum CookingObjectName
     Pineapple,
     Glass,
     Pot,
-    Cauldron
+    Cauldron,
+    ButcherKnife
 }

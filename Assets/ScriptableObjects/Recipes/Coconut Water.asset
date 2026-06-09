@@ -15,4 +15,4 @@ MonoBehaviour:
   towerPrefab: {fileID: 2405196700253947439, guid: 219a0800e69c5904ca840f2f44bdb1e2, type: 3}
   requiredIngredients:
   - name: 1
-    state: 1
+    state: 7
