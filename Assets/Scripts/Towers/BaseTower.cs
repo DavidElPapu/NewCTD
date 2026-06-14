@@ -7,7 +7,7 @@ public class BaseTower : MonoBehaviour
     [SerializeField] private List<GameObject> levelsModels;
     private List<ITowerComponent> towerComponents = new List<ITowerComponent>();
     private TowerContext context;
-    private int currentLevel = 0;
+    protected int currentLevel = 0;
 
     protected virtual void Awake()
     {
@@ -65,6 +65,11 @@ public class BaseTower : MonoBehaviour
         currentLevel++;
         levelsModels[currentLevel].SetActive(true);
         SetTowerComponentsData();
+    }
+
+    public virtual void DeleteTower()
+    {
+        Destroy(gameObject);
     }
 
     public BaseTowerSO GetData()

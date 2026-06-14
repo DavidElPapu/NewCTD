@@ -5,6 +5,8 @@ using UnityEngine;
 public class BaseTowerSO : ScriptableObject
 {
     public TowerName tName;
+    [Header("Health Data")]
+    public float maxHealth;
     public int damage;
     public float range1;
     public float cooldown1;

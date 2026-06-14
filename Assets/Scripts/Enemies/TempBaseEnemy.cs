@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempBaseEnemy : MonoBehaviour, IEnemyHealth
+public class TempBaseEnemy : MonoBehaviour, IDamageable
 {
-    public event Action<GameObject> OnDeath;
+    public event Action<GameObject> OnEnemyDeath;
     [SerializeField] List<Transform> waypoints;
     [SerializeField] public float speed;
-    private int health, index;
+    private HealthComponent healthComponent;
+    private int index;
 
     private void Awake()
     {
-        health = 100;
         index = 0;
         transform.LookAt(new Vector3(waypoints[index].position.x, transform.position.y, waypoints[index].position.z));
     }
@@ -38,26 +38,16 @@ public class TempBaseEnemy : MonoBehaviour, IEnemyHealth
 
     }
 
-    public void DealDamage(int damage)
+    private void OnDeath()
     {
-        health -= damage;
-        if (health <= 0)
-            Die();
-    }
-
-    public int GetCurrentHealth()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Heal(int healAmount)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void Die()
-    {
-        OnDeath?.Invoke(gameObject);
+        OnEnemyDeath?.Invoke(gameObject);
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        healthComponent.DecreaseHealth(damage);
+        if (healthComponent.CurrentHealth < 0)
+            OnDeath();
     }
 }

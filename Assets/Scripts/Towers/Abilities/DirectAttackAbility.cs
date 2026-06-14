@@ -6,10 +6,10 @@ public class DirectAttackAbility : TowerAbilitySO
     public override void TriggerAbility(in TowerContext context)
     {
         //I made this fast, this might need optimizing
-        GameObject targetEnemy = context.detectionRange.GetFirstEnemy();
-        if (targetEnemy.TryGetComponent(out IEnemyHealth enemyHealth))
+        BaseEnemy targetEnemy = context.detectionRange.GetFirstEnemy();
+        if (targetEnemy != null)
         {
-            enemyHealth.DealDamage(context.towerScript.GetData().damage);
+            targetEnemy.TakeDamage(context.towerScript.GetData().damage);
             context.towerScript.GetModel().transform.GetChild(0).LookAt(targetEnemy.transform.position);
         }
     }

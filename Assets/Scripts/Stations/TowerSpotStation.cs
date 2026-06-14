@@ -39,8 +39,7 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
     public void OnProcessorUse(GameObject usedItem)
     {
         //For now, this is just used to delete the tower, maybe later could be more uses for diferent tools on towers
-        //Before destroying could call a function of the tower for closure
-        Destroy(currentTower);
+        currentTower.DeleteTower();
         currentTower = null;
     }
 }
