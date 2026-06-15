@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContainerScript
   cName: 3
   validIngredientTypes: 00000000
-  validIngredientStates: 0100000000000000030000000400000005000000
+  validIngredientStates: 010000000000000003000000040000000500000007000000
   contentModel: {fileID: 2090698233}
   maxContainedIngredients: 4
 --- !u!4 &1192122476
@@ -2013,8 +2013,9 @@ GameObject:
   - component: {fileID: 1308923737}
   - component: {fileID: 1308923736}
   - component: {fileID: 1308923735}
-  - component: {fileID: 1308923734}
   - component: {fileID: 1308923739}
+  - component: {fileID: 1308923741}
+  - component: {fileID: 1308923740}
   m_Layer: 0
   m_Name: TemporalEnemy
   m_TagString: Untagged
@@ -2022,24 +2023,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1308923734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1308923733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b58134c4ae652b4ca1b6c448ace094e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TempBaseEnemy
-  waypoints:
-  - {fileID: 612864052}
-  - {fileID: 551490564}
-  - {fileID: 19950766}
-  - {fileID: 1391363735}
-  speed: 2
 --- !u!136 &1308923735
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2162,6 +2145,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1308923740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308923733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e911031cc240c4a83111f7aa13aa38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseEnemy
+--- !u!114 &1308923741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308923733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273376b685c1cac439f81bcc0e84fc45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
 --- !u!1 &1369324960
 GameObject:
   m_ObjectHideFlags: 0

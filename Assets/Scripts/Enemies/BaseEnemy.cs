@@ -2,10 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HealthComponent))]
 public class BaseEnemy : MonoBehaviour, IDamageable
 {
     public event Action<BaseEnemy> OnEnemyDeath;
     private HealthComponent healthComponent;
+
+    private void Awake()
+    {
+        TryGetComponent(out healthComponent);
+        healthComponent.SetMaxHealth(100f, true);
+    }
 
     private void OnDeath()
     {
@@ -15,8 +22,8 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        healthComponent.DecreaseHealth(damage);
-        if (healthComponent.CurrentHealth < 0)
+        healthComponent.ModifyHealth(-damage);
+        if (healthComponent.CurrentHealth <= 0)
             OnDeath();
     }
 

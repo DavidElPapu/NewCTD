@@ -46,7 +46,7 @@ public class TempBaseEnemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        healthComponent.DecreaseHealth(damage);
+        healthComponent.ModifyHealth(damage);
         if (healthComponent.CurrentHealth < 0)
             OnDeath();
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(HealthComponent))]
 public class DefenderTower : BaseTower, IDamageable
 {
     private HealthComponent healthComponent;
@@ -19,7 +20,7 @@ public class DefenderTower : BaseTower, IDamageable
 
     public void TakeDamage(float damage)
     {
-        healthComponent.DecreaseHealth(damage);
+        healthComponent.ModifyHealth(-damage);
         if (healthComponent.CurrentHealth < 0)
             DeleteTower();
     }

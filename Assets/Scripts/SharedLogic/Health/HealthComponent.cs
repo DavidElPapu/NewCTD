@@ -14,17 +14,8 @@ public class HealthComponent : MonoBehaviour
             currentHealth = maxHealth;
     }
 
-    public void IncreaseHealth(float healthAmount)
+    public void ModifyHealth(float healthAmount)
     {
-        currentHealth += healthAmount;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-    }
-
-    public void DecreaseHealth(float healthAmount)
-    {
-        currentHealth -= healthAmount;
-        if (currentHealth < 0)
-            currentHealth = 0;
+        currentHealth = Mathf.Clamp(currentHealth + healthAmount, 0, maxHealth);
     }
 }
