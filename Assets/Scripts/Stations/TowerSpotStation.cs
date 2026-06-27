@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(UsableStation))]
 public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
 {
-    private BaseTower currentTower;
+    private MainTowerController currentTower;
 
     private void Awake()
     {
@@ -17,13 +17,13 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
             if (currentTower == null)
             {
                 GameObject newTower = Instantiate(towerContainer.towerPrefab, transform.position, transform.rotation);
-                currentTower = newTower.GetComponent<BaseTower>();
+                currentTower = newTower.GetComponent<MainTowerController>();
                 if (item.TryGetComponent(out ContainerScript container))
                     container.EmptyContainer();
             }
-            else if (towerContainer.towerPrefab.TryGetComponent(out BaseTower tower) && (tower.GetData().tName == currentTower.GetData().tName) && currentTower.CanUpgrade())
+            else if (towerContainer.towerPrefab.TryGetComponent(out MainTowerController tower) && (tower.tName == currentTower.tName) && currentTower.CanUpgrade())
             {
-                currentTower.Upgrade();
+                currentTower.UpgradeTower();
                 if (item.TryGetComponent(out ContainerScript container2))
                     container2.EmptyContainer();
             }

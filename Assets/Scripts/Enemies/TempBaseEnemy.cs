@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempBaseEnemy : MonoBehaviour, IDamageable
+public class TempBaseEnemy : MonoBehaviour
 {
-    public event Action<GameObject> OnEnemyDeath;
+    //public event Action<GameObject> OnEnemyDeath;
     [SerializeField] List<Transform> waypoints;
     [SerializeField] public float speed;
-    private HealthComponent healthComponent;
+    //private HealthComponent healthComponent;
     private int index;
 
     private void Awake()
@@ -38,16 +38,16 @@ public class TempBaseEnemy : MonoBehaviour, IDamageable
 
     }
 
-    private void OnDeath()
-    {
-        OnEnemyDeath?.Invoke(gameObject);
-        Destroy(gameObject);
-    }
+    //private void OnDeath()
+    //{
+    //    OnEnemyDeath?.Invoke(gameObject);
+    //    Destroy(gameObject);
+    //}
 
-    public void TakeDamage(float damage)
-    {
-        healthComponent.ModifyHealth(damage);
-        if (healthComponent.CurrentHealth < 0)
-            OnDeath();
-    }
+    //public void TakeDamage(float damage)
+    //{
+    //    healthComponent.ModifyHealth(damage);
+    //    if (healthComponent.CurrentHealth < 0)
+    //        OnDeath();
+    //}
 }

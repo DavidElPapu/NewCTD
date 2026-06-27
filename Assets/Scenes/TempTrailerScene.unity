@@ -1219,6 +1219,8 @@ GameObject:
   - component: {fileID: 1010527585}
   - component: {fileID: 1010527584}
   - component: {fileID: 1010527583}
+  - component: {fileID: 1010527588}
+  - component: {fileID: 1010527587}
   m_Layer: 0
   m_Name: TemporalEnemy
   m_TagString: Untagged
@@ -1324,6 +1326,30 @@ Transform:
   - {fileID: 1664168108}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010527587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010527582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e911031cc240c4a83111f7aa13aa38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BaseEnemy
+--- !u!114 &1010527588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010527582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273376b685c1cac439f81bcc0e84fc45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
 --- !u!1 &1056673673
 GameObject:
   m_ObjectHideFlags: 0

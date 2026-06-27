@@ -2,15 +2,23 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class TowerDetectionRange : MonoBehaviour, ITowerComponent
+[RequireComponent (typeof(SphereCollider))]
+public class TowerDetectionRange : MonoBehaviour
 {
-    public List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
     [SerializeField] private SphereCollider detectionArea;
+    public List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
 
-    public void SetupData(BaseTowerSO newData)
+    public void Initialize(float range)
     {
-        //for now uses range1, maybe later will use a custom one
-        detectionArea.radius = newData.range1;
+        detectionArea.radius = range;
+        detectionArea.enabled = true;
+    }
+
+    public void Deactivate()
+    {
+        //For now there is no need to disable this component since it will not do anything without collider active
+        //For now there is also no need to empty the enemy list since disabling the collider triggers ontriggerexit
+        detectionArea.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

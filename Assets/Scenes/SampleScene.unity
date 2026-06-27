@@ -1200,7 +1200,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipesManager
   allRecipesSO:
   - {fileID: 11400000, guid: 682f97c611417884eb188981cfb9b02d, type: 2}
-  - {fileID: 11400000, guid: 6133557327b7c0440ad4c0f782238646, type: 2}
 --- !u!4 &583598467
 Transform:
   m_ObjectHideFlags: 0
