@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class ProjectileShooter : MonoBehaviour, ITowerAbility
 {
-    private ShootAbilityDataSO stats;
-    private Transform firePoint;
+    [SerializeField] private TowerDetectionRange detectionRange;
+    private ProjectileShootAbilityDataSO data;
+    private ShooterModelScript modelScript;
+    private Transform projectileSpawnPoint;
     private float timer;
 
-    public void Initialize(TowerAbilityDataSO data)
+    public void Initialize(TowerAbilityDataSO data, TowerModelScript modelScript)
     {
-        stats = (ShootAbilityDataSO)data;
+        //Set new data, restart cooldowns and also sets data for detectionRange
+        this.data = (ProjectileShootAbilityDataSO)data;
+        this.modelScript = (ShooterModelScript)modelScript;
+        detectionRange.Initialize(this.data.range);
+        projectileSpawnPoint = this.modelScript.projectileSpawnpoint;
+        timer = 0;
         enabled = true;
     }
 
@@ -16,18 +23,32 @@ public class ProjectileShooter : MonoBehaviour, ITowerAbility
     {
         //Disables the component
         if (enabled)
+        {
+            detectionRange.Deactivate();
             enabled = false;
+        }
     }
 
     private void Update()
     {
-        // Simple, flat polling timer. Zero GC, lightning fast.
-        timer += Time.deltaTime;
-        if (timer >= stats.fireRate)
+        //Checks cooldown
+        if (timer > 0)
         {
-            timer = 0;
-            Debug.Log("dISPARO");
-            // Execute shoot logic using stats.damage...
+            timer -= Time.deltaTime;
+            return;
         }
+
+        //Checks for detection Range
+        if (detectionRange.enemiesInRange.Count > 0)
+        {
+            Shoot();
+            timer += data.fireRate;
+        }
+    }
+
+    private void Shoot()
+    {
+        //This needs object pooling
+        GameObject newProjectile = Instantiate(data.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
     }
 }

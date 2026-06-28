@@ -189,6 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715787647241589812}
+  - component: {fileID: 5427732588629019685}
   m_Layer: 0
   m_Name: ModelLvl1 (1)
   m_TagString: Untagged
@@ -214,6 +215,30 @@ Transform:
   - {fileID: 4920541805084111916}
   m_Father: {fileID: 5871187926449424828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5427732588629019685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726795359310545554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c6bb264e8ea834e80a83f8a08cefaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShooterModelScript
+  modelMeshFilters:
+  - {fileID: 658154484024049445}
+  - {fileID: 2663544886409331430}
+  - {fileID: 140584314427968585}
+  - {fileID: 8147974033391479010}
+  modelMeshRenderers:
+  - {fileID: 3271822500875994798}
+  - {fileID: 6864931855418450516}
+  - {fileID: 9211538793856296005}
+  - {fileID: 7177388051307215832}
+  projectileSpawnpoint: {fileID: 0}
+  targetFollower: {fileID: 6338401184831978929}
 --- !u!1 &2008893446577917914
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +341,6 @@ GameObject:
   - component: {fileID: 5449347200747252298}
   - component: {fileID: 1986545350922021779}
   - component: {fileID: -7663129094288658809}
-  - component: {fileID: -8033662461471715410}
   m_Layer: 0
   m_Name: TempBasicTowerAlt
   m_TagString: Untagged
@@ -375,18 +399,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d6e095c96a0254f82511d9e81fc3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainTowerController
-  tName: CoconutWater
-  levelsModels:
-  - {fileID: 6326639438221102750}
-  - {fileID: 1726795359310545554}
-  - {fileID: 1726795359310545554}
-  levelsData:
-  - abilities:
-    - {fileID: 11400000, guid: 7da6b0465bb8fab4683dc500e7d1b58c, type: 2}
-  - abilities:
-    - {fileID: 11400000, guid: e19d380e51c657d47bb6a8d8a2805b63, type: 2}
-  - abilities:
-    - {fileID: 11400000, guid: ad6c80aee497467458ab25e4d0f5b20e, type: 2}
+  levelModelScripts:
+  - {fileID: 5145311976649940331}
+  - {fileID: 5427732588629019685}
+  levelsConfig: {fileID: 11400000, guid: fda31ff1149957d48acd46d9d17e9766, type: 2}
 --- !u!114 &-7663129094288658809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,18 +416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitscanShooter
   detectionRange: {fileID: 6347742573776182382}
---- !u!114 &-8033662461471715410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfba4ff45d615245a5f1c13d37ef8c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileShooter
 --- !u!1 &4629032179709045699
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8192572590914101404}
+  - component: {fileID: 5145311976649940331}
   m_Layer: 0
   m_Name: ModelLvl1
   m_TagString: Untagged
@@ -896,6 +901,30 @@ Transform:
   - {fileID: 5355028242995839566}
   m_Father: {fileID: 5871187926449424828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5145311976649940331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326639438221102750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c6bb264e8ea834e80a83f8a08cefaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShooterModelScript
+  modelMeshFilters:
+  - {fileID: 5598264433930494013}
+  - {fileID: 6580621321708232291}
+  - {fileID: 3004127092482760197}
+  - {fileID: 7695140565623725045}
+  modelMeshRenderers:
+  - {fileID: 3617041859275539858}
+  - {fileID: 8501009991644902781}
+  - {fileID: 5736815125303205488}
+  - {fileID: 936514224887605448}
+  projectileSpawnpoint: {fileID: 0}
+  targetFollower: {fileID: 56933844888269459}
 --- !u!1 &7389085114728813808
 GameObject:
   m_ObjectHideFlags: 0
