@@ -12,7 +12,7 @@ public class HitscanShooter : MonoBehaviour, ITowerAbility
         //Set new data, restart cooldowns and also sets data for detectionRange
         this.data = (HitscanShootAbilityDataSO)data;
         this.modelScript = (ShooterModelScript)modelScript;
-        detectionRange.Initialize(this.data.detectionRange);
+        detectionRange.Initialize(this.data.detectionRange, this.data.detectionLayers);
         cooldownTimer = 0;
         enabled = true;
     }

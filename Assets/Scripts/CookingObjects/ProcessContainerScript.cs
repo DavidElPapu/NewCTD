@@ -18,8 +18,8 @@ public class ProcessContainerScript : ContainerScript
     {
         base.PlaceIngredient(ingredient);
         maxProcessMeter += IngredientScript.ingredientProcessMeter;
-        if (contentMeshFilter.mesh != defaultContentMesh)
-            contentMeshFilter.mesh = defaultContentMesh;
+        if (contentMeshFilter.sharedMesh != defaultContentMesh)
+            contentMeshFilter.sharedMesh = defaultContentMesh;
     }
 
     #region EmptyContainer
@@ -62,7 +62,7 @@ public class ProcessContainerScript : ContainerScript
         {
             ingredient.state = stateChange;
         }
-        contentMeshFilter.mesh = processedContentMesh;
+        contentMeshFilter.sharedMesh = processedContentMesh;
     }
 
     #endregion

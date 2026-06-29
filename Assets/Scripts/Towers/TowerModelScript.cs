@@ -11,8 +11,8 @@ public class TowerModelScript : MonoBehaviour
         //We assume all the model parts have a meshFilter and a meshRenderer
         for (int i = 0; i < modelMeshFilters.Length; i++)
         {
-            modelMeshFilters[i].mesh = newMeshes[i];
-            modelMeshRenderers[i].material = newMaterials[i];
+            modelMeshFilters[i].sharedMesh = newMeshes[i];
+            modelMeshRenderers[i].sharedMaterial = newMaterials[i];
         }
     }
 }

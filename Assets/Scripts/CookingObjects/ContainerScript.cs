@@ -12,6 +12,8 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
     protected List<IngredientScript> containedIngredients;
+    // This is used to change the color of the material for this object only without changing the asset
+    private MaterialPropertyBlock propBlock;
     private MeshRenderer contentMeshRenderer;
     private Color contentColor;
 
@@ -19,6 +21,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     {
         containedIngredients = new List<IngredientScript>();
         contentModel.SetActive(false);
+        propBlock = new MaterialPropertyBlock();
         contentModel.TryGetComponent(out contentMeshRenderer);
         contentColor = Color.black;
     }
@@ -57,7 +60,11 @@ public class ContainerScript : MonoBehaviour, ICookingObject
             contentColor = ingredient.data.baseColor;
         else
             contentColor = Color.Lerp(contentColor, ingredient.data.baseColor, 0.5f);
-        contentMeshRenderer.material.color = contentColor;
+
+        //Changes the color of the material of this specific object by changing the property Block for this object
+        contentMeshRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetColor("_BaseColor", contentColor);
+        contentMeshRenderer.SetPropertyBlock(propBlock);
     }
 
     public void PlaceIngredientList(List<IngredientScript> ingredientList)

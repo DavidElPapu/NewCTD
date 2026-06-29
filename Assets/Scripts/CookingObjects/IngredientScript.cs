@@ -15,12 +15,12 @@ public class IngredientScript : MonoBehaviour, ICookingObject
 
     public void ChangeMesh(Mesh newMesh)
     {
-        meshFilter.mesh = newMesh;
+        meshFilter.sharedMesh = newMesh;
     }
 
     public void ChangeMaterial(Material newMaterial)
     {
-        meshRenderer.material = newMaterial;
+        meshRenderer.sharedMaterial = newMaterial;
     }
 
     public void ChangeSizeAndOffset(Vector3 newSize, Vector3 newOffset)

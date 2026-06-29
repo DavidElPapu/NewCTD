@@ -19,8 +19,8 @@ public class TowerProjectileScript : MonoBehaviour
     public void Initialize(Mesh newMesh, Material newMat, LayerMask detectionMask, float newSizeRadius, float newDamage, Vector3 startPos, Quaternion startRot)
     {
         //Starting values for the projectile when called
-        meshFilter.mesh = newMesh;
-        meshRenderer.material = newMat;
+        meshFilter.sharedMesh = newMesh;
+        meshRenderer.sharedMaterial = newMat;
         //Since we get a layer we want to detect, we flip it to exclude all other layers (since by default it collides with everything)
         LayerMask exludedLayer = ~detectionMask;
         hitbox.excludeLayers = exludedLayer;

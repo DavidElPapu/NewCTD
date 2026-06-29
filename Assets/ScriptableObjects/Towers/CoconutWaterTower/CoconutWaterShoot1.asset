@@ -16,7 +16,7 @@ MonoBehaviour:
   fireRate: 2
   detectionLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   detectionRange: 5
   projectilePrefab: {fileID: 0}
   projectileMesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}

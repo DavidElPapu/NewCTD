@@ -13,7 +13,7 @@ public class ProjectileShooter : MonoBehaviour, ITowerAbility
         //Set new data, restart cooldowns and also sets data for detectionRange
         this.data = (ProjectileShootAbilityDataSO)data;
         this.modelScript = (ShooterModelScript)modelScript;
-        detectionRange.Initialize(this.data.detectionRange);
+        detectionRange.Initialize(this.data.detectionRange, this.data.detectionLayers);
         projectileSpawnPoint = this.modelScript.projectileSpawnpoint;
         cooldownTimer = 0;
         enabled = true;

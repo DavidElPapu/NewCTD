@@ -5,12 +5,20 @@ using System;
 [RequireComponent (typeof(SphereCollider))]
 public class TowerDetectionRange : MonoBehaviour
 {
-    [SerializeField] private SphereCollider detectionArea;
     public List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
+    [SerializeField] private SphereCollider detectionArea;
 
-    public void Initialize(float range)
+    private void Awake()
+    {
+        TryGetComponent(out detectionArea);
+    }
+
+    public void Initialize(float range, LayerMask detectionLayers)
     {
         detectionArea.radius = range;
+        LayerMask excludedLayers = ~detectionLayers;
+        detectionArea.excludeLayers = excludedLayers;
+        enemiesInRange.Clear();
         detectionArea.enabled = true;
     }
 
