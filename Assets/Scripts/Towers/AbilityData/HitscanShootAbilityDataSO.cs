@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HitscanShootAbilityData", menuName = "Towers/AbilityData/HitscanShootData")]
 public class HitscanShootAbilityDataSO : TowerAbilityDataSO
 {
+    [Header("TowerStats")]
     public float damage;
     public float fireRate;
-    public float range;
+    [Header("Detection")]
+    public float detectionRange;
     public override System.Type GetAbilityComponentType() => typeof(HitscanShooter);
 }

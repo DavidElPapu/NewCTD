@@ -50,6 +50,7 @@ public class TowerDetectionRange : MonoBehaviour
 
     public BaseEnemy GetFirstEnemy()
     {
+        if (enemiesInRange.Count <= 0) return null;
         BaseEnemy firstEnemy = null;
         float closestDistance = Mathf.Infinity;
         for (int i = 0; i < enemiesInRange.Count; i++)

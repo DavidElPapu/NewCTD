@@ -15,7 +15,7 @@ MonoBehaviour:
   tName: CoconutWater
   levelsData:
   - abilities:
-    - {fileID: 11400000, guid: 7da6b0465bb8fab4683dc500e7d1b58c, type: 2}
+    - {fileID: 11400000, guid: 74f2ee8fd2abb514eb5036577b51d6e2, type: 2}
     modelIndex: 0
     modelMeshes:
     - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
@@ -28,7 +28,7 @@ MonoBehaviour:
     - {fileID: -3661639628750336703, guid: 9bbd8911c9120824090a6c07546e6656, type: 3}
     - {fileID: -3661639628750336703, guid: 9bbd8911c9120824090a6c07546e6656, type: 3}
   - abilities:
-    - {fileID: 11400000, guid: e19d380e51c657d47bb6a8d8a2805b63, type: 2}
+    - {fileID: 11400000, guid: 5f81c30870a917143bc10519bd076fdc, type: 2}
     modelIndex: 0
     modelMeshes:
     - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
     - {fileID: -6478536213147159724, guid: 9e51a5caeb688b0438f8a3045e88515e, type: 3}
     - {fileID: -6478536213147159724, guid: 9e51a5caeb688b0438f8a3045e88515e, type: 3}
   - abilities:
-    - {fileID: 11400000, guid: 29f71643f499dc2469b9f4ecdc5cb379, type: 2}
+    - {fileID: 11400000, guid: 7d3c6bdc518676d49968bae4b133db2e, type: 2}
     modelIndex: 1
     modelMeshes:
     - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

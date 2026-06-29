@@ -3,9 +3,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectileShootAbilityData", menuName = "Towers/AbilityData/ProjectileShootData")]
 public class ProjectileShootAbilityDataSO : TowerAbilityDataSO
 {
-    public GameObject projectilePrefab;
+    [Header("TowerStats")]
     public float damage;
     public float fireRate;
-    public float range;
-    public override System.Type GetAbilityComponentType() => typeof(HitscanShooter);
+    [Header("Detection")]
+    public LayerMask detectionLayers;
+    public float detectionRange;
+    [Header("Projectile")]
+    public GameObject projectilePrefab;
+    public Mesh projectileMesh;
+    public Material projectileMaterial;
+    public float projectileSizeRadius;
+    public float projectileSpeed;
+    public override System.Type GetAbilityComponentType() => typeof(ProjectileShooter);
 }

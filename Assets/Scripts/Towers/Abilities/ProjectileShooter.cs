@@ -6,16 +6,16 @@ public class ProjectileShooter : MonoBehaviour, ITowerAbility
     private ProjectileShootAbilityDataSO data;
     private ShooterModelScript modelScript;
     private Transform projectileSpawnPoint;
-    private float timer;
+    private float cooldownTimer;
 
     public void Initialize(TowerAbilityDataSO data, TowerModelScript modelScript)
     {
         //Set new data, restart cooldowns and also sets data for detectionRange
         this.data = (ProjectileShootAbilityDataSO)data;
         this.modelScript = (ShooterModelScript)modelScript;
-        detectionRange.Initialize(this.data.range);
+        detectionRange.Initialize(this.data.detectionRange);
         projectileSpawnPoint = this.modelScript.projectileSpawnpoint;
-        timer = 0;
+        cooldownTimer = 0;
         enabled = true;
     }
 
@@ -32,23 +32,23 @@ public class ProjectileShooter : MonoBehaviour, ITowerAbility
     private void Update()
     {
         //Checks cooldown
-        if (timer > 0)
+        if (cooldownTimer > 0)
         {
-            timer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime;
             return;
         }
-
-        //Checks for detection Range
-        if (detectionRange.enemiesInRange.Count > 0)
+        else
         {
-            Shoot();
-            timer += data.fireRate;
+            //If has enemy target, damages and resets cooldown
+            BaseEnemy targetEnemy = detectionRange.GetFirstEnemy();
+            if (targetEnemy != null)
+            {
+                modelScript.RotateToTarget(targetEnemy.gameObject.transform);
+                TowerProjectileScript projectileScript = TowerProjectilePoolManager.singleton.GetBaseProjectileScript();
+                projectileScript.Initialize(data.projectileMesh, data.projectileMaterial, data.detectionLayers, data.projectileSizeRadius, data.damage, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+                projectileScript.LaunchProjectile(projectileSpawnPoint.forward * data.projectileSpeed);
+                cooldownTimer += data.fireRate;
+            }
         }
-    }
-
-    private void Shoot()
-    {
-        //This needs object pooling
-        GameObject newProjectile = Instantiate(data.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
     }
 }

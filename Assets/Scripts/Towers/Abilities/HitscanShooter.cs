@@ -5,15 +5,15 @@ public class HitscanShooter : MonoBehaviour, ITowerAbility
     [SerializeField] private TowerDetectionRange detectionRange;
     private HitscanShootAbilityDataSO data;
     private ShooterModelScript modelScript;
-    private float timer;
+    private float cooldownTimer;
 
     public void Initialize(TowerAbilityDataSO data, TowerModelScript modelScript)
     {
         //Set new data, restart cooldowns and also sets data for detectionRange
         this.data = (HitscanShootAbilityDataSO)data;
         this.modelScript = (ShooterModelScript)modelScript;
-        detectionRange.Initialize(this.data.range);
-        timer = 0;
+        detectionRange.Initialize(this.data.detectionRange);
+        cooldownTimer = 0;
         enabled = true;
     }
 
@@ -30,20 +30,19 @@ public class HitscanShooter : MonoBehaviour, ITowerAbility
     private void Update()
     {
         //Checks cooldown
-        if (timer > 0)
+        if (cooldownTimer > 0)
         {
-            timer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime;
         }
-
-        //Checks for detection Range
-        if (detectionRange.enemiesInRange.Count > 0)
+        else
         {
+            //If has enemy target, damages and resets cooldown
             BaseEnemy targetEnemy = detectionRange.GetFirstEnemy();
-            modelScript.RotateToTarget(targetEnemy.gameObject.transform);
-            if (timer <= 0)
+            if (targetEnemy != null)
             {
+                modelScript.RotateToTarget(targetEnemy.gameObject.transform);
                 targetEnemy.TakeDamage(data.damage);
-                timer += data.fireRate;
+                cooldownTimer += data.fireRate;
             }
         }
     }
