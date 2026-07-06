@@ -3,8 +3,8 @@ using UnityEngine;
 public class ExplosiveProjectileScript : TowerProjectileScript
 {
     //To avoid garbage collection, we declare a fixed size array for colliders that OverlapSphereNonAlloc will use
-    //For now, 10 is the max number of enemies it can detect
-    private Collider[] enemyColliders = new Collider[10];
+    //For now, 50 is the max number of enemies it can detect
+    private Collider[] enemyColliders = new Collider[50];
     private ExplosiveProjectileShootAbilityDataSO EData => data as ExplosiveProjectileShootAbilityDataSO;
 
     protected override void OnImpact(BaseEnemy enemy)

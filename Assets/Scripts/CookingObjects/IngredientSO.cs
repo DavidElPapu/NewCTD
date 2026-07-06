@@ -4,7 +4,6 @@ using UnityEngine;
 public class IngredientSO : ScriptableObject
 {
     public CookingObjectName iName;
-    public IngredientType type;
     public Mesh mesh;
     public Material material;
     public Vector3 customSize;
@@ -12,19 +11,14 @@ public class IngredientSO : ScriptableObject
     public Color baseColor;
 }
 
-public enum IngredientType
-{
-    Fruit,
-}
-
 public enum IngredientState
 {
-    Intact,
-    Cut,
-    Blended,
-    Cooked,
-    Brewed,
-    Squashed,
     Null,
-    Sliced
+    Intact,
+    Sliced,
+    Cut,
+    Carbonated,
+    Extracted,
+    Blended,
+    ReadyToDrink
 }

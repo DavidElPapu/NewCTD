@@ -7,7 +7,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public event Action<IngredientScript> OnIngredientPlaced;
     public event Action OnIngredientReset;
     public CookingObjectName cName;
-    [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
@@ -32,7 +31,7 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     {
         if (containedIngredients.Count >= maxContainedIngredients) return false;
         //For now, it needs to be a valid type and state, that might change later for an exeptions list (like water, ice , etc)
-        if (IsIngredientTypeValid(ingredient.data.type) && IsIngredientStateValid(ingredient.state)) return true;
+        if (IsIngredientStateValid(ingredient.state)) return true;
         return false;
     }
 
@@ -103,16 +102,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public CookingObjectName GetCookingObjectName()
     {
         return cName;
-    }
-
-    private bool IsIngredientTypeValid(IngredientType iType)
-    {
-        if (validIngredientTypes.Count == 0) return true;
-        foreach (IngredientType validType in validIngredientTypes)
-        {
-            if (iType == validType) return true;
-        }
-        return false;
     }
 
     private bool IsIngredientStateValid(IngredientState iState)

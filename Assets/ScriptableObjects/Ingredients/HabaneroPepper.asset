@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ba4ae09bf3b3448ba68a158e933ff7, type: 3}
-  m_Name: Coconut
+  m_Name: HabaneroPepper
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
-  iName: 1
+  iName: 6
   mesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}
-  material: {fileID: 2100000, guid: 5f70900c90cf474468e9db306afc6a52, type: 2}
+  material: {fileID: 2100000, guid: ba9a0d7982384f44a836da9829b5f850, type: 2}
   customSize: {x: 0.7, y: 0.7, z: 0.7}
   customOffset: {x: 0, y: 0.35, z: 0}
-  baseColor: {r: 0.9528302, g: 0.9428539, b: 0.93934673, a: 0}
+  baseColor: {r: 0.8490566, g: 0.5424905, b: 0.13216448, a: 0}

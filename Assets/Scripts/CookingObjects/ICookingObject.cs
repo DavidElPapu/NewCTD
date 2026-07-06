@@ -7,11 +7,17 @@ public interface ICookingObject
 
 public enum CookingObjectName
 {
-    Stick,
+    Null,
     Coconut,
+    PassionFruit,
     Pineapple,
+    IceCube,
+    Starfruit,
+    HabaneroPepper,
+    Mango,
     Glass,
-    Pot,
-    Cauldron,
-    ButcherKnife
+    CarbonatorBottle,
+    BlenderPitcher,
+    Cleaver,
+    KitchenKnife
 }

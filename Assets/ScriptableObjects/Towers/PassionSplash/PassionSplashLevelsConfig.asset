@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1eede1ca8a8784ca3f6ffe3c4b32af, type: 3}
-  m_Name: StarfruitJuiceConfig
+  m_Name: PassionSplashLevelsConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerLevelsConfigSO
-  tName: Starfruit
+  tName: PassionSplash
   levelsData:
   - abilities:
-    - {fileID: 11400000, guid: 1a1a3bb0519d10d42822cbcdcadbf335, type: 2}
+    - {fileID: 11400000, guid: e51e6dba3a69576408ca1d86d7b8de2f, type: 2}
     modelIndex: 0
     modelMeshes:
     - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-    - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     modelMaterials:
-    - {fileID: 2100000, guid: e3e38ea8cfed9324fb8059e0e7ac9cb8, type: 2}
-    - {fileID: 2100000, guid: e3e38ea8cfed9324fb8059e0e7ac9cb8, type: 2}
+    - {fileID: 2100000, guid: 5ebf866964e708f45866e99e42407f35, type: 2}

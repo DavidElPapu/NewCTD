@@ -196,7 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
   validItems: 
-  validIngredientTypes: 00000000
   validIngredientStates: 0000000001000000
   itemLocation: {fileID: 3368256662326507062}
 --- !u!114 &9159407259945270527
@@ -211,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e371e17c1a58b46439dd3b291871f8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UsableStation
-  validTools: 06000000
+  validTools: 0b0000000c000000
   useCooldown: 0.2
 --- !u!114 &3265275965313525256
 MonoBehaviour:
@@ -229,7 +228,7 @@ MonoBehaviour:
   customSize: {x: 3, y: 3, z: 3}
   customOffset: {x: 0, y: 0, z: 0}
   processMeterValue: 100
-  processedState: 6
+  processedState: 0
 --- !u!1 &5150963647566158330
 GameObject:
   m_ObjectHideFlags: 0

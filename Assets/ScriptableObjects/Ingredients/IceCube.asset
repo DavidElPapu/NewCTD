@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ba4ae09bf3b3448ba68a158e933ff7, type: 3}
-  m_Name: Coconut
+  m_Name: IceCube
   m_EditorClassIdentifier: Assembly-CSharp::IngredientSO
-  iName: 1
-  mesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}
-  material: {fileID: 2100000, guid: 5f70900c90cf474468e9db306afc6a52, type: 2}
-  customSize: {x: 0.7, y: 0.7, z: 0.7}
-  customOffset: {x: 0, y: 0.35, z: 0}
-  baseColor: {r: 0.9528302, g: 0.9428539, b: 0.93934673, a: 0}
+  iName: 4
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 0477ec8f2ebc5da428d1977c2a5d71d9, type: 2}
+  customSize: {x: 0.3, y: 0.3, z: 0.3}
+  customOffset: {x: 0, y: 0.15, z: 0}
+  baseColor: {r: 0.8915094, g: 0.9878081, b: 1, a: 0}

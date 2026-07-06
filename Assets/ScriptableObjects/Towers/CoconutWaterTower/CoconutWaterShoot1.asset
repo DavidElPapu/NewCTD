@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e9247d6fd2ec442984002537c122fd, type: 3}
   m_Name: CoconutWaterShoot1
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootAbilityDataSO
-  damage: 0
-  fireRate: 2
+  damage: 10
+  fireRate: 1
+  applyEffect: 0
+  effectDuration: 0
   detectionLayers:
     serializedVersion: 2
     m_Bits: 256
   detectionRange: 5
   projectilePrefab: {fileID: 0}
-  projectileMesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}
+  projectileMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   projectileMaterial: {fileID: -3661639628750336703, guid: 9bbd8911c9120824090a6c07546e6656, type: 3}
   projectileSizeRadius: 0.5
   projectileSpeed: 8
+  projectileActiveTime: 3

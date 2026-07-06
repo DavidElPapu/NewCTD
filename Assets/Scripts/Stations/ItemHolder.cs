@@ -6,7 +6,6 @@ using static UnityEditor.Progress;
 public class ItemHolder : MonoBehaviour, IPlaceable
 {
     [SerializeField] private List<CookingObjectName> validItems;
-    [SerializeField] private List<IngredientType> validIngredientTypes;
     [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] private Transform itemLocation;
     private GameObject itemHeld;
@@ -20,8 +19,10 @@ public class ItemHolder : MonoBehaviour, IPlaceable
 
     public bool CanPlaceItem(GameObject item)
     {
+        //First Checks if the item is a cooking object (tool, ingredient or container)
         if(item.TryGetComponent(out ICookingObject cookingObject))
         {
+            //If this station is holding something, then...
             if (itemHeld != null)
             {
                 if (item.TryGetComponent(out ContainerScript container))
@@ -79,15 +80,16 @@ public class ItemHolder : MonoBehaviour, IPlaceable
             }
             else
             {
-                if (!IsCookingObjectValid(cookingObject.GetCookingObjectName()) || !IsIngredientTypeValid(item) || !IsIngredientStateValid(item))
+                //If the station isn't holding anything, checks if "item" is a valid item or valid ingredient state (if it's an ingredient)
+                if (!IsCookingObjectValid(cookingObject.GetCookingObjectName()) || !IsIngredientStateValid(item))
                 {
-                    //I dont like how this look, but this is to place an ingredient inside the container into the station
+                    //I dont like how this looks, but this is to place the ingredient from a container inside this station (if "item" is a container)
                     if (item.TryGetComponent(out ContainerScript container2) && container2.GetContainedIngredients() != null && container2.CanEmptyContainer())
                     {
                         IngredientScript newHeldIngredient = container2.GetContainedIngredients()[0];
                         if (container2.GetContainedIngredients().Count == 1 && IsCookingObjectValid(newHeldIngredient.GetCookingObjectName()))
                         {
-                            if(IsIngredientTypeValid(newHeldIngredient.gameObject) && IsIngredientStateValid(newHeldIngredient.gameObject))
+                            if (IsIngredientStateValid(newHeldIngredient.gameObject))
                             {
                                 container2.EmptyContainer();
                                 newHeldIngredient.gameObject.transform.parent = null;
@@ -131,20 +133,6 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         foreach (CookingObjectName validItem in validItems)
         {
             if (item == validItem) return true;
-        }
-        return false;
-    }
-
-    private bool IsIngredientTypeValid(GameObject possibleIngredient)
-    {
-        if (validIngredientTypes.Count == 0) return true;
-
-        if (possibleIngredient.TryGetComponent(out IngredientScript ingredient))
-        {
-            foreach (IngredientType validType in validIngredientTypes)
-            {
-                if (ingredient.data.type == validType) return true;
-            }
         }
         return false;
     }

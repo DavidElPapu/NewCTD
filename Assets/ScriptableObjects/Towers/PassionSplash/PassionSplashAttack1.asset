@@ -9,14 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26af6bad29e42a2459d0e498e039157e, type: 3}
-  m_Name: StarfruitJuiceShoot1
-  m_EditorClassIdentifier: Assembly-CSharp::HitscanShootAbilityDataSO
+  m_Script: {fileID: 11500000, guid: d51da2ab9fbf139449e80d8d3e3ac741, type: 3}
+  m_Name: PassionSplashAttack1
+  m_EditorClassIdentifier: Assembly-CSharp::SplashAttackAbilityDataSO
   damage: 7
-  fireRate: 0.8
+  fireRate: 1.5
   applyEffect: 0
   effectDuration: 0
   detectionLayers:
     serializedVersion: 2
+    m_Bits: 256
+  detectionRange: 3
+  splashDetectionLayers:
+    serializedVersion: 2
     m_Bits: 768
-  detectionRange: 6

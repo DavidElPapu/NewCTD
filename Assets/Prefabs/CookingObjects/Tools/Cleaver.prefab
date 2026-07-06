@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1573988798180385577}
   - component: {fileID: 2390195061290885881}
   m_Layer: 0
-  m_Name: ButcherKnife
+  m_Name: Cleaver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49298340478cae64ead79343bb23e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToolScript
-  tName: 6
-  processedState: 7
+  tName: 11
+  processedState: 2
 --- !u!1 &4516118854238315516
 GameObject:
   m_ObjectHideFlags: 0

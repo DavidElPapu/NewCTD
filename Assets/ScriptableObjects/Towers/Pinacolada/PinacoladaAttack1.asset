@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11e9247d6fd2ec442984002537c122fd, type: 3}
-  m_Name: CoconutWaterShoot3
+  m_Name: PinacoladaAttack1
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootAbilityDataSO
-  damage: 1
+  damage: 10
   fireRate: 1
+  applyEffect: 1
+  effectDuration: 1.5
   detectionLayers:
     serializedVersion: 2
     m_Bits: 256
-  detectionRange: 20
-  projectilePrefab: {fileID: 0}
-  projectileMesh: {fileID: -5495902117074765545, guid: afa30ceb686c3e047ba1bb76bc9513a2, type: 3}
-  projectileMaterial: {fileID: -3661639628750336703, guid: 9bbd8911c9120824090a6c07546e6656, type: 3}
-  projectileSizeRadius: 1
+  detectionRange: 5
+  projectilePrefab: {fileID: 734518066849431237, guid: 4db34bf464988fc459bbbcde99a79bd3, type: 3}
+  projectileMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  projectileMaterial: {fileID: 2100000, guid: 1b9aa46650004e94d9dac0641eeee803, type: 2}
+  projectileSizeRadius: 0.5
   projectileSpeed: 10
+  projectileActiveTime: 3
