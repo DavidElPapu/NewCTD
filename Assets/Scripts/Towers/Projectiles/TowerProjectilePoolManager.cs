@@ -9,6 +9,7 @@ public class TowerProjectilePoolManager : MonoBehaviour
 
     private void Awake()
     {
+        //Only 1 instance of this manager, initializes the pool on awake
         if (singleton == null)
         {
             singleton = this;

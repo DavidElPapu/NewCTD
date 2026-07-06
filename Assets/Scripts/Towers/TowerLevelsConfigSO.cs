@@ -20,6 +20,7 @@ public struct TowerLevelData
     [SerializeField] private int modelIndex;
     [SerializeField] private Mesh[] modelMeshes;
     [SerializeField] private Material[] modelMaterials;
+
     //Get only properties
     public readonly ReadOnlySpan<TowerAbilityDataSO> Abilities => abilities;
     public int ModelIndex => modelIndex;

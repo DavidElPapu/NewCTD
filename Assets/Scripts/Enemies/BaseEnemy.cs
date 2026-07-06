@@ -34,7 +34,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
             OnDeath();
     }
 
-    public void AddStatusEffect(StatusEffect effect, float duration)
+    public void ApplyStatusEffect(StatusEffect effect, float duration)
     {
         if (duration > statusEffectsRemainingTimes[(int)effect])
             statusEffectsRemainingTimes[(int)effect] = duration;
@@ -60,6 +60,7 @@ public class BaseEnemy : MonoBehaviour, IDamageable
 
 public enum StatusEffect
 {
+    None,
     Freeze,
     Poison,
     Stun
