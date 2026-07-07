@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ce9274d1089cf488a22b0c26d4824c, type: 3}
   m_Name: PinaColada
   m_EditorClassIdentifier: Assembly-CSharp::RecipeSO
-  towerPrefab: {fileID: 2405196700253947439, guid: 9a2e64fd41bb6564f9e97e71db3480e2, type: 3}
+  towerPrefab: {fileID: 2405196700253947439, guid: 73db001a7f0836748a91c7784365f05d, type: 3}
   requiredIngredients:
   - name: 1
     state: 6
   - name: 3
     state: 6
   - name: 4
-    state: 1
+    state: 7

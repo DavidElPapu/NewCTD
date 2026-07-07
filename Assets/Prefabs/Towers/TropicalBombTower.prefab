@@ -402,7 +402,7 @@ MonoBehaviour:
   levelModelScripts:
   - {fileID: 5145311976649940331}
   - {fileID: 5427732588629019685}
-  levelsConfig: {fileID: 11400000, guid: fda31ff1149957d48acd46d9d17e9766, type: 2}
+  levelsConfig: {fileID: 11400000, guid: 6e22b338c2da1f8459cae4bf6012016d, type: 2}
 --- !u!114 &6382460622889564566
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -68,10 +68,10 @@ public class TowerProjectileScript : MonoBehaviour
         DisableProjectile();
     }
 
-    private void DisableProjectile()
+    protected void DisableProjectile()
     {
         //Here could be any visuals related to the projectile's ending
         //Returns to the pool
-        TowerProjectilePoolManager.singleton.ReturnBaseProjectile(this);
+        TowerProjectilePoolManager.singleton.ReturnBaseProjectile(this, data.projectileType);
     }
 }

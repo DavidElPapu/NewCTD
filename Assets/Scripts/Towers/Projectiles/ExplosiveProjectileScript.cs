@@ -23,5 +23,6 @@ public class ExplosiveProjectileScript : TowerProjectileScript
             //Cleans the element from the array to avoid using old data in future casts
             enemyColliders[i] = null;
         }
+        DisableProjectile();
     }
 }

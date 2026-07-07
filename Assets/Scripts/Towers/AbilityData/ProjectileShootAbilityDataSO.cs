@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileShootAbilityDataSO : CooldownAttackAbilityDataSO
 {
     [Header("Projectile")]
-    public GameObject projectilePrefab;
+    public TowerProjectileType projectileType;
     public Mesh projectileMesh;
     public Material projectileMaterial;
     public float projectileSizeRadius;

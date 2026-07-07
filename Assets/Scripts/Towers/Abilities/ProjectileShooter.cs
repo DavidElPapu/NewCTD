@@ -21,7 +21,7 @@ public class ProjectileShooter : CooldownAttacker
     protected override void Attack(BaseEnemy enemy)
     {
         modelScript.RotateToTarget(enemy.gameObject.transform);
-        TowerProjectileScript projectileScript = TowerProjectilePoolManager.singleton.GetBaseProjectileScript();
+        TowerProjectileScript projectileScript = TowerProjectilePoolManager.singleton.GetProjectileScript(data.projectileType);
         projectileScript.Initialize(data, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
         projectileScript.LaunchProjectile(projectileSpawnPoint.forward * data.projectileSpeed);
     }

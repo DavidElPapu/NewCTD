@@ -1269,6 +1269,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21c36c7483bc078429dd2f9e909aade0, type: 2}
   - {fileID: 11400000, guid: 864f192e891471748a0d7399d725ca7d, type: 2}
   - {fileID: 11400000, guid: 616b328362450fe408a8eb1a80849a57, type: 2}
+  - {fileID: 11400000, guid: ea0df4516497cd1479db544f1edb1fbd, type: 2}
 --- !u!4 &583598467
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,7 +2240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b34c5bd6e4c2ee4da8e64e18cf6d94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerProjectilePoolManager
-  baseProjectilePrefab: {fileID: 734518066849431237, guid: 4db34bf464988fc459bbbcde99a79bd3, type: 3}
+  projectilePrefabs:
+  - {fileID: 734518066849431237, guid: 4db34bf464988fc459bbbcde99a79bd3, type: 3}
+  - {fileID: 734518066849431237, guid: c2aa091f7db155641a3cc7913252c31b, type: 3}
 --- !u!4 &1177905112
 Transform:
   m_ObjectHideFlags: 0
@@ -2793,7 +2796,7 @@ Transform:
   m_GameObject: {fileID: 1442109604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.72, y: 0.95, z: -2.15}
+  m_LocalPosition: {x: 9.51, y: 0.95, z: -4.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

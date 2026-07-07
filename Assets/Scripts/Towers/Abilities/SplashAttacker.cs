@@ -13,7 +13,7 @@ public class SplashAttacker : CooldownAttacker
     {
         //Set new data, restart cooldowns and also sets data for detectionRange
         this.data = (SplashAttackAbilityDataSO)data;
-        this.modelScript = (ShooterModelScript)modelScript;
+        this.modelScript = modelScript;
         detectionRange.Initialize(this.data.detectionRange, this.data.detectionLayers);
         cooldownTimer = 0;
         currentCooldown = this.data.fireRate;

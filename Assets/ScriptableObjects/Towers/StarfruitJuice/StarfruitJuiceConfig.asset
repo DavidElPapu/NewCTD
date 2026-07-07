@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1eede1ca8a8784ca3f6ffe3c4b32af, type: 3}
   m_Name: StarfruitJuiceConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerLevelsConfigSO
-  tName: Starfruit
+  tName: StarfruitJuice
   levelsData:
   - abilities:
     - {fileID: 11400000, guid: 1a1a3bb0519d10d42822cbcdcadbf335, type: 2}

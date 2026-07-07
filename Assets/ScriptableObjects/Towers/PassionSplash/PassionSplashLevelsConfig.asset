@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1eede1ca8a8784ca3f6ffe3c4b32af, type: 3}
   m_Name: PassionSplashLevelsConfig
   m_EditorClassIdentifier: Assembly-CSharp::TowerLevelsConfigSO
-  tName: PassionSplash
+  tName: PassionSplasher
   levelsData:
   - abilities:
     - {fileID: 11400000, guid: e51e6dba3a69576408ca1d86d7b8de2f, type: 2}
