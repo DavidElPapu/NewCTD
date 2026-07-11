@@ -9,6 +9,9 @@ public class ExplosiveProjectileScript : TowerProjectileScript
 
     protected override void OnImpact(BaseEnemy enemy)
     {
+        if (enemiesImpacted >= data.projectileMaxImpacts) return;
+        enemiesImpacted++;
+
         int enemyCount = Physics.OverlapSphereNonAlloc(transform.position, EData.explosionRadius, enemyColliders, EData.explosionDetectionLayers, QueryTriggerInteraction.Collide);
         
         //Loops through enemies found and deals damage and apply status effect to them

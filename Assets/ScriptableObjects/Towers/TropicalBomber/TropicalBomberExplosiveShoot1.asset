@@ -26,6 +26,7 @@ MonoBehaviour:
   projectileSizeRadius: 0.5
   projectileSpeed: 7
   projectileActiveTime: 7
+  projectileMaxImpacts: 1
   explosionRadius: 2
   explosionDetectionLayers:
     serializedVersion: 2

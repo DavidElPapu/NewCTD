@@ -8,6 +8,7 @@ public class TowerProjectileScript : MonoBehaviour
     private Rigidbody rb;
     private SphereCollider hitbox;
     private float activeTimer;
+    protected int enemiesImpacted;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class TowerProjectileScript : MonoBehaviour
         hitbox.excludeLayers = exludedLayer;
         hitbox.radius = this.data.projectileSizeRadius;
         activeTimer = this.data.projectileActiveTime;
+        enemiesImpacted = 0;
         transform.position = startPos;
         transform.rotation = startRot;
         //We assume the object came inactive from the pool
@@ -63,6 +65,10 @@ public class TowerProjectileScript : MonoBehaviour
 
     protected virtual void OnImpact(BaseEnemy enemy)
     {
+        //This ensures the proyectile deals damage to the max amount even if it collides with multiple colliders in the exact same frame
+        if (enemiesImpacted >= data.projectileMaxImpacts) return;
+        enemiesImpacted++;
+
         enemy.TakeDamage(data.damage);
         enemy.ApplyStatusEffect(data.applyEffect, data.effectDuration);
         DisableProjectile();

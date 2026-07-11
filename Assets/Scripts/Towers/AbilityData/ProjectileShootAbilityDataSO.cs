@@ -10,5 +10,6 @@ public class ProjectileShootAbilityDataSO : CooldownAttackAbilityDataSO
     public float projectileSizeRadius;
     public float projectileSpeed;
     public float projectileActiveTime;
+    public int projectileMaxImpacts;
     public override System.Type GetAbilityComponentType() => typeof(ProjectileShooter);
 }

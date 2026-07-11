@@ -26,3 +26,4 @@ MonoBehaviour:
   projectileSizeRadius: 0.5
   projectileSpeed: 8
   projectileActiveTime: 3
+  projectileMaxImpacts: 1
