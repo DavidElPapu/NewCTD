@@ -2351,21 +2351,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086b8be3d0b23e541b37284698e0618e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TemporalEnemySpawner
-  enemyPrefab: {fileID: 3855861665237729595, guid: 21378c3c27a7c654f8c047689f55864d, type: 3}
   mapWaypoints:
   - {fileID: 612864052}
   - {fileID: 551490564}
   - {fileID: 19950766}
   - {fileID: 1391363735}
-  enemiesToSpawn:
-  - enemyData: {fileID: 11400000, guid: a56b99a7d5eef8a4887fb2e2b94fd520, type: 2}
-    spawnDelay: 2
-  - enemyData: {fileID: 11400000, guid: cc03f1ec4233753458d0a761b96236b7, type: 2}
-    spawnDelay: 8
-  - enemyData: {fileID: 11400000, guid: 598ad47a018402048a8a0fc94e633fc8, type: 2}
-    spawnDelay: 5
-  - enemyData: {fileID: 11400000, guid: 7724d6839fd552e438730d5c1ed8ea00, type: 2}
-    spawnDelay: 8
+  levelData: {fileID: 11400000, guid: 42c8299696d42e74e8d3bba0a972adcb, type: 2}
+  enemyPrefab: {fileID: 3855861665237729595, guid: 21378c3c27a7c654f8c047689f55864d, type: 3}
 --- !u!4 &1277023207
 Transform:
   m_ObjectHideFlags: 0
@@ -2727,7 +2719,7 @@ Transform:
   m_GameObject: {fileID: 1530901416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35355, y: 1.15, z: 0.35355}
+  m_LocalPosition: {x: 0.35355, y: 1.15, z: 0.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
