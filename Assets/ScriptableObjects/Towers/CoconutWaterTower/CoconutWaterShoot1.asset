@@ -20,7 +20,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   detectionRange: 5
-  projectilePrefab: {fileID: 0}
+  projectileType: 0
   projectileMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   projectileMaterial: {fileID: -3661639628750336703, guid: 9bbd8911c9120824090a6c07546e6656, type: 3}
   projectileSizeRadius: 0.5
