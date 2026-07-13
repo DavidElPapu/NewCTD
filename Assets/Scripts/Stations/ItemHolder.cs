@@ -17,6 +17,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
         TryGetComponent(out holdProcessor);
     }
 
+    //This method checks item combinations to ensure the item can be placed
     public bool CanPlaceItem(GameObject item)
     {
         //First Checks if the item is a cooking object (tool, ingredient or container)
@@ -25,8 +26,10 @@ public class ItemHolder : MonoBehaviour, IPlaceable
             //If this station is holding something, then...
             if (itemHeld != null)
             {
+                //If a container is trying to be placed then...
                 if (item.TryGetComponent(out ContainerScript container))
                 {
+                    //If the station is holding a container, then...
                     if (itemHeld.TryGetComponent(out ContainerScript myContainer))
                     {
                         if (container.GetContainedIngredients() == null && myContainer.GetContainedIngredients() != null && myContainer.CanEmptyContainer())
@@ -66,6 +69,7 @@ public class ItemHolder : MonoBehaviour, IPlaceable
                 }
                 else
                 {
+                    //If it's holding a container, then only if an ingredient is being placed and the ingredient can be placed into the container, then is valid
                     if (itemHeld.TryGetComponent(out ContainerScript myContainer) && item.TryGetComponent(out IngredientScript aloneIngredient))
                     {
                         if (myContainer.CanPlaceIngredient(aloneIngredient))
