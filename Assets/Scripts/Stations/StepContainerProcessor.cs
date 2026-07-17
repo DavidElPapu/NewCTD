@@ -5,7 +5,7 @@ public class StepContainerProcessor : MonoBehaviour, IHoldProcessor, IUseProcess
     [SerializeField] private int processMeterValue;
     [Header("For processing without tool")]
     [SerializeField] private IngredientState processedState;
-    private GameObject currentItem;
+    private CookingObject currentItem;
     private IngredientState currentProcessedState;
 
     private void Awake()
@@ -14,30 +14,30 @@ public class StepContainerProcessor : MonoBehaviour, IHoldProcessor, IUseProcess
         currentProcessedState = IngredientState.Null;
     }
 
-    public void OnItemEnter(GameObject item)
+    public void OnItemEnter(CookingObject item)
     {
         currentItem = item;
         if (processedState != IngredientState.Null)
             currentProcessedState = processedState;
     }
 
-    public void OnItemExit(GameObject item)
+    public void OnItemExit(CookingObject item)
     {
         currentItem = null;
         currentProcessedState = IngredientState.Null;
     }
 
-    public void OnProcessorUse(GameObject usedItem)
+    public void OnProcessorUse(CookingObject usedItem)
     {
         if (currentItem == null) return;
-        if (usedItem != null && usedItem.TryGetComponent(out ToolScript tool))
+        if (usedItem != null && usedItem is ToolScript tool)
         {
             if (currentProcessedState == IngredientState.Null)
                 currentProcessedState = tool.processedState;
             else if (tool.processedState != currentProcessedState)
                 return;
         }
-        if (currentItem.TryGetComponent(out ProcessContainerScript container) && !container.IsProcessDone())
+        if (currentItem is ProcessContainerScript container && !container.IsProcessDone())
         {
             container.AddProcessMeter(processMeterValue);
             if (container.IsProcessDone())

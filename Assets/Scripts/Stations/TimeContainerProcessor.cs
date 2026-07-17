@@ -13,7 +13,7 @@ public class TimeContainerProcessor : MonoBehaviour, IHoldProcessor
         timerProcess = null;
     }
 
-    public void OnItemEnter(GameObject item)
+    public void OnItemEnter(CookingObject item)
     {
         if (timerProcess == null)
         {
@@ -21,7 +21,7 @@ public class TimeContainerProcessor : MonoBehaviour, IHoldProcessor
         }
     }
 
-    public void OnItemExit(GameObject item)
+    public void OnItemExit(CookingObject item)
     {
         if (timerProcess != null)
         {
@@ -30,9 +30,9 @@ public class TimeContainerProcessor : MonoBehaviour, IHoldProcessor
         }
     }
 
-    private IEnumerator Timer(GameObject item)
+    private IEnumerator Timer(CookingObject item)
     {
-        if (item.TryGetComponent(out ProcessContainerScript processContainer))
+        if (item is ProcessContainerScript processContainer)
         {
             while (!processContainer.IsProcessDone())
             {

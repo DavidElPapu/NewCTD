@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContainerScript : MonoBehaviour, ICookingObject
+public class ContainerScript : CookingObject
 {
     public event Action<IngredientScript> OnIngredientPlaced;
     public event Action OnIngredientReset;
-    public CookingObjectName cName;
     [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
@@ -98,11 +97,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     }
 
     #endregion
-
-    public CookingObjectName GetCookingObjectName()
-    {
-        return cName;
-    }
 
     private bool IsIngredientStateValid(IngredientState iState)
     {

@@ -6,12 +6,12 @@ public class PlayerActions : MonoBehaviour
 {
     [SerializeField] private Transform selectionPoint;
 
-    private List<GameObject> inventory;
+    private List<CookingObject> inventory;
     private int inventorySlots, selectedItem;
 
     private void Awake()
     {
-        inventory = new List<GameObject>();
+        inventory = new List<CookingObject>();
         inventorySlots = 3;
         selectedItem = 0;
     }

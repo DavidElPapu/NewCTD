@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TemporalMapSetter : MonoBehaviour
 {
     public List<GameObject> stationsOnMap;
-    public List<GameObject> containersOnMap;
+    public List<CookingObject> itemsOnMap;
 
     private void Start()
     {
@@ -12,12 +12,12 @@ public class TemporalMapSetter : MonoBehaviour
         {
             MapGridManager.singleton.AddObjectAt(station.transform.position, station);
         }
-        foreach (GameObject container in containersOnMap)
+        foreach (CookingObject item in itemsOnMap)
         {
-            GameObject possibleStation = MapGridManager.singleton.GetGameObjectAt(container.transform.position);
+            GameObject possibleStation = MapGridManager.singleton.GetGameObjectAt(item.transform.position);
             if (possibleStation != null && possibleStation.TryGetComponent(out IPlaceable stationInteraction))
             {
-                if (stationInteraction.CanPlaceItem(container))
+                if (stationInteraction.CanPlaceItem(item))
                 {
                     //no if since we assume we placed containers where we know is valid
                 }

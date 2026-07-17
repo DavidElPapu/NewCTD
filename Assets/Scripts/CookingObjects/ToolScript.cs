@@ -1,13 +1,7 @@
 using UnityEngine;
 
-public class ToolScript : MonoBehaviour, ICookingObject
+public class ToolScript : CookingObject
 {
-    public CookingObjectName tName;
     [Header("For processing")]
     public IngredientState processedState;
-
-    public CookingObjectName GetCookingObjectName()
-    {
-        return tName;
-    }
 }

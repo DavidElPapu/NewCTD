@@ -10,7 +10,7 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
         currentTower = null;
     }
 
-    public bool CanPlaceItem(GameObject item)
+    public bool CanPlaceItem(CookingObject item)
     {
         if (item.TryGetComponent(out TowerPlacer towerContainer) && towerContainer.towerPrefab != null)
         {
@@ -31,12 +31,12 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
         return false;
     }
 
-    public GameObject OnPickEmpty()
+    public CookingObject OnPickEmpty()
     {
         return null;
     }
 
-    public void OnProcessorUse(GameObject usedItem)
+    public void OnProcessorUse(CookingObject usedItem)
     {
         //For now, this is just used to delete the tower, maybe later could be more uses for diferent tools on towers
         currentTower.DeleteTower();

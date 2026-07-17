@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49298340478cae64ead79343bb23e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToolScript
-  tName: 12
+  cName: 12
   processedState: 3
 --- !u!1 &4516118854238315516
 GameObject:

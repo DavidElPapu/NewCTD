@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IPlaceable
 {
-    GameObject OnPickEmpty();
-    bool CanPlaceItem(GameObject item);
+    CookingObject OnPickEmpty();
+    bool CanPlaceItem(CookingObject item);
 }

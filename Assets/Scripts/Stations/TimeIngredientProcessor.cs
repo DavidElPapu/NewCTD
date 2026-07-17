@@ -17,7 +17,7 @@ public class TimeIngredientProcessor : MonoBehaviour, IHoldProcessor
         currentProcessMeter = 0;
     }
 
-    public void OnItemEnter(GameObject item)
+    public void OnItemEnter(CookingObject item)
     {
         if (timerProcess == null)
         {
@@ -25,7 +25,7 @@ public class TimeIngredientProcessor : MonoBehaviour, IHoldProcessor
         }
     }
 
-    public void OnItemExit(GameObject item)
+    public void OnItemExit(CookingObject item)
     {
         if (timerProcess != null)
         {
@@ -34,9 +34,9 @@ public class TimeIngredientProcessor : MonoBehaviour, IHoldProcessor
         }
     }
 
-    private IEnumerator Timer(GameObject item)
+    private IEnumerator Timer(CookingObject item)
     {
-        if (item.TryGetComponent(out IngredientScript ingredient))
+        if (item is IngredientScript ingredient)
         {
             currentProcessMeter = 0;
             while (currentProcessMeter < IngredientScript.ingredientProcessMeter)

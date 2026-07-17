@@ -16,7 +16,7 @@ public class UsableStation : MonoBehaviour
         canBeUsed = true;
     }
 
-    public void OnUse(GameObject item)
+    public void OnUse(CookingObject item)
     {
         if(IsItemValid(item) && canBeUsed)
         {
@@ -26,14 +26,14 @@ public class UsableStation : MonoBehaviour
         }
     }
 
-    private bool IsItemValid(GameObject item)
+    private bool IsItemValid(CookingObject item)
     {
         if (validTools.Count == 0) return true;
-        if (item != null && item.TryGetComponent(out ICookingObject cookingObject))
+        if (item != null)
         {
             foreach (CookingObjectName tool in validTools)
             {
-                if (cookingObject.GetCookingObjectName() == tool) return true;
+                if (item.cName == tool) return true;
             }
         }
         return false;

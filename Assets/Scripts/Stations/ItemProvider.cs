@@ -11,12 +11,12 @@ public class ItemProvider : MonoBehaviour, IPlaceable
         ingredientSO = ingredient;
     }
 
-    public bool CanPlaceItem(GameObject item)
+    public bool CanPlaceItem(CookingObject item)
     {
         return false;
     }
 
-    public GameObject OnPickEmpty()
+    public CookingObject OnPickEmpty()
     {
         GameObject newIngredient = Instantiate(ingredientPrefab);
         if (newIngredient.TryGetComponent(out IngredientScript ingredientScript))
@@ -29,6 +29,6 @@ public class ItemProvider : MonoBehaviour, IPlaceable
         }
         else
             return null;
-        return newIngredient;
+        return ingredientScript;
     }
 }

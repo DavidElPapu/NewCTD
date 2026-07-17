@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IHoldProcessor
 {
-    void OnItemEnter(GameObject item);
-    void OnItemExit(GameObject item);
+    void OnItemEnter(CookingObject item);
+    void OnItemExit(CookingObject item);
 }

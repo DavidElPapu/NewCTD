@@ -1557,12 +1557,12 @@ MonoBehaviour:
   - {fileID: 867941605}
   - {fileID: 881032326}
   - {fileID: 1087353147}
-  containersOnMap:
-  - {fileID: 1192122474}
-  - {fileID: 1005961184}
-  - {fileID: 840771960}
-  - {fileID: 937066000}
-  - {fileID: 1875791519}
+  itemsOnMap:
+  - {fileID: 1192122475}
+  - {fileID: 1005961187}
+  - {fileID: 840771961}
+  - {fileID: 937066001}
+  - {fileID: 1875791520}
 --- !u!1001 &867941604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1756,11 +1756,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fdbc9ebed1d48548b3f33a725f061e4, type: 3}
---- !u!1 &937066000 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4173847520520200085, guid: 8fdbc9ebed1d48548b3f33a725f061e4, type: 3}
+--- !u!114 &937066001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2390195061290885881, guid: 8fdbc9ebed1d48548b3f33a725f061e4, type: 3}
   m_PrefabInstance: {fileID: 937065999}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49298340478cae64ead79343bb23e36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolScript
 --- !u!1001 &998627497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,11 +3052,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0ac84487ec0ead489c087215d6314f9, type: 3}
---- !u!1 &1875791519 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4173847520520200085, guid: b0ac84487ec0ead489c087215d6314f9, type: 3}
+--- !u!114 &1875791520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2390195061290885881, guid: b0ac84487ec0ead489c087215d6314f9, type: 3}
   m_PrefabInstance: {fileID: 1875791518}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49298340478cae64ead79343bb23e36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolScript
 --- !u!1001 &1909220329
 PrefabInstance:
   m_ObjectHideFlags: 0

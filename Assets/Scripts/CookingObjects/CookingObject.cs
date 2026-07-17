@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public interface ICookingObject
+public class CookingObject : MonoBehaviour
 {
-    CookingObjectName GetCookingObjectName();
+    public CookingObjectName cName;
 }
 
 public enum CookingObjectName

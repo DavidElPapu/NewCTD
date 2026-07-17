@@ -1,17 +1,12 @@
 using UnityEngine;
 
-public class IngredientScript : MonoBehaviour, ICookingObject
+public class IngredientScript : CookingObject
 {
     public static int ingredientProcessMeter = 100;
     public IngredientSO data;
     public IngredientState state;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshRenderer meshRenderer;
-
-    public CookingObjectName GetCookingObjectName()
-    {
-        return data.iName;
-    }
 
     public void ChangeMesh(Mesh newMesh)
     {

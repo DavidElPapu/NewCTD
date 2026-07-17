@@ -7,7 +7,7 @@ public class StepIngredientProcessor : MonoBehaviour, IHoldProcessor, IUseProces
     [SerializeField] private int processMeterValue;
     [Header("For processing without tool")]
     [SerializeField] private IngredientState processedState;
-    private GameObject currentItem;
+    private CookingObject currentItem;
     private IngredientState currentProcessedState;
     private int currentProcessMeter;
 
@@ -18,7 +18,7 @@ public class StepIngredientProcessor : MonoBehaviour, IHoldProcessor, IUseProces
         currentProcessMeter = 0;
     }
 
-    public void OnItemEnter(GameObject item)
+    public void OnItemEnter(CookingObject item)
     {
         currentItem = item;
         currentProcessMeter = 0;
@@ -26,23 +26,23 @@ public class StepIngredientProcessor : MonoBehaviour, IHoldProcessor, IUseProces
             currentProcessedState = processedState;
     }
 
-    public void OnItemExit(GameObject item)
+    public void OnItemExit(CookingObject item)
     {
         currentItem = null;
         currentProcessedState = IngredientState.Null;
     }
 
-    public void OnProcessorUse(GameObject usedItem)
+    public void OnProcessorUse(CookingObject usedItem)
     {
         if (currentItem == null) return;
-        if (usedItem != null && usedItem.TryGetComponent(out ToolScript tool))
+        if (usedItem != null && usedItem is ToolScript tool)
         {
             if (currentProcessedState == IngredientState.Null)
                 currentProcessedState = tool.processedState;
             else if (tool.processedState != currentProcessedState)
                 return;
         }
-        if (currentItem.TryGetComponent(out IngredientScript ingredient) && currentProcessMeter < IngredientScript.ingredientProcessMeter)
+        if (currentItem is IngredientScript ingredient && currentProcessMeter < IngredientScript.ingredientProcessMeter)
         {
             currentProcessMeter += processMeterValue;
             if (currentProcessMeter >= IngredientScript.ingredientProcessMeter)
