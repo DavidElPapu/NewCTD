@@ -1,17 +1,12 @@
 using UnityEngine;
 
-public class IngredientScript : MonoBehaviour, ICookingObject
+public class IngredientScript : CookingObject
 {
     public static int ingredientProcessMeter = 100;
     public IngredientSO data;
     public IngredientState state;
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshRenderer meshRenderer;
-
-    public CookingObjectName GetCookingObjectName()
-    {
-        return data.iName;
-    }
 
     public void ChangeMesh(Mesh newMesh)
     {
@@ -27,5 +22,18 @@ public class IngredientScript : MonoBehaviour, ICookingObject
     {
         meshRenderer.transform.localScale = newSize;
         meshRenderer.transform.localPosition = newOffset;
+    }
+
+    public override bool TryEnterItem(CookingObject item)
+    {
+        //This method only return true if the item can enter this cookingObject, since this is an ingredient, it can only return false but still enter a container
+        if (item is ContainerScript container)
+        {
+            if (container.CanPlaceIngredient(this))
+            {
+                container.PlaceIngredient(this);
+            }
+        }
+        return false;
     }
 }

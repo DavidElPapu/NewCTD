@@ -41,8 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
-  - component: {fileID: 4180390567052774535}
-  - component: {fileID: 2192597100819383689}
+  - component: {fileID: -261186053123493446}
   m_Layer: 0
   m_Name: Blender
   m_TagString: Untagged
@@ -89,7 +88,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &4180390567052774535
+--- !u!114 &-261186053123493446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,27 +97,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
+  m_Script: {fileID: 11500000, guid: 58d91e9c1811b4d43af3e675709807ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  m_EditorClassIdentifier: Assembly-CSharp::TimeProcessor
   validItems: 0a000000
   validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
---- !u!114 &2192597100819383689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f906c7d2ee27b4eafc8a0e5332b1d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeContainerProcessor
   processedState: 6
   processMeterValueTimeFrequency: 0.5
   processMeterValue: 10
+  processedMesh: {fileID: 0}
 --- !u!1 &4659834671315776323
 GameObject:
   m_ObjectHideFlags: 0

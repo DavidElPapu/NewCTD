@@ -1,13 +1,9 @@
 using UnityEngine;
 
-public class ToolScript : MonoBehaviour, ICookingObject
+public abstract class ToolScript : CookingObject
 {
-    public CookingObjectName tName;
-    [Header("For processing")]
-    public IngredientState processedState;
-
-    public CookingObjectName GetCookingObjectName()
+    public override bool TryEnterItem(CookingObject item)
     {
-        return tName;
+        return false;
     }
 }

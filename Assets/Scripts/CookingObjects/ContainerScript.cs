@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContainerScript : MonoBehaviour, ICookingObject
+public class ContainerScript : CookingObject
 {
-    public event Action<IngredientScript> OnIngredientPlaced;
-    public event Action OnIngredientReset;
-    public CookingObjectName cName;
     [SerializeField] private List<IngredientState> validIngredientStates;
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
@@ -26,6 +23,43 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     }
 
     #region PlaceOnContainer
+
+    public override bool TryEnterItem(CookingObject item)
+    {
+        //This method only returns true if the item enters this container
+        if (item is IngredientScript ingredient)
+        {
+            if (CanPlaceIngredient(ingredient))
+            {
+                PlaceIngredient(ingredient);
+                return true;
+            }
+        }
+        else if (item is ContainerScript container)
+        {
+            //If the container trying to enter has ingredients that can enter this container, then it places them inside and empties the other container
+            if (container.CanEmptyContainer() && container.GetContainedIngredients() != null)
+            {
+                if (CanPlaceIngredientList(container.GetContainedIngredients()))
+                {
+                    PlaceIngredientList(container.GetContainedIngredients());
+                    container.EmptyContainer();
+                    return false;
+                }
+            }
+            //If the other container's content couldn't enter this container, then it checks if this container's content can enter the other container
+            if (CanEmptyContainer() && containedIngredients.Count > 0)
+            {
+                if (container.CanPlaceIngredientList(containedIngredients))
+                {
+                    container.PlaceIngredientList(containedIngredients);
+                    EmptyContainer();
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 
     public bool CanPlaceIngredient(IngredientScript ingredient)
     {
@@ -48,7 +82,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void PlaceIngredient(IngredientScript ingredient)
     {
         containedIngredients.Add(ingredient);
-        OnIngredientPlaced?.Invoke(ingredient);
         //For now it just deactivates the gameObject
         ingredient.transform.parent = transform;
         ingredient.transform.position = transform.position;
@@ -86,7 +119,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     public virtual void EmptyContainer()
     {
         containedIngredients.Clear();
-        OnIngredientReset?.Invoke();
         contentModel.SetActive(false);
         contentColor = Color.black;
     }
@@ -98,11 +130,6 @@ public class ContainerScript : MonoBehaviour, ICookingObject
     }
 
     #endregion
-
-    public CookingObjectName GetCookingObjectName()
-    {
-        return cName;
-    }
 
     private bool IsIngredientStateValid(IngredientState iState)
     {

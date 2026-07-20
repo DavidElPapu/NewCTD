@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public interface ICookingObject
+public abstract class CookingObject : MonoBehaviour
 {
-    CookingObjectName GetCookingObjectName();
+    public CookingObjectName cName;
+    public abstract bool TryEnterItem(CookingObject item);
 }
 
 public enum CookingObjectName

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5871187926449424828}
-  - component: {fileID: 7887580047886010139}
   - component: {fileID: 6109843154118697206}
   m_Layer: 0
   m_Name: TowerSpot
@@ -34,20 +33,6 @@ Transform:
   - {fileID: 6698836842312810817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7887580047886010139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e371e17c1a58b46439dd3b291871f8a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UsableStation
-  validTools: 00000000
-  useCooldown: 1
 --- !u!114 &6109843154118697206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ab53d0fb87644a81a5723a04e58b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerSpotStation
+  deleterTool: 11
 --- !u!1 &3516225523962851132
 GameObject:
   m_ObjectHideFlags: 0

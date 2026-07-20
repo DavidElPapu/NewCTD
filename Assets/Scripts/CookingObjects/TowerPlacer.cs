@@ -1,30 +1,28 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class TowerPlacer : MonoBehaviour
+public class TowerPlacer : ContainerScript
 {
-    private ContainerScript containerScript;
     private HashSet<RecipeIngredient> containedRecipeIngredients;
     public GameObject towerPrefab;
 
-    private void Awake()
+    protected override void Awake()
     {
-        TryGetComponent(out containerScript);
+        base.Awake();
         containedRecipeIngredients = new HashSet<RecipeIngredient>();
         towerPrefab = null;
     }
 
-    private void OnEnable()
+    public override void PlaceIngredient(IngredientScript ingredient)
     {
-        containerScript.OnIngredientPlaced += AddIngredientToHash;
-        containerScript.OnIngredientReset += ClearHash;
+        base.PlaceIngredient(ingredient);
+        AddIngredientToHash(ingredient);
     }
 
-    private void OnDisable()
+    public override void EmptyContainer()
     {
-        containerScript.OnIngredientPlaced -= AddIngredientToHash;
-        containerScript.OnIngredientReset -= ClearHash;
+        base.EmptyContainer();
+        ClearHash();
     }
 
     private void AddIngredientToHash(IngredientScript ingredient)

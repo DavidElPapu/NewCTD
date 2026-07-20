@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
-  - component: {fileID: 4180390567052774535}
+  - component: {fileID: 1496762437396548931}
   m_Layer: 0
   m_Name: BasicTable
   m_TagString: Untagged
@@ -87,7 +87,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &4180390567052774535
+--- !u!114 &1496762437396548931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,11 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
+  m_Script: {fileID: 11500000, guid: 3677bd081966a224a8525689a8a715bb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  m_EditorClassIdentifier: Assembly-CSharp::ItemHolderStation
   validItems: 
-  validIngredientTypes: 
   validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
 --- !u!1 &5150963647566158330

@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDeleter : MonoBehaviour, IPlaceable
+public class ItemDeleter : StationScript
 {
-    public bool CanPlaceItem(GameObject item)
+    public override bool TryPlaceItem(CookingObject item)
     {
-        if (item.TryGetComponent(out IngredientScript ingredient))
+        //If the item is an ingredient it gets deleted directly, if it's a container, deletes  its content if able without deleting the container
+        if (item is IngredientScript ingredient)
         {
-            Destroy(item);
+            Destroy(item.gameObject);
             return true;
         }
-        else if (item.TryGetComponent(out ContainerScript container) && container.GetContainedIngredients() != null)
+        else if (item is ContainerScript container && container.GetContainedIngredients() != null)
         {
             List<IngredientScript> transferIngredients = new List<IngredientScript>(container.GetContainedIngredients());
             container.EmptyContainer();
@@ -22,8 +23,14 @@ public class ItemDeleter : MonoBehaviour, IPlaceable
         return false;
     }
 
-    public GameObject OnPickEmpty()
+    public override CookingObject TryGetItem()
     {
+        //Not yet
         return null;
+    }
+
+    public override void UseStation(CookingObject item)
+    {
+        //Nothing
     }
 }

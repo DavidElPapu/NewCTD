@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[RequireComponent(typeof(UsableStation))]
-public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
+public class TowerSpotStation : StationScript
 {
+    [SerializeField] private CookingObjectName deleterTool;
     private MainTowerController currentTower;
 
     private void Awake()
@@ -10,7 +10,7 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
         currentTower = null;
     }
 
-    public bool CanPlaceItem(GameObject item)
+    public override bool TryPlaceItem(CookingObject item)
     {
         if (item.TryGetComponent(out TowerPlacer towerContainer) && towerContainer.towerPrefab != null)
         {
@@ -31,15 +31,18 @@ public class TowerSpotStation : MonoBehaviour, IPlaceable, IUseProcessor
         return false;
     }
 
-    public GameObject OnPickEmpty()
+    public override CookingObject TryGetItem()
     {
         return null;
     }
 
-    public void OnProcessorUse(GameObject usedItem)
+    public override void UseStation(CookingObject item)
     {
         //For now, this is just used to delete the tower, maybe later could be more uses for diferent tools on towers
-        currentTower.DeleteTower();
-        currentTower = null;
+        if (item.cName == deleterTool)
+        {
+            currentTower.DeleteTower();
+            currentTower = null;
+        }
     }
 }

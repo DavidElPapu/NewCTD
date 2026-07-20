@@ -131,8 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
-  - component: {fileID: 4180390567052774535}
-  - component: {fileID: 2937032785683682986}
+  - component: {fileID: -1231885495059552173}
   m_Layer: 0
   m_Name: Extractor
   m_TagString: Untagged
@@ -180,7 +179,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &4180390567052774535
+--- !u!114 &-1231885495059552173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,30 +188,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
+  m_Script: {fileID: 11500000, guid: 58d91e9c1811b4d43af3e675709807ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  m_EditorClassIdentifier: Assembly-CSharp::TimeProcessor
   validItems: 
   validIngredientStates: 01000000
   itemLocation: {fileID: 3368256662326507062}
---- !u!114 &2937032785683682986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8066face5d76e9e49bb0b559e2d654e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeIngredientProcessor
-  processedMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  customSize: {x: 0.5, y: 0.5, z: 0.5}
-  customOffset: {x: 0, y: 0.5, z: 0}
   processedState: 5
   processMeterValueTimeFrequency: 0.5
-  processMeterValue: 8
+  processMeterValue: 10
+  processedMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4659834671315776323
 GameObject:
   m_ObjectHideFlags: 0
