@@ -198,7 +198,6 @@ MonoBehaviour:
   itemLocation: {fileID: 3368256662326507062}
   validTools: 0b0000000c000000
   useCooldown: 0.2
-  processedMesh: {fileID: 2381890483179193753, guid: 830d62a62cc90fe46bb6c997091476c8, type: 3}
   internalTool: {fileID: 0}
 --- !u!1 &5150963647566158330
 GameObject:

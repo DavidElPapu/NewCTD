@@ -39,9 +39,9 @@ public class ItemHolderStation : StationScript
                 {
                     //For now the stations can only hold 1 item so the content needs to be just 1 ingredient
                     List<IngredientScript> transferIngredients = container.GetContainedIngredients();
-                    if (transferIngredients != null && transferIngredients.Count == 1 && IsIngredientStateValid(transferIngredients[0]))
+                    if (transferIngredients != null && transferIngredients.Count == 1 && IsIngredientStateValid(transferIngredients[0]) && IsCookingObjectValid(transferIngredients[0].cName))
                     {
-                        //For now it only checks the ingredient state, not the item name, this would only be needed if there are stations that can only process specific ingredients
+                        //If the ingredient inside is valid, it enters in the station
                         container.EmptyContainer();
                         PlaceItem(transferIngredients[0]);
                         UpdateItemChange();

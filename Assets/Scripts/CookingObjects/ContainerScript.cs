@@ -5,6 +5,7 @@ using UnityEngine;
 public class ContainerScript : CookingObject
 {
     [SerializeField] private List<IngredientState> validIngredientStates;
+    [SerializeField] private ContainerUI ui;
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
     protected List<IngredientScript> containedIngredients;
@@ -17,6 +18,7 @@ public class ContainerScript : CookingObject
     {
         containedIngredients = new List<IngredientScript>();
         contentModel.SetActive(false);
+        ui.Initialize(maxContainedIngredients);
         propBlock = new MaterialPropertyBlock();
         contentModel.TryGetComponent(out contentMeshRenderer);
         contentColor = Color.black;
@@ -97,6 +99,7 @@ public class ContainerScript : CookingObject
         contentMeshRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_BaseColor", contentColor);
         contentMeshRenderer.SetPropertyBlock(propBlock);
+        ui.UpdateIngredients(containedIngredients);
     }
 
     public void PlaceIngredientList(List<IngredientScript> ingredientList)

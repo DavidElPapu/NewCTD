@@ -18,12 +18,6 @@ public class IngredientScript : CookingObject
         meshRenderer.sharedMaterial = newMaterial;
     }
 
-    public void ChangeSizeAndOffset(Vector3 newSize, Vector3 newOffset)
-    {
-        meshRenderer.transform.localScale = newSize;
-        meshRenderer.transform.localPosition = newOffset;
-    }
-
     public override bool TryEnterItem(CookingObject item)
     {
         //This method only return true if the item can enter this cookingObject, since this is an ingredient, it can only return false but still enter a container
