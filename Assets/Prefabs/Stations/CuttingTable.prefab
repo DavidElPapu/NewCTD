@@ -134,9 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
-  - component: {fileID: 4180390567052774535}
-  - component: {fileID: 9159407259945270527}
-  - component: {fileID: 3265275965313525256}
+  - component: {fileID: 6310921060202216412}
   m_Layer: 0
   m_Name: CuttingTable
   m_TagString: Untagged
@@ -183,7 +181,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &4180390567052774535
+--- !u!114 &6310921060202216412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,43 +190,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2586f019bcee7df4fbfed91c8bb8c600, type: 3}
+  m_Script: {fileID: 11500000, guid: c88838145c166974da04a8fc18c38661, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  m_EditorClassIdentifier: Assembly-CSharp::StepProcessor
   validItems: 
-  validIngredientStates: 0000000001000000
+  validIngredientStates: 01000000
   itemLocation: {fileID: 3368256662326507062}
---- !u!114 &9159407259945270527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e371e17c1a58b46439dd3b291871f8a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UsableStation
   validTools: 0b0000000c000000
   useCooldown: 0.2
---- !u!114 &3265275965313525256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405196700253947439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc98f5abef2d814496ac44843a308e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StepIngredientProcessor
   processedMesh: {fileID: 2381890483179193753, guid: 830d62a62cc90fe46bb6c997091476c8, type: 3}
-  customSize: {x: 3, y: 3, z: 3}
-  customOffset: {x: 0, y: 0, z: 0}
-  processMeterValue: 100
-  processedState: 0
+  internalTool: {fileID: 0}
 --- !u!1 &5150963647566158330
 GameObject:
   m_ObjectHideFlags: 0

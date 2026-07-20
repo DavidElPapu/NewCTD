@@ -25,11 +25,11 @@ public class PlayerActions : MonoBehaviour
     {
         if(context.phase == InputActionPhase.Performed)
         {
-            GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
-            if (station == null || !station.TryGetComponent(out IPlaceable stationInteraction)) return;
+            StationScript station = MapGridManager.singleton.GetStationAt(selectionPoint.position);
+            if (!station) return;
             if (inventory[selectedItem] == null)
             {
-                inventory[selectedItem] = stationInteraction.OnPickEmpty();
+                inventory[selectedItem] = station.TryGetItem();
                 if (inventory[selectedItem] != null)
                 {
                     inventory[selectedItem].transform.parent = selectionPoint;
@@ -39,7 +39,7 @@ public class PlayerActions : MonoBehaviour
             }
             else
             {
-                if (stationInteraction.CanPlaceItem(inventory[selectedItem]) == true)
+                if (station.TryPlaceItem(inventory[selectedItem]) == true)
                 {
                     inventory[selectedItem] = null;
                 }
@@ -51,9 +51,9 @@ public class PlayerActions : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            GameObject station = MapGridManager.singleton.GetGameObjectAt(selectionPoint.position);
-            if (station == null || !station.TryGetComponent(out UsableStation useInteraction)) return;
-            useInteraction.OnUse(inventory[selectedItem]);
+            StationScript station = MapGridManager.singleton.GetStationAt(selectionPoint.position);
+            if (!station) return;
+            station.UseStation(inventory[selectedItem]);
         }
     }
 

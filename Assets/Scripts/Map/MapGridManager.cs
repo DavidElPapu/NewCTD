@@ -7,14 +7,14 @@ public class MapGridManager : MonoBehaviour
 {
     public static MapGridManager singleton;
     [SerializeField] private Grid mapGrid;
-    private Dictionary<Vector3Int, GameObject> objectsOnMap;
+    private Dictionary<Vector3Int, StationScript> stationsOnMap;
 
     private void Awake()
     {
         if (singleton == null)
         {
             singleton = this;
-            objectsOnMap = new Dictionary<Vector3Int, GameObject>();
+            stationsOnMap = new Dictionary<Vector3Int, StationScript>();
         }
         else
         {
@@ -22,29 +22,29 @@ public class MapGridManager : MonoBehaviour
         }
     }
 
-    public void AddObjectAt(Vector3 position, GameObject gameObject)
+    public void AddStationAt(Vector3 position, StationScript station)
     {
         Vector3Int gridPosition = GetGridPosition(position);
-        if (!objectsOnMap.ContainsKey(gridPosition))
+        if (!stationsOnMap.ContainsKey(gridPosition))
         {
-            objectsOnMap[gridPosition] = gameObject;
-            gameObject.transform.position = mapGrid.CellToWorld(gridPosition);
+            stationsOnMap[gridPosition] = station;
+            station.transform.position = mapGrid.CellToWorld(gridPosition);
         }
     }
 
     public void RemoveObjectAt(Vector3 position)
     {
         Vector3Int gridPosition = GetGridPosition(position);
-        if (objectsOnMap.ContainsKey(gridPosition))
-            objectsOnMap.Remove(gridPosition);
+        if (stationsOnMap.ContainsKey(gridPosition))
+            stationsOnMap.Remove(gridPosition);
     }
 
-    public GameObject GetGameObjectAt(Vector3 position)
+    public StationScript GetStationAt(Vector3 position)
     {
         Vector3Int gridPosition = GetGridPosition(position);
-        if (objectsOnMap.ContainsKey(gridPosition) == false)
+        if (stationsOnMap.ContainsKey(gridPosition) == false)
             return null;
-        return objectsOnMap[gridPosition].gameObject;
+        return stationsOnMap[gridPosition];
     }
 
     public Vector3Int GetGridPosition(Vector3 position)

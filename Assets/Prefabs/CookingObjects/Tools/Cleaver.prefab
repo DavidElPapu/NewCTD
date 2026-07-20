@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1573988798180385577}
-  - component: {fileID: 2390195061290885881}
+  - component: {fileID: 1075761198749628181}
   m_Layer: 0
   m_Name: Cleaver
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 6515491318257264715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2390195061290885881
+--- !u!114 &1075761198749628181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4173847520520200085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49298340478cae64ead79343bb23e36f, type: 3}
+  m_Script: {fileID: 11500000, guid: e422a10a2c878ea49b0524c250173335, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ToolScript
+  m_EditorClassIdentifier: Assembly-CSharp::ProcessorTool
   cName: 11
   processedState: 2
+  processedMesh: {fileID: 2381890483179193753, guid: 830d62a62cc90fe46bb6c997091476c8, type: 3}
+  processMeterValue: 100
 --- !u!1 &4516118854238315516
 GameObject:
   m_ObjectHideFlags: 0

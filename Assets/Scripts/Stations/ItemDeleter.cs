@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDeleter : MonoBehaviour, IPlaceable
+public class ItemDeleter : StationScript
 {
-    public bool CanPlaceItem(CookingObject item)
+    public override bool TryPlaceItem(CookingObject item)
     {
+        //If the item is an ingredient it gets deleted directly, if it's a container, deletes  its content if able without deleting the container
         if (item is IngredientScript ingredient)
         {
             Destroy(item.gameObject);
@@ -22,8 +23,14 @@ public class ItemDeleter : MonoBehaviour, IPlaceable
         return false;
     }
 
-    public CookingObject OnPickEmpty()
+    public override CookingObject TryGetItem()
     {
+        //Not yet
         return null;
+    }
+
+    public override void UseStation(CookingObject item)
+    {
+        //Nothing
     }
 }

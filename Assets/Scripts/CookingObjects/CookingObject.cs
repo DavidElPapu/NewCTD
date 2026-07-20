@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class CookingObject : MonoBehaviour
+public abstract class CookingObject : MonoBehaviour
 {
     public CookingObjectName cName;
+    public abstract bool TryEnterItem(CookingObject item);
 }
 
 public enum CookingObjectName

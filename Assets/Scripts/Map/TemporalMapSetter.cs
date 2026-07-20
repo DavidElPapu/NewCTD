@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 public class TemporalMapSetter : MonoBehaviour
 {
-    public List<GameObject> stationsOnMap;
-    public List<CookingObject> itemsOnMap;
+    public List<StationScript> mapStations;
+    public List<CookingObject> mapItems;
 
     private void Start()
     {
-        foreach (GameObject station in stationsOnMap)
+        foreach (StationScript station in mapStations)
         {
-            MapGridManager.singleton.AddObjectAt(station.transform.position, station);
+            MapGridManager.singleton.AddStationAt(station.transform.position, station);
         }
-        foreach (CookingObject item in itemsOnMap)
+        foreach (CookingObject item in mapItems)
         {
-            GameObject possibleStation = MapGridManager.singleton.GetGameObjectAt(item.transform.position);
-            if (possibleStation != null && possibleStation.TryGetComponent(out IPlaceable stationInteraction))
+            StationScript possibleStation = MapGridManager.singleton.GetStationAt(item.transform.position);
+            if (possibleStation != null)
             {
-                if (stationInteraction.CanPlaceItem(item))
+                if (possibleStation.TryPlaceItem(item))
                 {
                     //no if since we assume we placed containers where we know is valid
                 }

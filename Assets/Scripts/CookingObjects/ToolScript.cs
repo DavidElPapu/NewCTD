@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class ToolScript : CookingObject
+public abstract class ToolScript : CookingObject
 {
-    [Header("For processing")]
-    public IngredientState processedState;
+    public override bool TryEnterItem(CookingObject item)
+    {
+        return false;
+    }
 }
