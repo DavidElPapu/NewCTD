@@ -35,12 +35,14 @@ public class PlayerActions : MonoBehaviour
                     inventory[selectedItem].transform.parent = selectionPoint;
                     inventory[selectedItem].transform.position = selectionPoint.position;
                     inventory[selectedItem].transform.rotation = selectionPoint.rotation;
+                    inventory[selectedItem].OnPlayerInteraction(true);
                 }
             }
             else
             {
                 if (station.TryPlaceItem(inventory[selectedItem]) == true)
                 {
+                    inventory[selectedItem].OnPlayerInteraction(false);
                     inventory[selectedItem] = null;
                 }
             }

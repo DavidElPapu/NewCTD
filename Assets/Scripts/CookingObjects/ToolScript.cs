@@ -6,4 +6,9 @@ public abstract class ToolScript : CookingObject
     {
         return false;
     }
+
+    public override void OnPlayerInteraction(bool wasPicked)
+    {
+        //Nothing by default
+    }
 }

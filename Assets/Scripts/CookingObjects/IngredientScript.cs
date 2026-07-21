@@ -30,4 +30,9 @@ public class IngredientScript : CookingObject
         }
         return false;
     }
+
+    public override void OnPlayerInteraction(bool wasPicked)
+    {
+        //Nothing
+    }
 }

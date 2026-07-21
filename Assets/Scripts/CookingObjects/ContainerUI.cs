@@ -4,37 +4,20 @@ using UnityEngine.UI;
 
 public class ContainerUI : MonoBehaviour
 {
-    public Canvas canvas;
-    public Image[] containedIngredientsImages;
-    [SerializeField] private Sprite noIngredientSprite;
-
-    private void Awake()
-    {
-        RotateToCamera(Camera.main.transform);
-    }
-
-    public void Initialize(int maxIngredients)
-    {
-        for (int i = 0; i < containedIngredientsImages.Length; i++)
-        {
-            if (i >= maxIngredients)
-                containedIngredientsImages[i].enabled = false;
-        }
-    }
-
-    public void RotateToCamera(Transform camera)
-    {
-        canvas.transform.LookAt(camera);
-    }
+    [SerializeField] private Image[] containedIngredientsImages;
 
     public void UpdateIngredients(List<IngredientScript> ingredients)
     {
-        for (int i = 0; i < ingredients.Count; i++)
+        //Iterate to all UI images and put the ingredient icon from the ingredient list, if there are no left ingredients, it just deactivates the leftover images
+        for (int i = 0; i < containedIngredientsImages.Length; i++)
         {
-            if (ingredients[i] != null)
+            if (i < ingredients.Count)
+            {
                 containedIngredientsImages[i].sprite = ingredients[i].data.icon;
+                containedIngredientsImages[i].gameObject.SetActive(true);
+            }
             else
-                containedIngredientsImages[i].sprite = noIngredientSprite;
+                containedIngredientsImages[i].gameObject.SetActive(false);
         }
     }
 }

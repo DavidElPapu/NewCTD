@@ -15,12 +15,23 @@ public class StepProcessor : ItemHolderStation
     [Header("For processing without tool")]
     [SerializeField] private ProcessorTool internalTool;
 
+    [Header("UI")]
+    [SerializeField] protected WorldspaceUIControler uiControler;
+    private ProcessMeterUI processUI;
+
     protected override void Awake()
     {
         base.Awake();
         canBeUsed = true;
         currentTool = internalTool;
         currentProcessMeter = 0;
+        //If this station processes ingredients, it needs its own process meter (UI), so only if it was assigned in inspector, it gets initialized
+        if (uiControler != null)
+        {
+            uiControler.TryGetComponent(out processUI);
+            processUI.UpdateProcessMeterSlider(0, 0);
+            uiControler.RotateUIToCamera();
+        }
     }
 
     public override CookingObject TryGetItem()
@@ -37,6 +48,10 @@ public class StepProcessor : ItemHolderStation
             //This resets the tool for both cases, if is using an internal tool it stays the same, if uses external means the internal variable is null, so it gets reseted
             currentTool = internalTool;
             currentProcessMeter = 0;
+            if (uiControler != null)
+            {
+                processUI.UpdateProcessMeterSlider(0, 0);
+            }
         }
     }
 
@@ -60,6 +75,7 @@ public class StepProcessor : ItemHolderStation
                 ingredient.state = currentTool.processedState;
                 ingredient.ChangeMesh(currentTool.processedMesh);
             }
+            processUI.UpdateProcessMeterSlider(currentProcessMeter, IngredientScript.ingredientProcessMeter);
         }
         else if (itemHeld is ProcessContainerScript container && !container.IsProcessDone())
         {
