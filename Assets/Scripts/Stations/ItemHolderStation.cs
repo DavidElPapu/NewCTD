@@ -20,6 +20,9 @@ public class ItemHolderStation : StationScript
         {
             //If the station is holding an item, checks if the item can enter the item held
             couldItemEnter = itemHeld.TryEnterItem(item);
+            //Security check, if the item couldn't enter, but item held was gone, ensures item held is null
+            if (!couldItemEnter && itemHeld.transform.parent != null)
+                itemHeld = null;
             UpdateItemChange();
         }
         else

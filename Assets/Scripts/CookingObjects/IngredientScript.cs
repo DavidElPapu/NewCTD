@@ -20,7 +20,6 @@ public class IngredientScript : CookingObject
 
     public override bool TryEnterItem(CookingObject item)
     {
-        //This method only return true if the item can enter this cookingObject, since this is an ingredient, it can only return false but still enter a container
         if (item is ContainerScript container)
         {
             if (container.CanPlaceIngredient(this))
