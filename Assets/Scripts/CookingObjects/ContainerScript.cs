@@ -5,6 +5,7 @@ using UnityEngine;
 public class ContainerScript : CookingObject
 {
     [SerializeField] private List<IngredientState> validIngredientStates;
+    [SerializeField] protected WorldspaceUIControler uiControler;
     [SerializeField] protected GameObject contentModel;
     [SerializeField] private int maxContainedIngredients;
     protected List<IngredientScript> containedIngredients;
@@ -12,14 +13,18 @@ public class ContainerScript : CookingObject
     private MaterialPropertyBlock propBlock;
     private MeshRenderer contentMeshRenderer;
     private Color contentColor;
+    private ContainerUI containerUI;
 
     protected virtual void Awake()
     {
+        uiControler.TryGetComponent(out containerUI);
         containedIngredients = new List<IngredientScript>();
         contentModel.SetActive(false);
         propBlock = new MaterialPropertyBlock();
         contentModel.TryGetComponent(out contentMeshRenderer);
         contentColor = Color.black;
+        uiControler.RotateUIToCamera();
+        containerUI.UpdateIngredients(containedIngredients);
     }
 
     #region PlaceOnContainer
@@ -97,6 +102,7 @@ public class ContainerScript : CookingObject
         contentMeshRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_BaseColor", contentColor);
         contentMeshRenderer.SetPropertyBlock(propBlock);
+        containerUI.UpdateIngredients(containedIngredients);
     }
 
     public void PlaceIngredientList(List<IngredientScript> ingredientList)
@@ -121,6 +127,7 @@ public class ContainerScript : CookingObject
         containedIngredients.Clear();
         contentModel.SetActive(false);
         contentColor = Color.black;
+        containerUI.UpdateIngredients(containedIngredients);
     }
 
     public List<IngredientScript> GetContainedIngredients()
@@ -130,6 +137,14 @@ public class ContainerScript : CookingObject
     }
 
     #endregion
+
+    public override void OnPlayerInteraction(bool wasPicked)
+    {
+        uiControler.ToggleUIRotationUpdate(wasPicked);
+        //Rotates the UI again one last time so the UI stays rotated after being placed
+        if (!wasPicked)
+            uiControler.RotateUIToCamera();
+    }
 
     private bool IsIngredientStateValid(IngredientState iState)
     {

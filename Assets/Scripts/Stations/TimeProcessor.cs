@@ -13,10 +13,21 @@ public class TimeProcessor : ItemHolderStation
     [SerializeField] private Mesh processedMesh;
     private int currentProcessMeter;
 
+    [Header("UI")]
+    [SerializeField] protected WorldspaceUIControler uiControler;
+    private ProcessMeterUI processUI;
+
     protected override void Awake()
     {
         base.Awake();
         timerProcess = null;
+        //If this station processes ingredients, it needs its own process meter (UI), so only if it was assigned in inspector, it gets initialized
+        if (uiControler != null)
+        {
+            uiControler.TryGetComponent(out processUI);
+            processUI.UpdateProcessMeterSlider(0, 0);
+            uiControler.RotateUIToCamera();
+        }
     }
 
     protected override void UpdateItemChange()
@@ -27,10 +38,17 @@ public class TimeProcessor : ItemHolderStation
             if (itemHeld is ProcessContainerScript container && container.IsProcessDone()) return;
             timerProcess = StartCoroutine(Timer(itemHeld));
         }
-        else if (timerProcess != null && itemHeld == null)
+        else if (itemHeld == null)
         {
-            StopCoroutine(timerProcess);
-            timerProcess = null;
+            if (timerProcess != null)
+            {
+                StopCoroutine(timerProcess);
+                timerProcess = null;
+            }
+            if (uiControler != null)
+            {
+                processUI.UpdateProcessMeterSlider(0, 0);
+            }
         }
     }
 
@@ -63,11 +81,13 @@ public class TimeProcessor : ItemHolderStation
                 {
                     currentProcessMeter += processMeterValue;
                     processMeterValueTimer = 0f;
+                    processUI.UpdateProcessMeterSlider(currentProcessMeter, IngredientScript.ingredientProcessMeter);
                 }
                 yield return null;
             }
             ingredient.state = processedState;
             ingredient.ChangeMesh(processedMesh);
+            processUI.UpdateProcessMeterSlider(currentProcessMeter, IngredientScript.ingredientProcessMeter);
         }
         timerProcess = null;
     }

@@ -104,9 +104,10 @@ MonoBehaviour:
   validIngredientStates: 
   itemLocation: {fileID: 3368256662326507062}
   processedState: 6
-  processMeterValueTimeFrequency: 0.5
-  processMeterValue: 10
+  processMeterValueTimeFrequency: 0.1
+  processMeterValue: 1
   processedMesh: {fileID: 0}
+  uiControler: {fileID: 0}
 --- !u!1 &4659834671315776323
 GameObject:
   m_ObjectHideFlags: 0

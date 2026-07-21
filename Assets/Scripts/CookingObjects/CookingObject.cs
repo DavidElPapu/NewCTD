@@ -4,6 +4,7 @@ public abstract class CookingObject : MonoBehaviour
 {
     public CookingObjectName cName;
     public abstract bool TryEnterItem(CookingObject item);
+    public abstract void OnPlayerInteraction(bool wasPicked);
 }
 
 public enum CookingObjectName

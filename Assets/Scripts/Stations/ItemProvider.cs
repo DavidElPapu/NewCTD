@@ -21,7 +21,6 @@ public class ItemProvider : StationScript
             ingredientScript.state = initialState;
             ingredientScript.ChangeMesh(ingredientSO.mesh);
             ingredientScript.ChangeMaterial(ingredientSO.material);
-            ingredientScript.ChangeSizeAndOffset(ingredientSO.customSize, ingredientSO.customOffset);
         }
         else
             return null;

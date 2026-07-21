@@ -6,9 +6,8 @@ public class IngredientSO : ScriptableObject
     public CookingObjectName iName;
     public Mesh mesh;
     public Material material;
-    public Vector3 customSize;
-    public Vector3 customOffset;
     public Color baseColor;
+    public Sprite icon;
 }
 
 public enum IngredientState

@@ -3,15 +3,18 @@ using UnityEngine;
 public class ProcessContainerScript : ContainerScript
 {
     [SerializeField] private Mesh defaultContentMesh, processedContentMesh;
+    private ProcessMeterUI processUI;
     private MeshFilter contentMeshFilter;
     private int currentProcessMeter, maxProcessMeter;
 
     protected override void Awake()
     {
         base.Awake();
+        uiControler.TryGetComponent(out processUI);
         contentModel.TryGetComponent(out contentMeshFilter);
         currentProcessMeter = 0;
         maxProcessMeter = 0;
+        processUI.UpdateProcessMeterSlider(currentProcessMeter, maxProcessMeter);
     }
 
     public override void PlaceIngredient(IngredientScript ingredient)
@@ -20,6 +23,7 @@ public class ProcessContainerScript : ContainerScript
         maxProcessMeter += IngredientScript.ingredientProcessMeter;
         if (contentMeshFilter.sharedMesh != defaultContentMesh)
             contentMeshFilter.sharedMesh = defaultContentMesh;
+        processUI.UpdateProcessMeterSlider(currentProcessMeter, maxProcessMeter);
     }
 
     #region EmptyContainer
@@ -35,6 +39,7 @@ public class ProcessContainerScript : ContainerScript
         base.EmptyContainer();
         currentProcessMeter = 0;
         maxProcessMeter = 0;
+        processUI.UpdateProcessMeterSlider(currentProcessMeter, maxProcessMeter);
     }
 
     #endregion
@@ -44,6 +49,7 @@ public class ProcessContainerScript : ContainerScript
     public void AddProcessMeter(int processValue)
     {
         currentProcessMeter += processValue;
+        processUI.UpdateProcessMeterSlider(currentProcessMeter, maxProcessMeter);
     }
 
     public bool IsProcessDone()
