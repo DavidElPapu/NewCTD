@@ -1328,17 +1328,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18553cc9ce4192c4b92457bcf36cef34, type: 3}
---- !u!114 &474953598 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -1231885495059552173, guid: 18553cc9ce4192c4b92457bcf36cef34, type: 3}
-  m_PrefabInstance: {fileID: 474953592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d91e9c1811b4d43af3e675709807ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeProcessor
 --- !u!1 &495738701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2690,7 @@ MonoBehaviour:
   - {fileID: 867941606}
   - {fileID: 881032327}
   - {fileID: 1087353148}
-  - {fileID: 474953598}
+  - {fileID: 2049619133}
   - {fileID: 572103945}
   - {fileID: 1381279164}
   - {fileID: 1223891952}
@@ -3069,7 +3058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProcessContainerScript
   cName: 10
-  validIngredientStates: 01000000
+  validIngredientStates: 03000000
   uiControler: {fileID: 547384986}
   contentModel: {fileID: 1059830988}
   maxContainedIngredients: 4
@@ -5792,6 +5781,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55b5fa2208f7aae4c917511f16797a4b, type: 3}
+--- !u!114 &2049619133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4197747711548073812, guid: 18553cc9ce4192c4b92457bcf36cef34, type: 3}
+  m_PrefabInstance: {fileID: 474953592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88838145c166974da04a8fc18c38661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StepProcessor
 --- !u!1001 &2064294078
 PrefabInstance:
   m_ObjectHideFlags: 0

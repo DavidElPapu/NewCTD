@@ -234,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5871187926449424828}
   - component: {fileID: 5449347200747252298}
-  - component: {fileID: -1231885495059552173}
+  - component: {fileID: 4197747711548073812}
   m_Layer: 0
   m_Name: Extractor
   m_TagString: Untagged
@@ -260,6 +260,7 @@ Transform:
   - {fileID: 4360723021317945946}
   - {fileID: 3368256662326507062}
   - {fileID: 684316128335168288}
+  - {fileID: 1131269757947395071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5449347200747252298
@@ -283,7 +284,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &-1231885495059552173
+--- !u!114 &4197747711548073812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,16 +293,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2405196700253947439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d91e9c1811b4d43af3e675709807ad, type: 3}
+  m_Script: {fileID: 11500000, guid: c88838145c166974da04a8fc18c38661, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimeProcessor
+  m_EditorClassIdentifier: Assembly-CSharp::StepProcessor
   validItems: 
-  validIngredientStates: 01000000
+  validIngredientStates: 02000000
   itemLocation: {fileID: 3368256662326507062}
-  processedState: 5
-  processMeterValueTimeFrequency: 0.5
-  processMeterValue: 10
-  processedMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  validTools: 
+  useCooldown: 0.2
+  internalTool: {fileID: 1876638175913574391}
   uiControler: {fileID: 3045212731309542045}
 --- !u!1 &3151333988319076199
 GameObject:
@@ -668,6 +668,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProcessMeterUI
   processMeterSlider: {fileID: 1414293153273779605}
   readyIcon: {fileID: 4621138675025147203}
+--- !u!1 &5940937830729855899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131269757947395071}
+  - component: {fileID: 1876638175913574391}
+  m_Layer: 0
+  m_Name: InternalTool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1131269757947395071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5940937830729855899}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.49566, y: 0.81879, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5871187926449424828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1876638175913574391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5940937830729855899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e422a10a2c878ea49b0524c250173335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProcessorTool
+  cName: 0
+  processedState: 5
+  processedMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  processMeterValue: 10
 --- !u!1 &8516780248647521881
 GameObject:
   m_ObjectHideFlags: 0
