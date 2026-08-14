@@ -1,24 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public event Action WavesCompleted;
     [SerializeField] private List<Transform> mapWaypoints;
     [SerializeField] private LevelEnemyWavesConfigSO levelData;
     [SerializeField] private GameObject enemyPrefab;
+    private List<BaseEnemy> aliveEnemies; 
     private Coroutine waveCoroutine, levelCoroutine;
     private float enemySpawnDistanceOffset;
 
     private void Awake()
     {
+        aliveEnemies = new List<BaseEnemy>();
+        waveCoroutine = null;
+        levelCoroutine = null;
         enemySpawnDistanceOffset = 1f;
     }
 
-    private void Start()
+    public void StartEnemyWaves()
     {
         if (levelCoroutine != null)
             StopCoroutine(levelCoroutine);
+        if (aliveEnemies.Count > 0)
+            aliveEnemies.Clear();
         levelCoroutine = StartCoroutine(RunEnemyWaves());
     }
 
@@ -30,7 +38,11 @@ public class EnemySpawner : MonoBehaviour
             Vector3 offsetPos = enemySpawnDistanceOffset * i * -mapWaypoints[0].forward;
             GameObject newEnemy = Instantiate(enemyPrefab, mapWaypoints[0].position + offsetPos, mapWaypoints[0].rotation);
             if (newEnemy.TryGetComponent(out BaseEnemy enemyScript))
+            {
                 enemyScript.Initialize(enemiesToSpawn.enemyData, mapWaypoints);
+                aliveEnemies.Add(enemyScript);
+                enemyScript.OnEnemyDeath += EnemyDied;
+            }
         }
     }
 
@@ -42,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyWave currentWave = levelData.enemyWaves[i];
 
             //Waits this wave delay before spawning the enemies
+            Debug.Log("Preparation time");
             float currentWaveTimer = 0f;
             while (currentWaveTimer < currentWave.waveDelay)
             {
@@ -78,6 +91,17 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies(enemySpawn);
         }
         waveCoroutine = null;
+    }
+
+    public void EnemyDied(BaseEnemy enemy)
+    {
+        aliveEnemies.Remove(enemy);
+        enemy.OnEnemyDeath -= EnemyDied;
+        if (aliveEnemies.Count == 0 && levelCoroutine == null && waveCoroutine == null)
+        {
+            //If this was the last wave and the last enemy, all waves are offitially done
+            WavesCompleted?.Invoke();
+        }
     }
 
     private void OnDisable()

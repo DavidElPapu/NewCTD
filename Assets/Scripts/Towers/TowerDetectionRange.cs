@@ -49,11 +49,8 @@ public class TowerDetectionRange : MonoBehaviour
 
     private void EnemyRemove(BaseEnemy enemyScript)
     {
-        if (enemiesInRange.Contains(enemyScript))
-        {
-            enemiesInRange.Remove(enemyScript);
-            enemyScript.OnEnemyDeath -= EnemyRemove;
-        }
+        enemiesInRange.Remove(enemyScript);
+        enemyScript.OnEnemyDeath -= EnemyRemove;
     }
 
     public BaseEnemy GetFirstEnemy()
