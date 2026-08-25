@@ -259,6 +259,54 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelSetup"",
+            ""id"": ""e116dc46-0c72-4026-9fa2-b2f92d7062b5"",
+            ""actions"": [
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e888d52-df5a-4323-be99-e1d522cad8ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Value"",
+                    ""id"": ""bfa93501-cdfe-400f-9dfa-d7f39a99e676"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5f31d83f-d85b-4d08-bf58-2a8ad2d4a672"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07098218-4479-4b69-9a31-ab9c817dfba2"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -271,11 +319,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Pick = m_Player.FindAction("Pick", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
+        // LevelSetup
+        m_LevelSetup = asset.FindActionMap("LevelSetup", throwIfNotFound: true);
+        m_LevelSetup_Select = m_LevelSetup.FindAction("Select", throwIfNotFound: true);
+        m_LevelSetup_Point = m_LevelSetup.FindAction("Point", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LevelSetup.enabled, "This will cause a leak and performance issues, PlayerInputActions.LevelSetup.Disable() has not been called.");
     }
 
     /// <summary>
@@ -498,6 +551,113 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
+
+    // LevelSetup
+    private readonly InputActionMap m_LevelSetup;
+    private List<ILevelSetupActions> m_LevelSetupActionsCallbackInterfaces = new List<ILevelSetupActions>();
+    private readonly InputAction m_LevelSetup_Select;
+    private readonly InputAction m_LevelSetup_Point;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "LevelSetup".
+    /// </summary>
+    public struct LevelSetupActions
+    {
+        private @PlayerInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public LevelSetupActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSetup/Select".
+        /// </summary>
+        public InputAction @Select => m_Wrapper.m_LevelSetup_Select;
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSetup/Point".
+        /// </summary>
+        public InputAction @Point => m_Wrapper.m_LevelSetup_Point;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_LevelSetup; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="LevelSetupActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(LevelSetupActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="LevelSetupActions" />
+        public void AddCallbacks(ILevelSetupActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelSetupActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelSetupActionsCallbackInterfaces.Add(instance);
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Point.started += instance.OnPoint;
+            @Point.performed += instance.OnPoint;
+            @Point.canceled += instance.OnPoint;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="LevelSetupActions" />
+        private void UnregisterCallbacks(ILevelSetupActions instance)
+        {
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Point.started -= instance.OnPoint;
+            @Point.performed -= instance.OnPoint;
+            @Point.canceled -= instance.OnPoint;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="LevelSetupActions.UnregisterCallbacks(ILevelSetupActions)" />.
+        /// </summary>
+        /// <seealso cref="LevelSetupActions.UnregisterCallbacks(ILevelSetupActions)" />
+        public void RemoveCallbacks(ILevelSetupActions instance)
+        {
+            if (m_Wrapper.m_LevelSetupActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="LevelSetupActions.AddCallbacks(ILevelSetupActions)" />
+        /// <seealso cref="LevelSetupActions.RemoveCallbacks(ILevelSetupActions)" />
+        /// <seealso cref="LevelSetupActions.UnregisterCallbacks(ILevelSetupActions)" />
+        public void SetCallbacks(ILevelSetupActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelSetupActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelSetupActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="LevelSetupActions" /> instance referencing this action map.
+    /// </summary>
+    public LevelSetupActions @LevelSetup => new LevelSetupActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -547,5 +707,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnScroll(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LevelSetup" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="LevelSetupActions.AddCallbacks(ILevelSetupActions)" />
+    /// <seealso cref="LevelSetupActions.RemoveCallbacks(ILevelSetupActions)" />
+    public interface ILevelSetupActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Select" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelect(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Point" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPoint(InputAction.CallbackContext context);
     }
 }

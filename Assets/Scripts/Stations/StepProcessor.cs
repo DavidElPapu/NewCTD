@@ -13,7 +13,7 @@ public class StepProcessor : ItemHolderStation
     private int currentProcessMeter;
 
     [Header("For processing without tool")]
-    [SerializeField] private ProcessorTool internalTool;
+    public ProcessorTool internalTool;
 
     [Header("UI")]
     [SerializeField] protected WorldspaceUIControler uiControler;

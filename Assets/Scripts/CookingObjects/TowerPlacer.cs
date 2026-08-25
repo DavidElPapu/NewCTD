@@ -46,6 +46,6 @@ public class TowerPlacer : ContainerScript
 
     private void CheckRecipe()
     {
-        towerPrefab = RecipesManager.singleton.GetContentRecipePrefab(containedRecipeIngredients);
+        towerPrefab = LevelManager.singleton.recipesManager.GetContentRecipePrefab(containedRecipeIngredients);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TimeProcessor : ItemHolderStation
 {
-    [SerializeField] private IngredientState processedState;
+    public IngredientState processedState;
     [SerializeField] private float processMeterValueTimeFrequency;
     [SerializeField] private int processMeterValue;
     private Coroutine timerProcess;

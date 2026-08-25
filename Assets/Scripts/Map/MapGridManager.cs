@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
+[RequireComponent(typeof(Grid))]
 public class MapGridManager : MonoBehaviour
 {
     public static MapGridManager singleton;
-    [SerializeField] private Grid mapGrid;
+    private Grid mapGrid;
     private Dictionary<Vector3Int, StationScript> stationsOnMap;
 
     private void Awake()
@@ -14,6 +13,7 @@ public class MapGridManager : MonoBehaviour
         if (singleton == null)
         {
             singleton = this;
+            TryGetComponent(out mapGrid);
             stationsOnMap = new Dictionary<Vector3Int, StationScript>();
         }
         else

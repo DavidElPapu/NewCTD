@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RecipeScript
 {
+    //The point of this class is just to change the list of ingredients to a hashset since the hashset can't be serialized
     public RecipeSO data;
     public HashSet<RecipeIngredient> ingredients;
 

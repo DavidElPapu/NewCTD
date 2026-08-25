@@ -45,8 +45,8 @@ public class ItemHolderStation : StationScript
                     if (transferIngredients != null && transferIngredients.Count == 1 && IsIngredientStateValid(transferIngredients[0]) && IsCookingObjectValid(transferIngredients[0].cName))
                     {
                         //If the ingredient inside is valid, it enters in the station
-                        container.EmptyContainer();
                         PlaceItem(transferIngredients[0]);
+                        container.EmptyContainer();
                         UpdateItemChange();
                     }
                 }

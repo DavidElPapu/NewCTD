@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ItemProvider : StationScript
 {
+    public IngredientSO ingredientSO;
     [SerializeField] private GameObject ingredientPrefab;
-    [SerializeField] private IngredientSO ingredientSO;
-    [SerializeField] private IngredientState initialState;
+    private IngredientState initialState;
 
-    public void SetIngredient(IngredientSO ingredient)
+    public void SetIngredient(IngredientSO ingredient, IngredientState state)
     {
-        //This method will be used when selecting ingredients for the level
         ingredientSO = ingredient;
+        initialState = state;
     }
 
     public override CookingObject TryGetItem()
@@ -17,6 +17,7 @@ public class ItemProvider : StationScript
         GameObject newIngredient = Instantiate(ingredientPrefab);
         if (newIngredient.TryGetComponent(out IngredientScript ingredientScript))
         {
+            ingredientScript.cName = ingredientSO.iName;
             ingredientScript.data = ingredientSO;
             ingredientScript.state = initialState;
             ingredientScript.ChangeMesh(ingredientSO.mesh);

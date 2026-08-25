@@ -173,6 +173,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "LevelSetup",
+            "id": "e116dc46-0c72-4026-9fa2-b2f92d7062b5",
+            "actions": [
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "5e888d52-df5a-4323-be99-e1d522cad8ed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "bfa93501-cdfe-400f-9dfa-d7f39a99e676",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5f31d83f-d85b-4d08-bf58-2a8ad2d4a672",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07098218-4479-4b69-9a31-ab9c817dfba2",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
