@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class SetupSelectable : MonoBehaviour
 {
-    public UIType uiType;
+    public enum SetupSelectableUI
+    {
+        IngredientSelectionUI
+    }
+    public SetupSelectableUI uiType;
     public bool isSet;
     private MaterialPropertyBlock propBlock;
     private MeshRenderer outlineMeshRenderer;

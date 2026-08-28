@@ -3,15 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class WavesManager : MonoBehaviour
 {
     public event Action WavesCompleted;
+    public event Action BaseDestroyed;
     [SerializeField] private List<Transform> mapWaypoints;
     [SerializeField] private LevelEnemyWavesConfigSO levelData;
     [SerializeField] private GameObject enemyPrefab;
     private List<BaseEnemy> aliveEnemies; 
     private Coroutine waveCoroutine, levelCoroutine;
     private float enemySpawnDistanceOffset;
+    private int currentWave, maxWaves;
+
+    [Header("MapBase")]
+    [SerializeField] private float maxBaseHealth;
+    private float currentBaseHealth;
 
     private void Awake()
     {
@@ -27,7 +33,10 @@ public class EnemySpawner : MonoBehaviour
             StopCoroutine(levelCoroutine);
         if (aliveEnemies.Count > 0)
             aliveEnemies.Clear();
+        maxWaves = levelData.enemyWaves.Count;
+        currentBaseHealth = maxBaseHealth;
         levelCoroutine = StartCoroutine(RunEnemyWaves());
+        UIManager.singleton.waveUI.ShowWaveUI(maxBaseHealth);
     }
 
     private void SpawnEnemies(EnemySpawn enemiesToSpawn)
@@ -42,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
                 enemyScript.Initialize(enemiesToSpawn.enemyData, mapWaypoints);
                 aliveEnemies.Add(enemyScript);
                 enemyScript.OnEnemyDeath += EnemyDied;
+                UIManager.singleton.waveUI.DisplayEnemiesLeftText(aliveEnemies.Count);
             }
         }
     }
@@ -49,26 +59,27 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator RunEnemyWaves()
     {
         //Iterates through every wave to spawn the enemies
-        for (int i = 0; i < levelData.enemyWaves.Count; i++)
+        for (currentWave = 0; currentWave < maxWaves; currentWave++)
         {
-            EnemyWave currentWave = levelData.enemyWaves[i];
+            EnemyWave currentWaveStruct = levelData.enemyWaves[currentWave];
 
             //Waits this wave delay before spawning the enemies
-            Debug.Log("Preparation time");
+            if (aliveEnemies.Count == 0)
+                UIManager.singleton.waveUI.DisplayBreakText(currentWave, maxWaves);
+            UIManager.singleton.waveUI.ResetWaveTimerSlider(currentWaveStruct.waveDelay);
             float currentWaveTimer = 0f;
-            while (currentWaveTimer < currentWave.waveDelay)
+            while (currentWaveTimer < currentWaveStruct.waveDelay)
             {
                 currentWaveTimer += Time.deltaTime;
+                UIManager.singleton.waveUI.UpdateWaveTimerSlider(currentWaveTimer);
                 yield return null;
             }
-
-            Debug.Log("Wave " + (i + 1) + " Starts NOW");
+            UIManager.singleton.waveUI.DisplayCurrentWaveText(currentWave + 1, maxWaves);
             //Starts spawning the enemies of the wave
             if (waveCoroutine != null)
                 StopCoroutine(waveCoroutine);
-            waveCoroutine = StartCoroutine(SpawnWaveEnemies(currentWave));
+            waveCoroutine = StartCoroutine(SpawnWaveEnemies(currentWaveStruct));
         }
-        Debug.Log("Waves ended, now I wait till all enemies are dead to finish");
         levelCoroutine = null;
     }
 
@@ -97,11 +108,27 @@ public class EnemySpawner : MonoBehaviour
     {
         aliveEnemies.Remove(enemy);
         enemy.OnEnemyDeath -= EnemyDied;
-        if (aliveEnemies.Count == 0 && levelCoroutine == null && waveCoroutine == null)
+        if (enemy.GetDistanceToBase() <= 0.5f)
         {
-            //If this was the last wave and the last enemy, all waves are offitially done
-            WavesCompleted?.Invoke();
+            //If the enemy reached the last waypoint, it died and here applies the damage equal to its health
+            currentBaseHealth -= enemy.GetCurrentHealth();
+            UIManager.singleton.waveUI.UpdateBaseHealthSlider(currentBaseHealth);
+            if (currentBaseHealth <= 0)
+                BaseDestroyed?.Invoke();
         }
+        if (aliveEnemies.Count == 0)
+        {
+            if (currentWave == maxWaves - 1)
+            {
+                //If this was the last wave and the last enemy, all waves are offitially done
+                UIManager.singleton.waveUI.DisplayBreakText(maxWaves, maxWaves);
+                WavesCompleted?.Invoke();
+            }
+            else
+                UIManager.singleton.waveUI.DisplayBreakText(currentWave, maxWaves);
+        }
+        else
+            UIManager.singleton.waveUI.DisplayEnemiesLeftText(aliveEnemies.Count);
     }
 
     private void OnDisable()

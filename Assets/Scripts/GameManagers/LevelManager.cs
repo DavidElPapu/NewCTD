@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager singleton;
+    public GameObject playerGO;
     public MapManager mapManager;
     public PlayerInput gameplayInput;
     public SetupSelectionManager setupSelectionManager;
     public RecipesManager recipesManager;
-    public EnemySpawner wavesManager;
+    public WavesManager wavesManager;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class LevelManager : MonoBehaviour
         setupSelectionManager.SelectionDone += OnSelectionPhaseEnd;
         recipesManager.LevelRecipesSet += OnLevelRecipesSet;
         wavesManager.WavesCompleted += OnWavesPhaseEnd;
+        wavesManager.BaseDestroyed += OnBaseDestroyed;
     }
 
     private void OnDisable()
@@ -38,6 +40,7 @@ public class LevelManager : MonoBehaviour
         setupSelectionManager.SelectionDone -= OnSelectionPhaseEnd;
         recipesManager.LevelRecipesSet -= OnLevelRecipesSet;
         wavesManager.WavesCompleted -= OnWavesPhaseEnd;
+        wavesManager.BaseDestroyed -= OnBaseDestroyed;
     }
 
     private void OnMapSetupDone()
@@ -57,11 +60,17 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Recipes done, game starts now");
         gameplayInput.SwitchCurrentActionMap("Player");
+        playerGO.SetActive(true);
         wavesManager.StartEnemyWaves();
     }
 
     private void OnWavesPhaseEnd()
     {
         Debug.Log("You Win");
+    }
+
+    private void OnBaseDestroyed()
+    {
+        Debug.Log("You Lose");
     }
 }

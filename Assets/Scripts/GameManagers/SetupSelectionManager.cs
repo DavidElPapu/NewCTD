@@ -33,13 +33,13 @@ public class SetupSelectionManager : MonoBehaviour
         setSelectables = 0;
 
         //Shows UI
-        UIManager.singleton.ShowUI(UIType.SetupSelectionUI);
+        UIManager.singleton.setupSelectionUI.ShowUI();
     }
 
     private void StopSelection()
     {
         //No need to hide ready button since hideUI hides both
-        UIManager.singleton.HideUI(UIType.SetupSelectionUI);
+        UIManager.singleton.setupSelectionUI.HideUI();
 
         //Disables all selectables and hides the ingredientSelectionUI if there was one active
         if (currentSelectedSelectable != null)
@@ -71,7 +71,15 @@ public class SetupSelectionManager : MonoBehaviour
                 }
                 currentSelectedSelectable = currentHoverSelectable;
                 currentSelectedSelectable.OnSelect();
-                UIManager.singleton.ShowObjectUI(currentSelectedSelectable.uiType, currentSelectedSelectable.transform.parent.gameObject);
+                switch (currentSelectedSelectable.uiType)
+                {
+                    case SetupSelectable.SetupSelectableUI.IngredientSelectionUI:
+                        UIManager.singleton.ingredientSelectionUI.ShowSelectionPanel(currentSelectedSelectable.transform.parent.gameObject);
+                        break;
+                    default:
+                        Debug.LogError("Selectable has not valid IU type");
+                        break;
+                }
             }
             else if (currentSelectedSelectable != null)
             {
@@ -144,7 +152,7 @@ public class SetupSelectionManager : MonoBehaviour
             //If all selectables are set, shows the ready button to exit selection
             if (setSelectables >= selectablesOnMap.Count)
             {
-                UIManager.singleton.ShowUI(UIType.SetupSelectionReadyUI);
+                UIManager.singleton.setupSelectionUI.ShowReadyButton();
             }
         }
         //We don't need to check if currentSelectedSelectable is not null since this method is called only by UI which hides when currentSelectedSelectable is null
@@ -159,7 +167,15 @@ public class SetupSelectionManager : MonoBehaviour
 
     private void UnselectSelectedSelectableAndHideUI()
     {
-        UIManager.singleton.HideUI(currentSelectedSelectable.uiType);
+        switch (currentSelectedSelectable.uiType)
+        {
+            case SetupSelectable.SetupSelectableUI.IngredientSelectionUI:
+                UIManager.singleton.ingredientSelectionUI.HideSelectionPanel();
+                break;
+            default:
+                Debug.LogError("Selectable has not valid IU type");
+                break;
+        }
         currentSelectedSelectable.UnSelect();
         currentSelectedSelectable = null;
     }

@@ -92,7 +92,8 @@ public class BaseEnemy : MonoBehaviour, IDamageable
         {
             if (currentWaypoint >= waypoints.Count - 1)
             {
-                //If the enemy reached the final waypoint, stops and attacks
+                //If the enemy reached the final waypoint, stops and dies
+                OnDeath();
             }
             else
             {
@@ -112,6 +113,11 @@ public class BaseEnemy : MonoBehaviour, IDamageable
     {
         //the distance to base is the distance to the currentWaypoint + the waypoint value, the further the waypoint is to the base, the greater it is
         return distanceToWaypoint + (((waypoints.Count - 1) - currentWaypoint) * 100f);
+    }
+
+    public float GetCurrentHealth()
+    {
+        return healthComponent.CurrentHealth;
     }
 }
 

@@ -18,6 +18,7 @@ public class ItemProvider : StationScript
         if (newIngredient.TryGetComponent(out IngredientScript ingredientScript))
         {
             ingredientScript.cName = ingredientSO.iName;
+            ingredientScript.icon = ingredientSO.icon;
             ingredientScript.data = ingredientSO;
             ingredientScript.state = initialState;
             ingredientScript.ChangeMesh(ingredientSO.mesh);

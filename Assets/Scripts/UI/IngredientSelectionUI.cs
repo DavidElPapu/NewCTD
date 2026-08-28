@@ -13,9 +13,9 @@ public class IngredientSelectionUI : MonoBehaviour
         selectionPanel.SetActive(false);
     }
 
-    public void ShowSelectionPanel(GameObject target)
+    public void ShowSelectionPanel(GameObject selectableStation)
     {
-        if (target.TryGetComponent(out targetProvider))
+        if (selectableStation.TryGetComponent(out targetProvider))
         {
             selectionPanel.SetActive(true);
             if (targetProvider.ingredientSO != null)
