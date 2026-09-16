@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ingredient", menuName = "Create Ingredient SO")]
+[CreateAssetMenu(fileName = "Ingredient", menuName = "CookingObjects/Create Ingredient SO")]
 public class IngredientSO : ScriptableObject
 {
+    public int ID;
     public CookingObjectName iName;
     public Mesh mesh;
     public Material material;

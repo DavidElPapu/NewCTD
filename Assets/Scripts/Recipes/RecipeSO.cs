@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-[CreateAssetMenu(fileName = "Recipe", menuName = "Create Recipe SO")]
+[CreateAssetMenu(fileName = "Recipe", menuName = "CookingObjects/Create Recipe SO")]
 public class RecipeSO : ScriptableObject
 {
     public GameObject towerPrefab;

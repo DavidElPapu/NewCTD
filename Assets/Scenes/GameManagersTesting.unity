@@ -1324,9 +1324,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca17b4d29c939a4888a993d25d2497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionUI
+  ingredientsSOs:
+  - {fileID: 11400000, guid: 8ae3b06261d4b62478c02c1b97516af5, type: 2}
+  - {fileID: 11400000, guid: 1c07bbb72feb5cf498dbd205605f6509, type: 2}
+  - {fileID: 11400000, guid: 0f904454a88519a42a91ecfdb8e6e621, type: 2}
+  - {fileID: 11400000, guid: f5b6efe2bcc0be247ab21e28d1750a8b, type: 2}
+  - {fileID: 11400000, guid: 55dc95e2c24e026478f461f48a1394f0, type: 2}
+  - {fileID: 11400000, guid: 4ac1056855f95e847ae267c12014e8e9, type: 2}
+  ingredientsButtonsParent: {fileID: 1548643376}
   selectionPanel: {fileID: 1145648564}
   selectedIngredientImage: {fileID: 413903547}
   unselectedIngredientSprite: {fileID: 21300000, guid: 013850e4a45871946ad90b6836df9eb8, type: 3}
+  lockedIngredientSprite: {fileID: 21300000, guid: 013850e4a45871946ad90b6836df9eb8, type: 3}
 --- !u!1 &305517025
 GameObject:
   m_ObjectHideFlags: 0
