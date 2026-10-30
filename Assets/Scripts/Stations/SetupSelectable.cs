@@ -21,6 +21,7 @@ public class SetupSelectable : MonoBehaviour
     {
         isSet = false;
         gameObject.SetActive(true);
+        outlineMeshRenderer.GetPropertyBlock(propBlock);
         UnSelect();
     }
 
@@ -31,19 +32,12 @@ public class SetupSelectable : MonoBehaviour
 
     public void OnHover()
     {
-        if (isSet)
-        {
-            outlineMeshRenderer.GetPropertyBlock(propBlock);
-            propBlock.SetColor("_OutlineColor", Color.white);
-            outlineMeshRenderer.SetPropertyBlock(propBlock);
-        }
-        else
-            outlineMeshRenderer.enabled = true;
+        propBlock.SetFloat("_Emission", 35f);
+        outlineMeshRenderer.SetPropertyBlock(propBlock);
     }
 
     public void OnSelect()
     {
-        outlineMeshRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_OutlineColor", Color.yellow);
         outlineMeshRenderer.SetPropertyBlock(propBlock);
     }
@@ -51,25 +45,18 @@ public class SetupSelectable : MonoBehaviour
     public void UnHover()
     {
         if (isSet)
-        {
-            outlineMeshRenderer.GetPropertyBlock(propBlock);
             propBlock.SetColor("_OutlineColor", Color.green);
-            outlineMeshRenderer.SetPropertyBlock(propBlock);
-        }
-        else
-            outlineMeshRenderer.enabled = false;
+        propBlock.SetFloat("_Emission", 10f);
+        outlineMeshRenderer.SetPropertyBlock(propBlock);
     }
 
     public void UnSelect()
     {
-        outlineMeshRenderer.GetPropertyBlock(propBlock);
         if (!isSet)
-        {
             propBlock.SetColor("_OutlineColor", Color.white);
-            outlineMeshRenderer.enabled = false;
-        }
         else
             propBlock.SetColor("_OutlineColor", Color.green);
+        propBlock.SetFloat("_Emission", 10f);
         outlineMeshRenderer.SetPropertyBlock(propBlock);
     }
 }

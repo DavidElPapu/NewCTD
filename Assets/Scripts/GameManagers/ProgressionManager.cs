@@ -24,6 +24,12 @@ public class ProgressionManager : MonoBehaviour
     private void Initialize()
     {
         unlockedIngredientsIDs = new HashSet<int>();
+        unlockedIngredientsIDs.Add(0);
+        unlockedIngredientsIDs.Add(1);
+        unlockedIngredientsIDs.Add(2);
+        unlockedIngredientsIDs.Add(3);
+        unlockedIngredientsIDs.Add(4);
+        //unlockedIngredientsIDs.Add(5);
         unlockedLevels = 1;
         completedLevels = 0;
         currentMoney = 0;
